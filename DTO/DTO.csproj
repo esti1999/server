@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2535E84A-60D8-4DBA-A9A4-CD0001945616}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DTO</RootNamespace>
+    <AssemblyName>DTO</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddressEntity.cs" />
+    <Compile Include="address_code_assistedEntity.cs" />
+    <Compile Include="address_code_volunteerEntity.cs" />
+    <Compile Include="Assisted_domainEntity.cs" />
+    <Compile Include="Availability_volunteerEntity.cs" />
+    <Compile Include="CarsEntity.cs" />
+    <Compile Include="CityEntity.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Days_codeEntity.cs" />
+    <Compile Include="DomainEntity.cs" />
+    <Compile Include="GenderEntity.cs" />
+    <Compile Include="LanguagesEntity.cs" />
+    <Compile Include="Langueges_assisted_codeEntity.cs" />
+    <Compile Include="langueges_volunteer_codeEntity.cs" />
+    <Compile Include="LicenseEntity.cs" />
+    <Compile Include="License_type_codeEntity.cs" />
+    <Compile Include="Military_ServiceEntity.cs" />
+    <Compile Include="Personal_Information_AssistedEntity.cs" />
+    <Compile Include="Personal_Information_voEntity.cs" />
+    <Compile Include="Personal_statusEntity.cs" />
+    <Compile Include="Phone_typeEntity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests_for_helpEntity.cs" />
+    <Compile Include="Service_codeEntity.cs" />
+    <Compile Include="Shifts_codeEntity.cs" />
+    <Compile Include="SysdiagramsEntity.cs" />
+    <Compile Include="TrainingEntity.cs" />
+    <Compile Include="Training_codeEntity.cs" />
+    <Compile Include="Type_carsEntity.cs" />
+    <Compile Include="TytelEntity.cs" />
+    <Compile Include="VolunteeringEntity.cs" />
+    <Compile Include="Volunteer_domainEntity.cs" />
+    <Compile Include="Weapons_licenseEntity.cs" />
+    <Compile Include="Weapons_license_codeEntity.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{3BB76823-4979-4259-8092-175831CD7CA8}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

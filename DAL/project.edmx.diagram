@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b813d2f667194c5aad7afcfff6d8bfc4" Name="Diagram1">
+        <EntityTypeShape EntityType="projectModel.address" Width="1.5" PointX="5.25" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.address_code_volunteer_" Width="1.5" PointX="7.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.address_code_assisted_" Width="1.5" PointX="10.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.assisted_domain" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.availability_volunteer_" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.cars" Width="1.5" PointX="7.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.city" Width="1.5" PointX="3" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.days_code_" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.domain" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.gender" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.Languages" Width="1.5" PointX="8.25" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.langueges_assisted_code_" Width="1.5" PointX="10.5" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.langueges_volunteer_code_" Width="1.5" PointX="10.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.license" Width="1.5" PointX="10.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.License_type_code_" Width="1.5" PointX="8.25" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.Military_Service" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.Personal_Information_Assisted_" Width="1.5" PointX="8.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.Personal_Information_vo_" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.personal_status" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.Phone_type" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.Requests_for_help" Width="1.5" PointX="6" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.Service_code_" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.shifts_code_" Width="1.5" PointX="3.75" PointY="29.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.training" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.training_code_" Width="1.5" PointX="0.75" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.type_cars" Width="1.5" PointX="5.25" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.tytel" Width="1.5" PointX="3" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.Volunteer_domain" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.volunteering" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.weapons_license" Width="1.5" PointX="7.5" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectModel.Weapons_license_code_" Width="1.5" PointX="9.75" PointY="21.875" IsExpanded="true" />
+        <AssociationConnector Association="projectModel.FK_address_code_volunteer__adress" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_address_city" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_address_code_assisted__adress" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_address_code_volunteer__Personal_Information_vo_" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_address_code_assisted__Personal_Information_Assisted_" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_assisted_domain_domain" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_assisted_domain_Personal_Information_Assisted_" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_assisted_domain_volunteering" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_availability_volunteer__days_code_" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_Personal_Information_vo__availability_volunteer_" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_cars_Personal_Information_vo_" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_cars_type_cars" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_Volunteer_domain_domain" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_Personal_Information_vo__gender" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_langueges_assisted_code__Languages" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_langueges_volunteer_code__Languages" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_langueges_assisted_code__Personal_Information_Assisted_" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_langueges_volunteer_code__Personal_Information_vo_" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_license_License_type_code_" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_license_Personal_Information_vo_" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_Military_Service_Personal_Information_vo_" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_Military_Service_Service_code_" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_Personal_Information_Assisted__Requests_for_help" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_Personal_Information_vo__personal_status" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_Personal_Information_vo__Phone_type" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_Personal_Information_vo__training" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_Personal_Information_vo__tytel" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_Personal_Information_vo__Volunteer_domain" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_weapons_license_Personal_Information_vo_" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_Requests_for_help_shifts_code_" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_Requests_for_help_volunteering" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_training_training_code_" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_Volunteer_domain_volunteering" ManuallyRouted="false" />
+        <AssociationConnector Association="projectModel.FK_Weapons_license_code__weapons_license" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
