@@ -12,6 +12,7 @@ namespace DTO
         public int code_Volunteering { get; set; }
         public string name_Volunteering { get; set; }
         public string Details { get; set; }
+        public Nullable<int> code_domain { get; set; }
 
         public static VolunteeringEntity ConvertvolunteeringTableToVolunteeringEntity(volunteering volunteering)
         {
@@ -19,8 +20,10 @@ namespace DTO
             {
                 code_Volunteering = volunteering.code_Volunteering,
                 name_Volunteering = volunteering.name_Volunteering,
-                Details = volunteering.Details
-            };
+                Details = volunteering.Details,
+                code_domain = volunteering.code_domain
+                
+    };
             return volunteering1;
         }
 
@@ -30,7 +33,8 @@ namespace DTO
             {
                 code_Volunteering = volunteering.code_Volunteering,
                 name_Volunteering = volunteering.name_Volunteering,
-                Details = volunteering.Details
+                Details = volunteering.Details,
+                code_domain = volunteering.code_domain
             };
             return volunteering1;
         }

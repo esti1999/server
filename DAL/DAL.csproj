@@ -153,9 +153,6 @@
     <Compile Include="shifts_code_.cs">
       <DependentUpon>project.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>project.tt</DependentUpon>
-    </Compile>
     <Compile Include="training.cs">
       <DependentUpon>project.tt</DependentUpon>
     </Compile>

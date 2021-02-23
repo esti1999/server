@@ -26,7 +26,7 @@ namespace DTO
 
 
 
-        public static domain ConvertDomainTableToDomainEntity(DomainEntity Domain)
+        public static domain ConvertDomainEntityToDomainTable(DomainEntity Domain)
         {
             domain domain1 = new domain
             {
@@ -53,7 +53,7 @@ namespace DTO
             List<domain> domains1 = new List<domain>();
             foreach (var item in domains)
             {
-                domains1.Add(ConvertDomainTableToDomainEntity(item));
+                domains1.Add(ConvertDomainEntityToDomainTable(item));
             }
             return domains1;
         }

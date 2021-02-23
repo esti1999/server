@@ -16,10 +16,10 @@ namespace WebApplication4.Controllers
         // GET: api/Login
        [HttpGet]
        //[Route("login")]
-        public Personal_Information_voEntity Login()
-        {
-            return BL.LoginBL.Login();
-        }
+        //public T Login<T>(string userName, string password)
+        //{
+        //    return BL.LoginBL.Login(userName, password);
+        //}
 
         // GET: api/Login/5
         public string Get(int id)

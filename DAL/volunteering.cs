@@ -25,6 +25,7 @@ namespace DAL
         public int code_Volunteering { get; set; }
         public string name_Volunteering { get; set; }
         public string Details { get; set; }
+        public Nullable<int> code_domain { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<assisted_domain> assisted_domain { get; set; }

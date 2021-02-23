@@ -48,7 +48,6 @@ namespace DAL
         public virtual DbSet<Requests_for_help> Requests_for_help { get; set; }
         public virtual DbSet<Service_code_> Service_code_ { get; set; }
         public virtual DbSet<shifts_code_> shifts_code_ { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<training> training { get; set; }
         public virtual DbSet<training_code_> training_code_ { get; set; }
         public virtual DbSet<type_cars> type_cars { get; set; }
