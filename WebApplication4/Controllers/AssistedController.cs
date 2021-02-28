@@ -24,8 +24,10 @@ namespace WebApplication4.Controllers
         }
 
         // POST: api/Assisted
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public bool AddAssisted(Personal_Information_AssistedEntity assisted)
         {
+            return BL.AssistedBL.AddAssisted(assisted);
         }
 
         // PUT: api/Assisted/5
@@ -36,11 +38,6 @@ namespace WebApplication4.Controllers
         // DELETE: api/Assisted/5
         public void Delete(int id)
         {
-        }
-        [HttpPost]
-        public bool AddAssisted(Personal_Information_AssistedEntity assisted)
-        {
-            return BL.AssistedBL.AddAssisted(assisted);
         }
     }
 }
