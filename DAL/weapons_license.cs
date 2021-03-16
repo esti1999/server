@@ -14,12 +14,16 @@ namespace DAL
     
     public partial class weapons_license
     {
-        public int code_volunteer { get; set; }
-        public int code_license { get; set; }
-        public string Valid_license { get; set; }
-        public string Knowledge_in { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public weapons_license()
+        {
+            this.weapons_license_volunteer = new HashSet<weapons_license_volunteer>();
+        }
     
-        public virtual Personal_Information_vo_ Personal_Information_vo_ { get; set; }
-        public virtual Weapons_license_code_ Weapons_license_code_ { get; set; }
+        public int code_weapons_license { get; set; }
+        public string description { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<weapons_license_volunteer> weapons_license_volunteer { get; set; }
     }
 }

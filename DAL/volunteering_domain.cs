@@ -12,18 +12,23 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class training
+    public partial class volunteering_domain
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public training()
+        public volunteering_domain()
         {
-            this.training_volunteer = new HashSet<training_volunteer>();
+            this.assisted_domain = new HashSet<assisted_domain>();
+            this.volunteer_domain = new HashSet<volunteer_domain>();
         }
     
-        public int code_training { get; set; }
+        public int code_volunteering { get; set; }
+        public int code_domain { get; set; }
         public string description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<training_volunteer> training_volunteer { get; set; }
+        public virtual ICollection<assisted_domain> assisted_domain { get; set; }
+        public virtual domain domain { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<volunteer_domain> volunteer_domain { get; set; }
     }
 }

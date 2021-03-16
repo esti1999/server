@@ -17,13 +17,16 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public gender()
         {
-            this.Personal_Information_vo_ = new HashSet<Personal_Information_vo_>();
+            this.assisted = new HashSet<assisted>();
+            this.volunteer = new HashSet<volunteer>();
         }
     
         public int code_gender { get; set; }
-        public string name_gender { get; set; }
+        public string description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Personal_Information_vo_> Personal_Information_vo_ { get; set; }
+        public virtual ICollection<assisted> assisted { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<volunteer> volunteer { get; set; }
     }
 }

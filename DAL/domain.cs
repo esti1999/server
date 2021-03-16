@@ -17,16 +17,16 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public domain()
         {
-            this.assisted_domain = new HashSet<assisted_domain>();
-            this.Volunteer_domain = new HashSet<Volunteer_domain>();
+            this.assisted = new HashSet<assisted>();
+            this.volunteering_domain = new HashSet<volunteering_domain>();
         }
     
         public int code_domain { get; set; }
-        public string name_domain { get; set; }
+        public string description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<assisted_domain> assisted_domain { get; set; }
+        public virtual ICollection<assisted> assisted { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Volunteer_domain> Volunteer_domain { get; set; }
+        public virtual ICollection<volunteering_domain> volunteering_domain { get; set; }
     }
 }

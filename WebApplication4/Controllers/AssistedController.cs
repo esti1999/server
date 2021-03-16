@@ -9,15 +9,18 @@ using BL;
 
 namespace WebApplication4.Controllers
 {
+    [RoutePrefix("api/assisted")]
     public class AssistedController : ApiController
     {
         // GET: api/Assisted
+        [Route("get")]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
         // GET: api/Assisted/5
+        [Route("get/{id}")]
         public string Get(int id)
         {
             return "value";
@@ -25,8 +28,10 @@ namespace WebApplication4.Controllers
 
         // POST: api/Assisted
         [HttpPost]
-        public bool AddAssisted(Personal_Information_AssistedEntity assisted)
+        [Route("addAssisted")]
+        public bool AddAssisted( Assisted assisted)
         {
+
             return BL.AssistedBL.AddAssisted(assisted);
         }
 

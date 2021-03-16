@@ -12,14 +12,13 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Volunteer_domain
+    public partial class volunteer_domain
     {
-        public int code_volunteer { get; set; }
+        public int code_volunteer_domain { get; set; }
         public int code_volunteering { get; set; }
-        public int code_domain { get; set; }
+        public string id_volunteer { get; set; }
     
-        public virtual domain domain { get; set; }
-        public virtual Personal_Information_vo_ Personal_Information_vo_ { get; set; }
-        public virtual volunteering volunteering { get; set; }
+        public virtual volunteer volunteer { get; set; }
+        public virtual volunteering_domain volunteering_domain { get; set; }
     }
 }

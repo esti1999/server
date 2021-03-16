@@ -10,39 +10,50 @@ namespace BL
 {
     public class DomainBL
     {
-        public static projectEntities db = new projectEntities();
-        public static List<DomainEntity> GetDomainsList()
+        public static Progect_lEntities1 db = new Progect_lEntities1();
+        public static List<Domain> GetDomainsList()
         {
             List<domain> domain = db.domain.ToList();
-            return DomainEntity.ConvertDomainTableToListDomainEntity(domain);
+            return Domain.convertdomaintabletolistdomainentity(domain);
         }
-        public static DomainEntity getBtId(int code_domain)
+        public static Domain getBtId(int code_domain)
         {
             domain domain = db.domain.FirstOrDefault(x => code_domain == code_domain);
-            return DomainEntity.ConvertDomainTableToDomainEntity(domain);
+            return Domain.convertdomaintabletodomainentity(domain);
         }
-        public static List<DomainEntity> AddDomain(DomainEntity domain)
+        public static List<Domain> AddDomain(Domain domain)
         {
-            db.domain.Add(DomainEntity.ConvertDomainEntityToDomainTable(domain));
+            db.domain.Add(Domain.convertdomainentitytodomaintable(domain));
             db.SaveChanges();
-            return DomainEntity.ConvertDomainTableToListDomainEntity(db.domain.ToList());
+            return Domain.convertdomaintabletolistdomainentity(db.domain.ToList());
         }
-        public static List<DomainEntity> RemoveDomain(int code_domaim)
+        public static List<Domain> RemoveDomain(int code_domaim)
         {
             db.domain.Remove(db.domain.FirstOrDefault(x => x.code_domain == code_domaim));
             db.SaveChanges();
-            return DomainEntity.ConvertDomainTableToListDomainEntity(db.domain.ToList());
+            return Domain.convertdomaintabletolistdomainentity(db.domain.ToList());
         }
-        public static List<DomainEntity> EditDomain(DomainEntity domain)
+        public static List<Domain> EditDomain(Domain domain)
         {
-            db.domain.FirstOrDefault(x => x.code_domain == domain.code_domain).name_domain = domain.name_domain;
+            db.domain.FirstOrDefault(x => x.code_domain == domain.code_domain).description = domain.description;
             db.SaveChanges();
-            return DomainEntity.ConvertDomainTableToListDomainEntity(db.domain.ToList());
+            return Domain.convertdomaintabletolistdomainentity(db.domain.ToList());
         }
-        public static List<VolunteeringEntity> GetVolunteeringByDomain(int code_domain)
+        public static List<VolunteeringDomain> GetVolunteeringByDomain(int code_domain)
         {
-            List <volunteering> volunteerings =db.volunteering.Where(x => x.code_domain == code_domain).ToList();
-            return VolunteeringEntity.ConvertvolunteeringTableToListVolunteeringEntity(volunteerings);
+            List<volunteering_domain> volunteerings = db.volunteering_domain.Where(x => x.code_domain == code_domain).ToList();
+            return VolunteeringDomain.convertvolunteeringdomaintabletolistvolunteeringdomainentity(volunteerings);
+        }
+
+        public static List<Domain> GetVolunteeringDomain()
+        {
+            Progect_lEntities1 db = new Progect_lEntities1();
+            List<Domain> list = new List<Domain>();
+            foreach (var item in db.domain)
+            {
+                list.Add(new Domain { code_domain = item.code_domain, description = item.description });
+            }
+            return list;
         }
     }
 }

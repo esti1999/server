@@ -8,15 +8,18 @@ using DTO;
 
 namespace WebApplication4.Controllers
 {
+    [RoutePrefix("api/volunteer")]
     public class VolunteerController : ApiController
     {
         // GET: api/Volunteer
+        [Route("get")]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
         // GET: api/Volunteer/5
+        [Route("get/{id}")]
         public string Get(int id)
         {
             return "value";
@@ -24,7 +27,8 @@ namespace WebApplication4.Controllers
 
         // POST: api/Volunteer
         [HttpPost]
-        public bool AddVolunteer(Personal_Information_volunteerEntity valunteer)
+        [Route("addVolunteer")]
+        public bool AddVolunteer(Volunteer valunteer)
         {
             return BL.VolunteerBL.AddVolunteer(valunteer);
         }

@@ -10,37 +10,36 @@ namespace BL
 {
    public class VolunteeringBL
    {
-        public static projectEntities db = new projectEntities();
-        public static List<VolunteeringEntity> getall()
+        public static Progect_lEntities1 db = new Progect_lEntities1();
+        public static List<VolunteeringDomain> getall()
         {
-            List<volunteering> volunteering = db.volunteering.ToList();
-            return VolunteeringEntity.ConvertvolunteeringTableToListVolunteeringEntity(volunteering);
+            List<volunteering_domain> volunteeringdomain = db.volunteering_domain.ToList();
+            return VolunteeringDomain.convertvolunteeringdomaintabletolistvolunteeringdomainentity(volunteeringdomain);
         }
-        public static VolunteeringEntity getBtId(int code_Volunteering)
+        public static VolunteeringDomain getBtId(int code_volunteering)
         {
-            volunteering volunteering = db.volunteering.FirstOrDefault(x => code_Volunteering == code_Volunteering);
-            return VolunteeringEntity.ConvertvolunteeringTableToVolunteeringEntity(volunteering);
+            volunteering_domain volunteeringdomain = db.volunteering_domain.FirstOrDefault(x => code_volunteering == code_volunteering);
+            return VolunteeringDomain.convertvolunteeringdomaintablevolunteeringdomainentity(volunteeringdomain);
         }
-        public static List<VolunteeringEntity> AddVolunteering(VolunteeringEntity volunteering)
+        public static List<VolunteeringDomain> AddVolunteering(VolunteeringDomain volunteeringdomain)
         {
-            db.volunteering.Add(VolunteeringEntity.ConvertVolunteeringEntityTovolunteeringTable(volunteering));
+            db.volunteering_domain.Add(VolunteeringDomain.convertvolunteeringdomainentitytovolunteeringdomaintable(volunteeringdomain));
             db.SaveChanges();
-            return VolunteeringEntity.ConvertvolunteeringTableToListVolunteeringEntity(db.volunteering.ToList());
+            return VolunteeringDomain.convertvolunteeringdomaintabletolistvolunteeringdomainentity(db.volunteering_domain.ToList());
         }
-        public static List<VolunteeringEntity> RemoveVolunteering(int code_Volunteering)
+        public static List<VolunteeringDomain> RemoveVolunteering(int code_volunteering)
         {
-            db.volunteering.Remove(db.volunteering.FirstOrDefault(x => x.code_Volunteering == code_Volunteering));
+            db.volunteering_domain.Remove(db.volunteering_domain.FirstOrDefault(x => x.code_volunteering == code_volunteering));
             db.SaveChanges();
-            return VolunteeringEntity.ConvertvolunteeringTableToListVolunteeringEntity(db.volunteering.ToList());
+            return VolunteeringDomain.convertvolunteeringdomaintabletolistvolunteeringdomainentity(db.volunteering_domain.ToList());
         }
-        public static List<VolunteeringEntity> EditVolunteering(VolunteeringEntity volunteering)
+        public static List<VolunteeringDomain> EditVolunteering(VolunteeringDomain volunteeringdomain)
         {
-            db.volunteering.FirstOrDefault(x => x.code_Volunteering == volunteering.code_Volunteering).name_Volunteering = volunteering.name_Volunteering;
-            db.volunteering.FirstOrDefault(x => x.code_Volunteering == volunteering.code_Volunteering).Details = volunteering.Details;
-            db.volunteering.FirstOrDefault(x => x.code_Volunteering == volunteering.code_Volunteering).code_domain = volunteering.code_domain;
+            db.volunteering_domain.FirstOrDefault(x => x.code_volunteering == volunteeringdomain.code_volunteering).code_domain = volunteeringdomain.code_domain;
+            db.volunteering_domain.FirstOrDefault(x => x.code_volunteering == volunteeringdomain.code_volunteering).description = volunteeringdomain.description;
 
             db.SaveChanges();
-            return VolunteeringEntity.ConvertvolunteeringTableToListVolunteeringEntity(db.volunteering.ToList());
+            return VolunteeringDomain.convertvolunteeringdomaintabletolistvolunteeringdomainentity(db.volunteering_domain.ToList());
         }
     }
 }

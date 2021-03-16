@@ -10,22 +10,22 @@ namespace BL
 {
     public class AssistedBL
     {
-        public static projectEntities db = new projectEntities();
-        public static List<Personal_Information_AssistedEntity> getall()
+        public static Progect_lEntities1 db = new Progect_lEntities1();
+        public static List<Assisted> getall()
         {
-            List<Personal_Information_Assisted_> Personal_Information_Assisted = db.Personal_Information_Assisted_.ToList();
-            return Personal_Information_AssistedEntity.ConvertPersonal_Information_Assisted_TableToListPersonal_Information_AssistedEntity(Personal_Information_Assisted);
+            List<assisted> assisted = db.assisted.ToList();
+            return Assisted.convertassistedtabletolistassistedentity(assisted);
         }
-        public static Personal_Information_AssistedEntity getBtId(int code_Assisted)
+        public static Assisted getBtId(string id_assisted)
         {
-            Personal_Information_Assisted_ Personal_Information_Assisted = db.Personal_Information_Assisted_.FirstOrDefault(x => code_Assisted == code_Assisted);
-            return Personal_Information_AssistedEntity.ConvertPersonal_Information_Assisted_TableToPersonal_Information_AssistedEntity(Personal_Information_Assisted);
+            assisted assisted = db.assisted.FirstOrDefault(x => id_assisted == id_assisted);
+            return Assisted.convertassistedtabletoassistedentity(assisted);
         }
-        public static bool AddAssisted(Personal_Information_AssistedEntity personal_Information_Assisted)
+        public static bool AddAssisted(Assisted assisted)
         {
             try
             {
-                db.Personal_Information_Assisted_.Add(Personal_Information_AssistedEntity.ConvertPersonal_Information_AssistedEntityToPersonal_Information_AssistedTable(personal_Information_Assisted));
+                db.assisted.Add(Assisted.convertassistedentitytoassistedtable(assisted));
                 db.SaveChanges();
             }
             catch (Exception e)
@@ -35,23 +35,29 @@ namespace BL
 
             return true;
         }
-        public static List<Personal_Information_AssistedEntity> RemoveAssisted(int code_Assisted)
+        public static List<Assisted> RemoveAssisted(string id_assisted)
         {
-            db.Personal_Information_Assisted_.Remove(db.Personal_Information_Assisted_.FirstOrDefault(x => x.code_Assisted == code_Assisted));
+            db.assisted.Remove(db.assisted.FirstOrDefault(x => x.id_assisted == id_assisted));
             db.SaveChanges();
-            return Personal_Information_AssistedEntity.ConvertPersonal_Information_Assisted_TableToListPersonal_Information_AssistedEntity(db.Personal_Information_Assisted_.ToList());
+            return Assisted.convertassistedtabletolistassistedentity(db.assisted.ToList());
         }
-        public static List<Personal_Information_AssistedEntity> EditAssisted(Personal_Information_AssistedEntity Personal_Information_Assisted)
+        public static List<Assisted> EditAssisted(Assisted assisted)
         {
-            db.Personal_Information_Assisted_.FirstOrDefault(x => x.code_Assisted == Personal_Information_Assisted.code_Assisted).code_tytel = Personal_Information_Assisted.code_tytel;
-            db.Personal_Information_Assisted_.FirstOrDefault(x => x.code_Assisted == Personal_Information_Assisted.code_Assisted).code_gender = Personal_Information_Assisted.code_gender;
-            db.Personal_Information_Assisted_.FirstOrDefault(x => x.code_Assisted == Personal_Information_Assisted.code_Assisted).phone_number = Personal_Information_Assisted.phone_number;
-            db.Personal_Information_Assisted_.FirstOrDefault(x => x.code_Assisted == Personal_Information_Assisted.code_Assisted).phone_type = Personal_Information_Assisted.phone_type;
-            db.Personal_Information_Assisted_.FirstOrDefault(x => x.code_Assisted == Personal_Information_Assisted.code_Assisted).adres = Personal_Information_Assisted.adres;
-            db.Personal_Information_Assisted_.FirstOrDefault(x => x.code_Assisted == Personal_Information_Assisted.code_Assisted).personal_status = Personal_Information_Assisted.personal_status;
-            db.Personal_Information_Assisted_.FirstOrDefault(x => x.code_Assisted == Personal_Information_Assisted.code_Assisted).code_languages = Personal_Information_Assisted.code_languages;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).first_name = assisted.first_name;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).last_name = assisted.last_name;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).date_birth = assisted.date_birth;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).code_gender = assisted.code_gender;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).code_language = assisted.code_language;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).code_status = assisted.code_status;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).code_help_domain = assisted.code_help_domain;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).code_city = assisted.code_city;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).postal_code = assisted.postal_code;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).street = assisted.street;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).number_building = assisted.number_building;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).number_house = assisted.number_house;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).e_mail = assisted.e_mail;
             db.SaveChanges();
-            return Personal_Information_AssistedEntity.ConvertPersonal_Information_Assisted_TableToListPersonal_Information_AssistedEntity(db.Personal_Information_Assisted_.ToList());
+            return Assisted.convertassistedtabletolistassistedentity(db.assisted.ToList());
         }
-    }
+    }    
 }

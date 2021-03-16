@@ -12,18 +12,18 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class training
+    public partial class car_license
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public training()
+        public car_license()
         {
-            this.training_volunteer = new HashSet<training_volunteer>();
+            this.car_license_volunteer = new HashSet<car_license_volunteer>();
         }
     
-        public int code_training { get; set; }
+        public int code_car_license { get; set; }
         public string description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<training_volunteer> training_volunteer { get; set; }
+        public virtual ICollection<car_license_volunteer> car_license_volunteer { get; set; }
     }
 }
