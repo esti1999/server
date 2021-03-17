@@ -44,5 +44,17 @@ namespace WebApplication4.Controllers
         public void Delete(int id)
         {
         }
+        [HttpGet]
+        [Route("GetPersonalStatus")]
+        public List<PersonalStatus> GetPersonalStatuses()
+        {
+            return BL.AssistedBL.GetPersonalStatuses();
+        }
+        [HttpGet]
+        [Route("GetGender")]
+        public List<Gender> GetGender()
+        {
+            return BL.AssistedBL.GetGender();
+        }
     }
 }

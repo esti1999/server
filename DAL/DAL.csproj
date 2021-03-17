@@ -135,7 +135,7 @@
     <Compile Include="volunteering_domain.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Volunteer_domain.cs">
+    <Compile Include="volunteer_domain.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="weapons_license.cs">

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Progect_lModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Progect_lModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="assisted">
           <Key>
             <PropertyRef Name="id_assisted" />
@@ -23,6 +23,7 @@
           <Property Name="code_language" Type="int" Nullable="false" />
           <Property Name="e-mail" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="code_help_domain" Type="int" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="assisted_domain">
           <Key>
@@ -156,6 +157,7 @@
           <Property Name="code_training" Type="int" Nullable="false" />
           <Property Name="code_volunteering_domain" Type="int" Nullable="false" />
           <Property Name="code_availability" Type="int" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="volunteer_domain">
           <Key>
@@ -579,8 +581,7 @@
             <End Role="weapons_license_volunteer" EntitySet="weapons_license_volunteer" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Progect_lModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -608,6 +609,7 @@
           <NavigationProperty Name="gender" Relationship="Self.FK_assisted_gender" FromRole="assisted" ToRole="gender" />
           <NavigationProperty Name="language" Relationship="Self.FK_assisted_language" FromRole="assisted" ToRole="language" />
           <NavigationProperty Name="personal_status" Relationship="Self.FK_assisted_personal_status" FromRole="assisted" ToRole="personal_status" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="assisted_domain">
           <Key>
@@ -773,6 +775,7 @@
           <NavigationProperty Name="training_volunteer" Relationship="Self.FK_training_volunteer_volunteer1" FromRole="volunteer" ToRole="training_volunteer" />
           <NavigationProperty Name="volunteer_domain" Relationship="Self.FK_volunteer_domain_volunteer" FromRole="volunteer" ToRole="volunteer_domain" />
           <NavigationProperty Name="weapons_license_volunteer" Relationship="Self.FK_weapons_license_volunteer_volunteer" FromRole="volunteer" ToRole="weapons_license_volunteer" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="volunteer_domain">
           <Key>
@@ -1213,6 +1216,7 @@
           <EntitySetMapping Name="assisted">
             <EntityTypeMapping TypeName="Progect_lModel.assisted">
               <MappingFragment StoreEntitySet="assisted">
+                <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="id_assisted" ColumnName="id_assisted" />
                 <ScalarProperty Name="first_name" ColumnName="first_name" />
                 <ScalarProperty Name="last_name" ColumnName="last_name" />
@@ -1356,6 +1360,7 @@
           <EntitySetMapping Name="volunteer">
             <EntityTypeMapping TypeName="Progect_lModel.volunteer">
               <MappingFragment StoreEntitySet="volunteer">
+                <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="id_volunteer" ColumnName="id_volunteer" />
                 <ScalarProperty Name="firstName_volunteer" ColumnName="firstName_volunteer" />
                 <ScalarProperty Name="lastName_volunteer" ColumnName="lastName_volunteer" />

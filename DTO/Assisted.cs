@@ -23,8 +23,9 @@ namespace DTO
         public int code_language { get; set; }
         public string e_mail { get; set; }
         public int code_help_domain { get; set; }
+        public string phone { get; set; }
 
-   
+
         public static Assisted convertassistedtabletoassistedentity(assisted a)
         {
             Assisted a1 = new Assisted()

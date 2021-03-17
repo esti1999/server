@@ -59,5 +59,25 @@ namespace BL
             db.SaveChanges();
             return Assisted.convertassistedtabletolistassistedentity(db.assisted.ToList());
         }
+        public static List<PersonalStatus> GetPersonalStatuses()
+        {
+            Progect_lEntities1 db = new Progect_lEntities1();
+            List<PersonalStatus> list = new List<PersonalStatus>();
+            foreach (var item in db.personal_status)
+            {
+                list.Add(new PersonalStatus { code_status = item.code_status, description = item.description });
+            }
+            return list;
+        }
+        public static List<Gender> GetGender()
+        {
+            Progect_lEntities1 db = new Progect_lEntities1();
+            List<Gender> list1 = new List<Gender>();
+            foreach (var item in db.gender)
+            {
+                list1.Add(new Gender { code_gender = item.code_gender, description = item.description });
+            }
+            return list1;
+        }
     }    
 }

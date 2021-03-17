@@ -28,6 +28,7 @@ namespace DTO
         public int code_training { get; set; }
         public int code_volunteering_domain { get; set; }
         public int code_availability { get; set; }
+        public string phone { get; set; }
 
 
         public static Volunteer convertvolunteertabletovolunteerentity(volunteer v)
@@ -103,6 +104,7 @@ namespace DTO
             }
             return v1;
         }
+
     }
 }
 
