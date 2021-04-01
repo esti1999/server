@@ -24,6 +24,9 @@ namespace DTO
         public string e_mail { get; set; }
         public int code_help_domain { get; set; }
         public string phone { get; set; }
+        public int number_floor { get; set; }
+        public string password { get; set; }
+
 
 
         public static Assisted convertassistedtabletoassistedentity(assisted a)
@@ -43,7 +46,10 @@ namespace DTO
                 e_mail=a.e_mail,
                 street=a.street,
                 number_building=a.number_building,
-                number_house=a.number_house
+                number_house=a.number_house,
+                number_floor=a.number_floor,
+                phone = a.phone,
+                password = a.password
             };
             return a1;
         }
@@ -64,7 +70,10 @@ namespace DTO
                 e_mail = a.e_mail,
                 street = a.street,
                 number_building = a.number_building,
-                number_house = a.number_house
+                number_house = a.number_house,
+                number_floor = a.number_floor,
+                phone = a.phone,
+                password = a.password
             };
             return a1;
         }

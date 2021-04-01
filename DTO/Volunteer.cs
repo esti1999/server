@@ -29,6 +29,8 @@ namespace DTO
         public int code_volunteering_domain { get; set; }
         public int code_availability { get; set; }
         public string phone { get; set; }
+        public int number_floor { get; set; }
+        public string password { get; set; }
 
 
         public static Volunteer convertvolunteertabletovolunteerentity(volunteer v)
@@ -54,7 +56,10 @@ namespace DTO
                 code_service = v.code_service,
                 code_training = v.code_training,
                 code_availability = v.code_availability,
-                code_volunteering_domain = v.code_volunteering_domain
+                code_volunteering_domain = v.code_volunteering_domain,
+                number_floor=v.number_floor,
+                phone=v.phone,
+                password = v.password
 
             };
             return v1;
@@ -82,7 +87,10 @@ namespace DTO
                 code_service = v.code_service,
                 code_training = v.code_training,
                 code_availability = v.code_availability,
-                code_volunteering_domain = v.code_volunteering_domain
+                code_volunteering_domain = v.code_volunteering_domain,
+                number_floor = v.number_floor,
+                phone = v.phone,
+                password = v.password
             };
             return v1;
         }
