@@ -116,5 +116,15 @@ namespace BL
             }
             return list4;
         }
+        public static List<Language> GetLanguage()
+        {
+            Progect_lEntities1 db = new Progect_lEntities1();
+            List<Language> list5 = new List<Language>();
+            foreach (var item in db.language)
+            {
+                list5.Add(new Language { code_language = item.code_language, name_language = item.name_language});
+            }
+            return list5;
+        }
     }
 }
