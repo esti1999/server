@@ -27,6 +27,8 @@ namespace BL
             db.SaveChanges();
             return Domain.convertdomaintabletolistdomainentity(db.domain.ToList());
         }
+
+
         public static List<Domain> RemoveDomain(int code_domaim)
         {
             db.domain.Remove(db.domain.FirstOrDefault(x => x.code_domain == code_domaim));
@@ -41,8 +43,17 @@ namespace BL
         }
         public static List<VolunteeringDomain> GetVolunteeringByDomain(int code_domain)
         {
-            List<volunteering_domain> volunteerings = db.volunteering_domain.Where(x => x.code_domain == code_domain).ToList();
-            return VolunteeringDomain.convertvolunteeringdomaintabletolistvolunteeringdomainentity(volunteerings);
+            try
+            {
+                List<volunteering_domain> volunteerings = db.volunteering_domain.Where(x => x.code_domain == code_domain).ToList();
+                return VolunteeringDomain.convertvolunteeringdomaintabletolistvolunteeringdomainentity(volunteerings);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            
+            
         }
 
         public static List<Domain> GetVolunteeringDomain()

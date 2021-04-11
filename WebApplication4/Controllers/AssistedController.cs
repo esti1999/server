@@ -56,5 +56,17 @@ namespace WebApplication4.Controllers
         {
             return BL.AssistedBL.GetGender();
         }
+        [HttpGet]
+        [Route("GetLanguage")]
+        public List<Language> GetLanguage()
+        {
+            return BL.AssistedBL.GetLanguage();
+        }
+        [HttpGet]
+        [Route("GetCity")]
+        public List<City> GetCity()
+        {
+            return BL.AssistedBL.GetCity();
+        }
     }
 }

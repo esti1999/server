@@ -82,5 +82,25 @@ namespace BL
             }
             return list1;
         }
+        public static List<Language> GetLanguage()
+        {
+            Progect_lEntities1 db = new Progect_lEntities1();
+            List<Language> list2 = new List<Language>();
+            foreach (var item in db.language)
+            {
+                list2.Add(new Language { code_language = item.code_language, name_language = item.name_language });
+            }
+            return list2;
+        }
+        public static List<City> GetCity()
+        {
+            Progect_lEntities1 db = new Progect_lEntities1();
+            List<City> list3 = new List<City>();
+            foreach (var item in db.city)
+            {
+                list3.Add(new City { code_city = item.code_city, name_city = item.name_city });
+            }
+            return list3;
+        }
     }    
 }

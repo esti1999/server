@@ -66,7 +66,12 @@ namespace DTO
         }
 
         public static volunteer convertvolunteerentitytovolunteertable(Volunteer v)
-        {
+        { 
+            //car_license car_License1=new car_license()
+            //{
+            //    code_car_license=v.code_license_car,
+            //    description=v.code_license_car
+            //}
             volunteer v1 = new volunteer()
             {
                 id_volunteer = v.id_volunteer,
@@ -92,6 +97,9 @@ namespace DTO
                 phone = v.phone,
                 password = v.password
             };
+            //v1.car_license_volunteer = car_License1;
+
+
             return v1;
         }
         public static List<Volunteer> convertvolunteertabletolistvolunteerentity(List<volunteer> vl)
@@ -112,7 +120,6 @@ namespace DTO
             }
             return v1;
         }
-
     }
 }
 

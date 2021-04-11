@@ -79,5 +79,11 @@ namespace WebApplication4.Controllers
         {
             return BL.VolunteerBL.GetLanguage();
         }
+        [HttpGet]
+        [Route("GetCity")]
+        public List<City> GetCity()
+        {
+            return BL.VolunteerBL.GetCity();
+        }
     }
 }

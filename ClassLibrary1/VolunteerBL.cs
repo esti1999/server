@@ -27,6 +27,7 @@ namespace BL
             {
                 db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
                 db.SaveChanges();
+
             }
             catch(Exception e)
             {
@@ -125,6 +126,16 @@ namespace BL
                 list5.Add(new Language { code_language = item.code_language, name_language = item.name_language});
             }
             return list5;
+        }
+        public static List<City> GetCity()
+        {
+            Progect_lEntities1 db = new Progect_lEntities1();
+            List<City> list6 = new List<City>();
+            foreach (var item in db.city)
+            {
+                list6.Add(new City { code_city = item.code_city, name_city = item.name_city });
+            }
+            return list6;
         }
     }
 }
