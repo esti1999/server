@@ -10,7 +10,7 @@ namespace BL
 {
     public class AssistedBL
     {
-        public static Progect_lEntities1 db = new Progect_lEntities1();
+        public static Progect_lEntities db = new Progect_lEntities();
         public static List<Assisted> getall()
         {
             List<assisted> assisted = db.assisted.ToList();
@@ -61,7 +61,7 @@ namespace BL
         }
         public static List<PersonalStatus> GetPersonalStatuses()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<PersonalStatus> list = new List<PersonalStatus>();
             foreach (var item in db.personal_status)
             {
@@ -71,7 +71,7 @@ namespace BL
         }
         public static List<Gender> GetGender()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<Gender> list1 = new List<Gender>();
             foreach (var item in db.gender)
             {

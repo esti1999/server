@@ -10,7 +10,7 @@ namespace BL
 {
    public class VolunteeringBL
    {
-        public static Progect_lEntities1 db = new Progect_lEntities1();
+        public static Progect_lEntities db = new Progect_lEntities();
         public static List<VolunteeringDomain> getall()
         {
             List<volunteering_domain> volunteeringdomain = db.volunteering_domain.ToList();

@@ -10,7 +10,7 @@ namespace BL
 {
     public class DomainBL
     {
-        public static Progect_lEntities1 db = new Progect_lEntities1();
+        public static Progect_lEntities db = new Progect_lEntities();
         public static List<Domain> GetDomainsList()
         {
             List<domain> domain = db.domain.ToList();
@@ -47,7 +47,7 @@ namespace BL
 
         public static List<Domain> GetVolunteeringDomain()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<Domain> list = new List<Domain>();
             foreach (var item in db.domain)
             {

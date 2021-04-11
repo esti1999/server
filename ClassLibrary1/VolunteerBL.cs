@@ -10,7 +10,7 @@ namespace BL
 {
     public class VolunteerBL
     {
-        public static Progect_lEntities1 db = new Progect_lEntities1();
+        public static Progect_lEntities db = new Progect_lEntities();
         public static List<Volunteer> getall()
         {
             List<volunteer> volunteer = db.volunteer.ToList();
@@ -35,6 +35,12 @@ namespace BL
 
             return true;
         }
+
+        //public static List<Language> GetLanguages()
+        //{
+        //    return db.language.ToList();
+        //}
+
         public static List<Volunteer> RemoveVolunteer(string id_volunteer)
         {
             db.volunteer.Remove(db.volunteer.FirstOrDefault(x => x.id_volunteer == id_volunteer));
@@ -65,7 +71,7 @@ namespace BL
         }
         public static List<PersonalStatus> GetPersonalStatuses()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<PersonalStatus> list = new List<PersonalStatus>();
             foreach (var item in db.personal_status)
             {
@@ -75,7 +81,7 @@ namespace BL
         }
         public static List<Gender> GetGender()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<Gender> list1 = new List<Gender>();
             foreach (var item in db.gender)
             {

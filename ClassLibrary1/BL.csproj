@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="AssistedBL.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Convert.cs" />
     <Compile Include="DomainBL.cs" />
     <Compile Include="LoginBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

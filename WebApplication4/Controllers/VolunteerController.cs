@@ -33,6 +33,13 @@ namespace WebApplication4.Controllers
             return BL.VolunteerBL.AddVolunteer(valunteer);
         }
 
+        //[HttpGet]
+        //[Route("GetLanguages")]
+        //public List<Language> GetLanguages()
+        //{
+        //    return BL.VolunteerBL.GetLanguages();
+        //}
+
         // PUT: api/Volunteer/5
         public void Put(int id, [FromBody]string value)
         {

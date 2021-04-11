@@ -13,10 +13,10 @@ namespace DAL
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Progect_lEntities1 : DbContext
+    public partial class Progect_lEntities : DbContext
     {
-        public Progect_lEntities1()
-            : base("name=Progect_lEntities1")
+        public Progect_lEntities()
+            : base("name=Progect_lEntities")
         {
         }
     
@@ -37,7 +37,6 @@ namespace DAL
         public virtual DbSet<language> language { get; set; }
         public virtual DbSet<personal_status> personal_status { get; set; }
         public virtual DbSet<services> services { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<training> training { get; set; }
         public virtual DbSet<training_volunteer> training_volunteer { get; set; }
         public virtual DbSet<volunteer> volunteer { get; set; }
