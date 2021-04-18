@@ -62,5 +62,35 @@ namespace WebApplication4.Controllers
         {
             return BL.VolunteerBL.GetGender();
         }
+        [HttpGet]
+        [Route("GetCarLicense")]
+        public List<CarLicense> GetCarLicense()
+        {
+            return BL.VolunteerBL.GetCarLicense();
+        }
+        [HttpGet]
+        [Route("GetWeaponsLicense")]
+        public List<WeaponsLicense> GetWeaponsLicense()
+        {
+            return BL.VolunteerBL.GetWeaponsLicense();
+        }
+        [HttpGet]
+        [Route("GetAvailability")]
+        public List<Availability> GetAvailability()
+        {
+            return BL.VolunteerBL.GetAvailability();
+        }
+        [HttpGet]
+        [Route("GetLanguage")]
+        public List<Language> GetLanguage()
+        {
+            return BL.VolunteerBL.GetLanguage();
+        }
+        [HttpGet]
+        [Route("GetCity")]
+        public List<City> GetCity()
+        {
+            return BL.VolunteerBL.GetCity();
+        }
     }
 }

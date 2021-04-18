@@ -27,6 +27,13 @@ namespace WebApplication4.Controllers
             return BL.DomainBL.GetDomainsList();
         }
 
+        //[HttpGet]
+        //[Route("getDomainLists")]
+        //public  GetDomainsLists()
+        //{ 
+        //    return  BL.DomainBL.GetDomainsLists();
+        //}
+        [HttpGet]
         [Route("getVolunteeringByDomain/{code_domain}")]
         public List<VolunteeringDomain> GetVolunteeringByDomain(int code_domain)
         {

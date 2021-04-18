@@ -27,6 +27,7 @@ namespace BL
             {
                 db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
                 db.SaveChanges();
+
             }
             catch(Exception e)
             {
@@ -64,8 +65,11 @@ namespace BL
             db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).street = volunteer.street;
             db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).bulding_number = volunteer.bulding_number;
             db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).house_number = volunteer.house_number;
+            db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).number_floor = volunteer.number_floor;
             db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).postal_code = volunteer.postal_code;
             db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).e_mail = volunteer.e_mail;
+            db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).phone = volunteer.phone;
+            db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).password = volunteer.password;
             db.SaveChanges();
             return Volunteer.convertvolunteertabletolistvolunteerentity(db.volunteer.ToList());
         }
@@ -88,6 +92,56 @@ namespace BL
                 list1.Add(new Gender { code_gender = item.code_gender, description = item.description });
             }
             return list1;
+        }
+        public static List<CarLicense> GetCarLicense()
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<CarLicense> list2 = new List<CarLicense>();
+            foreach (var item in db.car_license)
+            {
+                list2.Add(new CarLicense { code_car_license = item.code_car_license, description = item.description });
+            }
+            return list2;
+        }
+        public static List<WeaponsLicense> GetWeaponsLicense()
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<WeaponsLicense> list3 = new List<WeaponsLicense>();
+            foreach (var item in db.weapons_license)
+            {
+                list3.Add(new WeaponsLicense { code_weapons_license = item.code_weapons_license, description = item.description });
+            }
+            return list3;
+        }
+        public static List<Availability> GetAvailability()
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<Availability> list4 = new List<Availability>();
+            foreach (var item in db.availability)
+            {
+                list4.Add(new Availability { code_availability = item.code_availability, code_day = item.code_day, code_shift = item.code_shift, description = item.description });
+            }
+            return list4;
+        }
+        public static List<Language> GetLanguage()
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<Language> list5 = new List<Language>();
+            foreach (var item in db.language)
+            {
+                list5.Add(new Language { CodeLanguage = item.code_language, NameLanguage = item.name_language});
+            }
+            return list5;
+        }
+        public static List<City> GetCity()
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<City> list6 = new List<City>();
+            foreach (var item in db.city)
+            {
+                list6.Add(new City { code_city = item.code_city, name_city = item.name_city });
+            }
+            return list6;
         }
     }
 }

@@ -29,6 +29,8 @@ namespace DTO
         public int code_volunteering_domain { get; set; }
         public int code_availability { get; set; }
         public string phone { get; set; }
+        public int number_floor { get; set; }
+        public string password { get; set; }
 
 
         public static Volunteer convertvolunteertabletovolunteerentity(volunteer v)
@@ -54,7 +56,10 @@ namespace DTO
                 code_service = v.code_service,
                 code_training = v.code_training,
                 code_availability = v.code_availability,
-                code_volunteering_domain = v.code_volunteering_domain
+                code_volunteering_domain = v.code_volunteering_domain,
+                number_floor=v.number_floor,
+                phone=v.phone,
+                password = v.password
 
             };
             return v1;
@@ -62,6 +67,11 @@ namespace DTO
 
         public static volunteer convertvolunteerentitytovolunteertable(Volunteer v)
         {
+            //car_license car_License1=new car_license()
+            //{
+            //    code_car_license=v.code_license_car,
+            //    description=v.code_license_car
+            //}
             volunteer v1 = new volunteer()
             {
                 id_volunteer = v.id_volunteer,
@@ -82,8 +92,14 @@ namespace DTO
                 code_service = v.code_service,
                 code_training = v.code_training,
                 code_availability = v.code_availability,
-                code_volunteering_domain = v.code_volunteering_domain
+                code_volunteering_domain = v.code_volunteering_domain,
+                number_floor = v.number_floor,
+                phone = v.phone,
+                password = v.password
             };
+            //v1.car_license_volunteer = car_License1;
+
+
             return v1;
         }
         public static List<Volunteer> convertvolunteertabletolistvolunteerentity(List<volunteer> vl)
@@ -104,7 +120,6 @@ namespace DTO
             }
             return v1;
         }
-
     }
 }
 

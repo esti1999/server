@@ -56,6 +56,9 @@ namespace BL
             db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).number_building = assisted.number_building;
             db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).number_house = assisted.number_house;
             db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).e_mail = assisted.e_mail;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).number_floor = assisted.number_floor;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).phone = assisted.phone;
+            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).password = assisted.password ;
             db.SaveChanges();
             return Assisted.convertassistedtabletolistassistedentity(db.assisted.ToList());
         }
@@ -78,6 +81,26 @@ namespace BL
                 list1.Add(new Gender { code_gender = item.code_gender, description = item.description });
             }
             return list1;
+        }
+        public static List<Language> GetLanguage()
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<Language> list2 = new List<Language>();
+            foreach (var item in db.language)
+            {
+                list2.Add(new Language { CodeLanguage = item.code_language, NameLanguage = item.name_language });
+            }
+            return list2;
+        }
+        public static List<City> GetCity()
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<City> list3 = new List<City>();
+            foreach (var item in db.city)
+            {
+                list3.Add(new City { code_city = item.code_city, name_city = item.name_city });
+            }
+            return list3;
         }
     }    
 }

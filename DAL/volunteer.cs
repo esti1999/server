@@ -43,7 +43,9 @@ namespace DAL
         public int code_training { get; set; }
         public int code_volunteering_domain { get; set; }
         public int code_availability { get; set; }
+        public string phone { get; set; }
         public int number_floor { get; set; }
+        public string password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<availability_volunteer> availability_volunteer { get; set; }

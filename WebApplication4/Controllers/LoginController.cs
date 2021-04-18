@@ -10,22 +10,10 @@ using DTO;
 
 namespace WebApplication4.Controllers
 {
-    //[RoutePrefix("Login")]
+    [RoutePrefix("api/Login")]
     public class LoginController : ApiController
     {
-        // GET: api/Login
-       [HttpGet]
-       //[Route("login")]
-        //public T Login<T>(string userName, string password)
-        //{
-        //    return BL.LoginBL.Login(userName, password);
-        //}
-
-        // GET: api/Login/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+       
 
         // POST: api/Login
         public void Post([FromBody]string value)
@@ -40,6 +28,18 @@ namespace WebApplication4.Controllers
         // DELETE: api/Login/5
         public void Delete(int id)
         {
+        }
+        [Route("GetEmailAddressPassword/{e_mail}/{password}")]
+        [HttpGet]
+        public Volunteer GetEmailAddressPassword(string e_mail, string password)
+        {
+            return LoginBL.GetEmailAddressPassword(e_mail, password);
+        }
+        [Route("GetEmailAddressPassword1/{e_mail}/{password}")]
+        [HttpGet]
+        public Assisted GetEmailAddressPassword1(string e_mail, string password)
+        {
+            return LoginBL.GetEmailAddressPassword1(e_mail, password);
         }
     }
 }

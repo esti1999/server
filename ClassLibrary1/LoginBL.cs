@@ -10,19 +10,20 @@ namespace BL
 {
     public class LoginBL
     {
-        //LoginDAL dbLogin;
-        //public LoginBL(LoginDAL loginDAL)
-        //{
-        //    dbLogin = loginDAL;
-        //}
-        //public static T Login<T>(string userName, string password)
-        //{
-        //    if (T is Personal_Information_vo_)
-        //    {
-
-        //        return Personal_Information_volunteerEntity.ConvertPersonal_Information_voTableToPersonal_Information_voEntity(DAL.LoginDAL.Login(userName, password));
-        //    }
-        //    return Personal_Information_AssistedEntity.ConvertPersonal_Information_Assisted_TableToPersonal_Information_AssistedEntity(DAL.LoginDAL.Login(userName, password));
-        //}
+        public static Progect_lEntities db = new Progect_lEntities();
+        public static Volunteer GetEmailAddressPassword(string e_mail, string password)
+        {
+            var v = (db.volunteer.FirstOrDefault(x => x.e_mail == e_mail && x.password == password));
+            if (v != null)
+                return Volunteer.convertvolunteertabletovolunteerentity(v);
+            return null;
+        }
+        public static Assisted GetEmailAddressPassword1(string e_mail, string password)
+        {
+            var v1 = (db.assisted.FirstOrDefault(x => x.e_mail == e_mail && x.password == password));
+            if (v1!= null)
+                return Assisted.convertassistedtabletoassistedentity(v1);
+            return null;
+        }
     }
 }

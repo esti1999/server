@@ -34,10 +34,11 @@ namespace DAL
         public int code_language { get; set; }
         public string e_mail { get; set; }
         public int code_help_domain { get; set; }
+        public string phone { get; set; }
         public int number_floor { get; set; }
+        public string password { get; set; }
     
         public virtual city city { get; set; }
-        public virtual domain domain { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<assisted_domain> assisted_domain { get; set; }
         public virtual gender gender { get; set; }
