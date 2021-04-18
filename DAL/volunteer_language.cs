@@ -12,14 +12,13 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class weapons_license_volunteer
+    public partial class volunteer_language
     {
-        public int code_weapons_license_volunteer { get; set; }
-        public int code_weapons_license { get; set; }
+        public int code_volunteer_language { get; set; }
+        public int code_language { get; set; }
         public string id_volunteer { get; set; }
-        public System.DateTime validity { get; set; }
     
-        public virtual weapons_license weapons_license { get; set; }
+        public virtual language language { get; set; }
         public virtual volunteer volunteer { get; set; }
     }
 }

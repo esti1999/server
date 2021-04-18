@@ -39,7 +39,7 @@ namespace DTO
             }
             return p1;
         }
-        public static List<personal_status> convertpersonalstatusentitytolistpersonalstatusentity(List<PersonalStatus> pl)
+        public static List<personal_status> convertpersonalstatusentitytolistpersonalstatustable(List<PersonalStatus> pl)
         {
             List<personal_status> p1 = new List<personal_status>();
             foreach (var item in pl)

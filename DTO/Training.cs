@@ -39,7 +39,7 @@ namespace DTO
             }
             return t1;
         }
-        public static List<training> converttreiningentitytolisttrainingentity(List<Training> tl)
+        public static List<training> converttreiningentitytolisttrainingtable(List<Training> tl)
         {
             List<training> t1 = new List<training>();
             foreach (var item in tl)

@@ -18,7 +18,7 @@ namespace BL
         }
         public static Volunteer getBtId(string id_volunteer)
         {
-            volunteer volunteer = db.volunteer.FirstOrDefault(x => id_volunteer == id_volunteer);
+            volunteer volunteer = db.volunteer.FirstOrDefault(x => x.id_volunteer == id_volunteer);
             return Volunteer.convertvolunteertabletovolunteerentity(volunteer);
         }
         public static bool AddVolunteer(Volunteer volunteer)
@@ -27,9 +27,9 @@ namespace BL
             {
                 db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
                 db.SaveChanges();
-
             }
-            catch(Exception e)
+
+            catch (Exception e)
             {
                 return false;
             }
@@ -136,6 +136,16 @@ namespace BL
                 list6.Add(new City { code_city = item.code_city, name_city = item.name_city });
             }
             return list6;
+        }
+        public static List<Services> GetServices()
+        {
+            Progect_lEntities1 db = new Progect_lEntities1();
+            List<Services> list7 = new List<Services>();
+            foreach (var item in db.services)
+            {
+                list7.Add(new Services { code_service = item.code_service, description = item.description });
+            }
+            return list7;
         }
     }
 }

@@ -41,7 +41,7 @@ namespace DTO
             }
             return c1;
         }
-        public static List<city> convertcityentitytolistcityentity(List<City> cl)
+        public static List<city> convertcityentitytolistcitytable(List<City> cl)
         {
             List<city> c1 = new List<city>();
             foreach (var item in cl)

@@ -29,7 +29,7 @@ namespace WebApplication4.Controllers
         // POST: api/Assisted
         [HttpPost]
         [Route("addAssisted")]
-        public bool AddAssisted( Assisted assisted)
+        public bool AddAssisted( [FromBody] Assisted assisted)
         {
 
             return BL.AssistedBL.AddAssisted(assisted);

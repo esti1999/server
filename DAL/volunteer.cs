@@ -22,6 +22,7 @@ namespace DAL
             this.training_volunteer = new HashSet<training_volunteer>();
             this.volunteer_domain = new HashSet<volunteer_domain>();
             this.weapons_license_volunteer = new HashSet<weapons_license_volunteer>();
+            this.volunteer_language = new HashSet<volunteer_language>();
         }
     
         public string id_volunteer { get; set; }
@@ -35,26 +36,24 @@ namespace DAL
         public string postal_code { get; set; }
         public int house_number { get; set; }
         public int bulding_number { get; set; }
+        public int number_floor { get; set; }
         public int code_language { get; set; }
         public string e_mail { get; set; }
         public int code_license_car { get; set; }
         public int code_service { get; set; }
         public int code_license_weapon { get; set; }
-        public int code_training { get; set; }
+        public Nullable<int> code_training { get; set; }
         public int code_volunteering_domain { get; set; }
         public int code_availability { get; set; }
         public string phone { get; set; }
-        public int number_floor { get; set; }
         public string password { get; set; }
+        public Nullable<System.DateTime> release_date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<availability_volunteer> availability_volunteer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<car_license_volunteer> car_license_volunteer { get; set; }
         public virtual city city { get; set; }
-        public virtual gender gender { get; set; }
-        public virtual language language { get; set; }
-        public virtual personal_status personal_status { get; set; }
         public virtual services services { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<training_volunteer> training_volunteer { get; set; }
@@ -62,5 +61,7 @@ namespace DAL
         public virtual ICollection<volunteer_domain> volunteer_domain { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<weapons_license_volunteer> weapons_license_volunteer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<volunteer_language> volunteer_language { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace DTO
             };
             return c1;
         }
-        public static List<car_license> convertvolunteertabletolistvolunteerentity(List<CarLicense> al)
+        public static List<car_license> convertcarlicenseentitytolistcarlicensetable(List<CarLicense> al)
         {
             List<car_license> a1 = new List<car_license>();
             foreach (var item in al)
@@ -39,7 +39,7 @@ namespace DTO
             }
             return a1;
         }
-        public static List<CarLicense> convertvolunteerentitytolistvolunteerentity(List<car_license> al)
+        public static List<CarLicense> convertcarlicensetabletolistcarlicenseentity(List<car_license> al)
         {
             List<CarLicense> a1 = new List<CarLicense>();
             foreach (var item in al)

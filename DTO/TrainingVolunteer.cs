@@ -43,7 +43,7 @@ namespace DTO
             }
             return t1;
         }
-        public static List<training_volunteer> converttreiningvolunteerentitytolisttrainingvolunteerentity(List<TrainingVolunteer> tl)
+        public static List<training_volunteer> converttreiningvolunteerentitytolisttrainingvolunteertable(List<TrainingVolunteer> tl)
         {
             List<training_volunteer> t1 = new List<training_volunteer>();
             foreach (var item in tl)

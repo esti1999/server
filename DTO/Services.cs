@@ -11,7 +11,6 @@ namespace DTO
     {
         public int code_service { get; set; }
         public string description { get; set; }
-        public System.DateTime release_date { get; set; }
 
         public static Services convetservicestabletoserviceentity(services s)
         {
@@ -19,7 +18,6 @@ namespace DTO
             {
                 code_service = s.code_service,
                 description = s.description,
-                release_date = s.release_date
             };
             return s1;
         }
@@ -29,7 +27,6 @@ namespace DTO
             {
                 code_service = s.code_service,
                 description = s.description,
-                release_date = s.release_date
             };
             return s1;
         }
@@ -42,7 +39,7 @@ namespace DTO
             }
             return s1;
         }
-        public static List<services> convertservicesentitytolistservicesentity(List<Services> sl)
+        public static List<services> convertservicesentitytolistservicestable(List<Services> sl)
         {
             List<services> s1 = new List<services>();
             foreach (var item in sl)

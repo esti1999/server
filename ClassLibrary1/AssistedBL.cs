@@ -18,7 +18,7 @@ namespace BL
         }
         public static Assisted getBtId(string id_assisted)
         {
-            assisted assisted = db.assisted.FirstOrDefault(x => id_assisted == id_assisted);
+            assisted assisted = db.assisted.FirstOrDefault(x => x.id_assisted == id_assisted);
             return Assisted.convertassistedtabletoassistedentity(assisted);
         }
         public static bool AddAssisted(Assisted assisted)

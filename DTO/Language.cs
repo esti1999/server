@@ -39,7 +39,7 @@ namespace DTO
             }
             return l1;
         }
-        public static List<language> convertvolunteerentitytolistvolunteerentity(List<Language> ll)
+        public static List<language> convertvolunteerentitytolistvolunteertable(List<Language> ll)
         {
             List<language> l1 = new List<language>();
             foreach (var item in ll)
