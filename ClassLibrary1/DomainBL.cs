@@ -52,8 +52,6 @@ namespace BL
             {
                 return null;
             }
-            
-            
         }
 
         public static List<Domain> GetVolunteeringDomain()
