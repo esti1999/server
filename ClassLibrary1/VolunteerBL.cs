@@ -10,7 +10,7 @@ namespace BL
 {
     public class VolunteerBL
     {
-        public static Progect_lEntities1 db = new Progect_lEntities1();
+        public static Progect_lEntities db = new Progect_lEntities();
         public static List<Volunteer> getall()
         {
             List<volunteer> volunteer = db.volunteer.ToList();
@@ -25,7 +25,47 @@ namespace BL
         {
             try
             {
-                db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
+                volunteer v = db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer);
+                if (v!=null)
+                {
+                    //v = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
+                    volunteer v1 = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
+
+                    v.availability_volunteer = v1.availability_volunteer;
+                    v.bulding_number = v1.bulding_number;
+                    v.car_license_volunteer = v1.car_license_volunteer;
+                    v.code_availability = v1.code_availability;
+                    v.code_city = v1.code_city;
+                    v.code_gender = v1.code_gender;
+                    v.code_language = v1.code_language;
+                    v.code_license_car = v1.code_license_car;
+                    v.code_license_weapon = v1.code_license_weapon;
+                    v.code_service = v1.code_service;
+                    v.code_status = v1.code_status;
+                    v.code_training = v1.code_training;
+                    v.code_volunteering_domain = v1.code_volunteering_domain;
+                    v.date_of_birth = v1.date_of_birth;
+                    v.e_mail = v1.e_mail;
+                    v.firstName_volunteer = v1.firstName_volunteer;
+                    v.house_number = v1.house_number;
+                    v.id_volunteer = v1.id_volunteer;
+                    v.lastName_volunteer = v1.lastName_volunteer;
+                    v.number_floor = v1.number_floor;
+                    v.password = v1.password;
+                    v.phone = v1.phone;
+                    v.postal_code = v1.postal_code;
+                    v.release_date = v1.release_date;
+                    v.services = v1.services;
+                    v.street = v1.street;
+                    v.training_volunteer = v1.training_volunteer;
+                    v.volunteer_domain = v1.volunteer_domain;
+                    v.volunteer_language = v1.volunteer_language;
+                    v.weapons_license_volunteer = v1.weapons_license_volunteer;
+                }
+                else
+                {
+                    db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
+                }
                 db.SaveChanges();
             }
 
@@ -36,6 +76,12 @@ namespace BL
 
             return true;
         }
+
+        //public static List<Language> GetLanguages()
+        //{
+        //    return db.language.ToList();
+        //}
+
         public static List<Volunteer> RemoveVolunteer(string id_volunteer)
         {
             db.volunteer.Remove(db.volunteer.FirstOrDefault(x => x.id_volunteer == id_volunteer));
@@ -63,7 +109,7 @@ namespace BL
         }
         public static List<PersonalStatus> GetPersonalStatuses()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<PersonalStatus> list = new List<PersonalStatus>();
             foreach (var item in db.personal_status)
             {
@@ -73,7 +119,7 @@ namespace BL
         }
         public static List<Gender> GetGender()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<Gender> list1 = new List<Gender>();
             foreach (var item in db.gender)
             {
@@ -83,7 +129,7 @@ namespace BL
         }
         public static List<CarLicense> GetCarLicense()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<CarLicense> list2 = new List<CarLicense>();
             foreach (var item in db.car_license)
             {
@@ -93,7 +139,7 @@ namespace BL
         }
         public static List<WeaponsLicense> GetWeaponsLicense()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<WeaponsLicense> list3 = new List<WeaponsLicense>();
             foreach (var item in db.weapons_license)
             {
@@ -103,7 +149,7 @@ namespace BL
         }
         public static List<Availability> GetAvailability()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<Availability> list4 = new List<Availability>();
             foreach (var item in db.availability)
             {
@@ -113,17 +159,17 @@ namespace BL
         }
         public static List<Language> GetLanguage()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<Language> list5 = new List<Language>();
             foreach (var item in db.language)
             {
-                list5.Add(new Language { code_language = item.code_language, name_language = item.name_language});
+                list5.Add(new Language { CodeLanguage = item.code_language, NameLanguage = item.name_language});
             }
             return list5;
         }
         public static List<City> GetCity()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<City> list6 = new List<City>();
             foreach (var item in db.city)
             {
@@ -133,7 +179,7 @@ namespace BL
         }
         public static List<Services> GetServices()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<Services> list7 = new List<Services>();
             foreach (var item in db.services)
             {

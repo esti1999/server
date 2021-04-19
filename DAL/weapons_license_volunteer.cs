@@ -19,7 +19,7 @@ namespace DAL
         public string id_volunteer { get; set; }
         public System.DateTime validity { get; set; }
     
-        public virtual weapons_license weapons_license { get; set; }
         public virtual volunteer volunteer { get; set; }
+        public virtual weapons_license weapons_license { get; set; }
     }
 }

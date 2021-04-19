@@ -10,7 +10,7 @@ namespace BL
 {
     public class LoginBL
     {
-        public static Progect_lEntities1 db = new Progect_lEntities1();
+        public static Progect_lEntities db = new Progect_lEntities();
         public static Volunteer GetEmailAddressPassword(string e_mail, string password)
         {
             var v = (db.volunteer.FirstOrDefault(x => x.e_mail == e_mail && x.password == password));

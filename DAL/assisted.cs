@@ -44,6 +44,13 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<assisted_domain> assisted_domain { get; set; }
         public virtual gender gender { get; set; }
+<<<<<<< HEAD
+<<<<<<< HEAD
+        public virtual language language { get; set; }
+=======
+>>>>>>> 8052e0d920678382b409a855a2616810babf5883
+=======
+>>>>>>> 8052e0d920678382b409a855a2616810babf5883
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<assisted_language> assisted_language { get; set; }
         public virtual personal_status personal_status { get; set; }

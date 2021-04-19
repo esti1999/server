@@ -18,7 +18,7 @@ namespace DAL
         public int code_volunteering { get; set; }
         public string id_volunteer { get; set; }
     
-        public virtual volunteering_domain volunteering_domain { get; set; }
         public virtual volunteer volunteer { get; set; }
+        public virtual volunteering_domain volunteering_domain { get; set; }
     }
 }

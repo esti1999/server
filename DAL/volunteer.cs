@@ -56,8 +56,17 @@ namespace DAL
         public virtual ICollection<volunteer_language> volunteer_language { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<weapons_license_volunteer> weapons_license_volunteer { get; set; }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
         public virtual city city { get; set; }
         public virtual gender gender { get; set; }
         public virtual personal_status personal_status { get; set; }
+>>>>>>> 8052e0d920678382b409a855a2616810babf5883
+=======
+        public virtual city city { get; set; }
+        public virtual gender gender { get; set; }
+        public virtual personal_status personal_status { get; set; }
+>>>>>>> 8052e0d920678382b409a855a2616810babf5883
     }
 }

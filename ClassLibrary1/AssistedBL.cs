@@ -8,10 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BL
-{
+{ 
     public class AssistedBL
     {
-        public static Progect_lEntities1 db = new Progect_lEntities1();
+        public static Progect_lEntities db = new Progect_lEntities();
         public static List<Assisted> getall()
         {
             List<assisted> assisted = db.assisted.ToList();
@@ -26,7 +26,39 @@ namespace BL
         {
             try
             {
-                db.assisted.Add(Assisted.convertassistedentitytoassistedtable(assisted));
+                assisted a = db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted);
+                if (a != null)
+                {
+                    assisted a1 = Assisted.convertassistedentitytoassistedtable(assisted);
+                    a.assisted_domain = a1.assisted_domain;
+                    a.assisted_language = a1.assisted_language;
+                    a.city = a1.city;
+                    a.code_city = a1.code_city;
+                    a.code_gender = a1.code_gender;
+                    a.code_help_domain = a1.code_help_domain;
+                    a.code_language = a1.code_language;
+                    a.code_status = a1.code_status;
+                    a.date_birth = a1.date_birth;
+                    a.e_mail = a1.e_mail;
+                    a.first_name = a1.first_name;
+                    a.gender = a1.gender;
+                    a.id_assisted = a1.id_assisted;
+                    a.language = a1.language;
+                    a.last_name = a1.last_name;
+                    a.number_building = a1.number_building;
+                    a.number_floor = a1.number_floor;
+                    a.number_house = a1.number_house;
+                    a.password = a1.password;
+                    a.personal_status = a1.personal_status;
+                    a.phone = a1.phone;
+                    a.postal_code = a1.postal_code;
+                    a.street = a1.street;
+                }
+                else
+                {
+                    db.assisted.Add(Assisted.convertassistedentitytoassistedtable(assisted));
+                }
+
                 db.SaveChanges();
             }
             catch (Exception e)
@@ -127,7 +159,7 @@ namespace BL
         }
         public static List<PersonalStatus> GetPersonalStatuses()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<PersonalStatus> list = new List<PersonalStatus>();
             foreach (var item in db.personal_status)
             {
@@ -137,7 +169,7 @@ namespace BL
         }
         public static List<Gender> GetGender()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<Gender> list1 = new List<Gender>();
             foreach (var item in db.gender)
             {
@@ -147,17 +179,17 @@ namespace BL
         }
         public static List<Language> GetLanguage()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<Language> list2 = new List<Language>();
             foreach (var item in db.language)
             {
-                list2.Add(new Language { code_language = item.code_language, name_language = item.name_language });
+                list2.Add(new Language { CodeLanguage = item.code_language, NameLanguage = item.name_language });
             }
             return list2;
         }
         public static List<City> GetCity()
         {
-            Progect_lEntities1 db = new Progect_lEntities1();
+            Progect_lEntities db = new Progect_lEntities();
             List<City> list3 = new List<City>();
             foreach (var item in db.city)
             {
