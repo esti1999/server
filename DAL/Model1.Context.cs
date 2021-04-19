@@ -25,7 +25,6 @@ namespace DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<assisted> assisted { get; set; }
         public virtual DbSet<assisted_domain> assisted_domain { get; set; }
         public virtual DbSet<assisted_language> assisted_language { get; set; }
         public virtual DbSet<availability> availability { get; set; }
@@ -46,5 +45,14 @@ namespace DAL
         public virtual DbSet<volunteering_domain> volunteering_domain { get; set; }
         public virtual DbSet<weapons_license> weapons_license { get; set; }
         public virtual DbSet<weapons_license_volunteer> weapons_license_volunteer { get; set; }
+<<<<<<< HEAD
+=======
+        public virtual DbSet<services> services { get; set; }
+        public virtual DbSet<assisted_language> assisted_language { get; set; }
+        public virtual DbSet<volunteer_language> volunteer_language { get; set; }
+        public virtual DbSet<assisted_availability> assisted_availability { get; set; }
+        public virtual DbSet<assisted> assisted { get; set; }
+        public virtual DbSet<volunteer> volunteer { get; set; }
+>>>>>>> 8052e0d920678382b409a855a2616810babf5883
     }
 }

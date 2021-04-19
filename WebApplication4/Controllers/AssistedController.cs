@@ -26,6 +26,12 @@ namespace WebApplication4.Controllers
             return "value";
         }
 
+        [HttpPost]
+        [Route("embededAssisted")]
+        public bool EmbededAssisted([FromBody] Assisted assisted)
+        {
+            return BL.AssistedBL.EmbededAssisted(assisted);
+        }
         // POST: api/Assisted
         [HttpPost]
         [Route("addAssisted")]
@@ -68,5 +74,31 @@ namespace WebApplication4.Controllers
         {
             return BL.AssistedBL.GetCity();
         }
+        //[HttpPost("SendMail/{volunteer}")]
+        //public IActionResult SendMail(volunteer volunteer, [FromBody] )
+        //{
+        //    try
+        //    {
+        //        var kimat_erua = erua.kimat_erua1 == 1 ? "אירוע" : "כמעט אירוע";
+        //        var message = "<div style='direction:rtl;;font-family:Arial;'>" +
+        //      "שלום רב, </br> </br>" +
+        //       "דיווח: " + kimat_erua + " חריג " +
+        //       "</br>" +
+        //        "</br>" +
+        //        " דווח על " + kimat_erua + " חריג. " + "</br>" + "עליך להכנס למערכת כדי לראות את פרטי האירוע ." + "</br>" +
+        //        "מספר האירוע: " + erua.erua_no + "</br>" + "תאריך האירוע:  " + erua.taarich_erua.ToString();
+        //        לשלוח מייל
+
+
+
+        //        SendMail(volunteer, erua, " דיווח" + kimat_erua + " חריג ", message);
+        //        return Ok(true);
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
     }
 }

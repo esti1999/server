@@ -17,6 +17,7 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public assisted()
         {
+            this.assisted_availability = new HashSet<assisted_availability>();
             this.assisted_domain = new HashSet<assisted_domain>();
             this.assisted_language = new HashSet<assisted_language>();
         }
@@ -33,17 +34,20 @@ namespace DAL
         public int number_building { get; set; }
         public int number_floor { get; set; }
         public int postal_code { get; set; }
-        public int code_language { get; set; }
         public string e_mail { get; set; }
-        public int code_help_domain { get; set; }
         public string phone { get; set; }
         public string password { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<assisted_availability> assisted_availability { get; set; }
         public virtual city city { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<assisted_domain> assisted_domain { get; set; }
         public virtual gender gender { get; set; }
+<<<<<<< HEAD
         public virtual language language { get; set; }
+=======
+>>>>>>> 8052e0d920678382b409a855a2616810babf5883
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<assisted_language> assisted_language { get; set; }
         public virtual personal_status personal_status { get; set; }
