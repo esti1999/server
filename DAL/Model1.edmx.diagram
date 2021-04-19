@@ -52,6 +52,9 @@
         <EntityTypeShape EntityType="Progect_lModel.volunteering_domain" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Progect_lModel.weapons_license" Width="1.5" PointX="9" PointY="16.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Progect_lModel.weapons_license_volunteer" Width="1.5" PointX="11.25" PointY="13.125" IsExpanded="true" />
+<<<<<<< HEAD
+>>>>>>> 8052e0d920678382b409a855a2616810babf5883
+=======
 >>>>>>> 8052e0d920678382b409a855a2616810babf5883
         <AssociationConnector Association="Progect_lModel.FK_assisted_domain_volunteering_domain" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_assisted_language_language" ManuallyRouted="false" />
@@ -96,6 +99,9 @@
         <AssociationConnector Association="Progect_lModel.FK_volunteer_city1" />
         <AssociationConnector Association="Progect_lModel.FK_volunteer_gender" />
         <AssociationConnector Association="Progect_lModel.FK_volunteer_personal_status" />
+<<<<<<< HEAD
+>>>>>>> 8052e0d920678382b409a855a2616810babf5883
+=======
 >>>>>>> 8052e0d920678382b409a855a2616810babf5883
       </Diagram>
     </edmx:Diagrams>

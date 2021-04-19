@@ -53,6 +53,9 @@ namespace DAL
         public virtual DbSet<assisted_availability> assisted_availability { get; set; }
         public virtual DbSet<assisted> assisted { get; set; }
         public virtual DbSet<volunteer> volunteer { get; set; }
+<<<<<<< HEAD
+>>>>>>> 8052e0d920678382b409a855a2616810babf5883
+=======
 >>>>>>> 8052e0d920678382b409a855a2616810babf5883
     }
 }
