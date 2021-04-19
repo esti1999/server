@@ -25,12 +25,13 @@ namespace DTO
         public int code_license_car { get; set; }
         public int code_service { get; set; }
         public int code_license_weapon { get; set; }
-        public int code_training { get; set; }
+        public Nullable<int> code_training { get; set; }
         public int code_volunteering_domain { get; set; }
         public int code_availability { get; set; }
         public string phone { get; set; }
         public int number_floor { get; set; }
         public string password { get; set; }
+        public Nullable<System.DateTime> release_date { get; set; }
 
 
         public static Volunteer convertvolunteertabletovolunteerentity(volunteer v)
@@ -57,17 +58,19 @@ namespace DTO
                 code_training = v.code_training,
                 code_availability = v.code_availability,
                 code_volunteering_domain = v.code_volunteering_domain,
-                number_floor=v.number_floor,
-                phone=v.phone,
-                password = v.password
+                number_floor = v.number_floor,
+                phone = v.phone,
+                password = v.password,
+                release_date = v.release_date
 
             };
             return v1;
         }
 
         public static volunteer convertvolunteerentitytovolunteertable(Volunteer v)
+        //car_license car_License1=new car_license()
         {
-            //car_license car_License1=new car_license()
+            //car_license car_License1 = new car_license()
             //{
             //    code_car_license=v.code_license_car,
             //    description=v.code_license_car
@@ -95,7 +98,8 @@ namespace DTO
                 code_volunteering_domain = v.code_volunteering_domain,
                 number_floor = v.number_floor,
                 phone = v.phone,
-                password = v.password
+                password = v.password,
+                release_date = v.release_date
             };
             //v1.car_license_volunteer = car_License1;
 
@@ -105,16 +109,16 @@ namespace DTO
         public static List<Volunteer> convertvolunteertabletolistvolunteerentity(List<volunteer> vl)
         {
             List<Volunteer> v1 = new List<Volunteer>();
-            foreach(var item in vl)
+            foreach (var item in vl)
             {
                 v1.Add(convertvolunteertabletovolunteerentity(item));
             }
             return v1;
         }
-        public static List<volunteer> convertvolunteerentitytolistvolunteerentity(List<Volunteer> vl)
+        public static List<volunteer> convertvolunteerentitytolistvolunteertable(List<Volunteer> vl)
         {
             List<volunteer> v1 = new List<volunteer>();
-            foreach(var item in vl)
+            foreach (var item in vl)
             {
                 v1.Add(convertvolunteerentitytovolunteertable(item));
             }
@@ -122,4 +126,7 @@ namespace DTO
         }
     }
 }
+        
+    
+
 

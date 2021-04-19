@@ -72,6 +72,9 @@
     <Compile Include="assisted_domain.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="assisted_language.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="availability.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -120,9 +123,6 @@
     <Compile Include="services.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="training.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -136,6 +136,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="volunteer_domain.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="volunteer_language.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="weapons_license.cs">

@@ -12,12 +12,13 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class assisted_language
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int code_assisted_language { get; set; }
+        public int code_language { get; set; }
+        public string id_assisted { get; set; }
+    
+        public virtual assisted assisted { get; set; }
+        public virtual language language { get; set; }
     }
 }

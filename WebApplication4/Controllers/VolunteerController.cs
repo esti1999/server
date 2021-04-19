@@ -28,7 +28,7 @@ namespace WebApplication4.Controllers
         // POST: api/Volunteer
         [HttpPost]
         [Route("addVolunteer")]
-        public bool AddVolunteer(Volunteer valunteer)
+        public bool AddVolunteer( [FromBody] Volunteer valunteer)
         {
             return BL.VolunteerBL.AddVolunteer(valunteer);
         }
@@ -91,6 +91,12 @@ namespace WebApplication4.Controllers
         public List<City> GetCity()
         {
             return BL.VolunteerBL.GetCity();
+        }
+        [HttpGet]
+        [Route("GetServices")]
+        public List<Services> GetServices()
+        {
+            return BL.VolunteerBL.GetServices();
         }
     }
 }

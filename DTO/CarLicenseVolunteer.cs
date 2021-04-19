@@ -38,7 +38,7 @@ namespace DTO
             return c1;
         }
 
-        public static List<CarLicenseVolunteer> convertvolunteertabletolistvolunteerentity(List<car_license_volunteer> cl)
+        public static List<CarLicenseVolunteer> convertcarlicensevolunteertabletolistcarlicensevolunteerentity(List<car_license_volunteer> cl)
         {
             List<CarLicenseVolunteer> c1 = new List<CarLicenseVolunteer>();
             foreach (var item in cl)
@@ -47,7 +47,7 @@ namespace DTO
             }
             return c1;
         }
-        public static List<car_license_volunteer> convertvolunteerentitytolistvolunteerentity(List<CarLicenseVolunteer> cl)
+        public static List<car_license_volunteer> convertcarlicensevolunteerentitytolistcarlicensevolunteertable(List<CarLicenseVolunteer> cl)
         {
             List<car_license_volunteer> c1 = new List<car_license_volunteer>();
             foreach (var item in cl)

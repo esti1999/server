@@ -22,7 +22,6 @@ namespace DAL
     
         public int code_service { get; set; }
         public string description { get; set; }
-        public System.DateTime release_date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<volunteer> volunteer { get; set; }

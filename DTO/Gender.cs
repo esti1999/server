@@ -40,7 +40,7 @@ namespace DTO
             }
             return g1;
         }
-        public static List<gender> convertgenderentitytolistgenderentity(List<Gender> gl)
+        public static List<gender> convertgenderentitytolistgendertable(List<Gender> gl)
         {
             List<gender> g1 = new List<gender>();
             foreach (var item in gl)

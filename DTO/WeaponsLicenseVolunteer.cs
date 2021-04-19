@@ -45,7 +45,7 @@ namespace DTO
             }
             return w1;
         }
-        public static List<weapons_license_volunteer> convertweaponslicensevolunteerentitytolistweaponslicensevolunteerentity(List<WeaponsLicenseVolunteer> wl)
+        public static List<weapons_license_volunteer> convertweaponslicensevolunteerentitytolistweaponslicensevolunteertable(List<WeaponsLicenseVolunteer> wl)
         {
             List<weapons_license_volunteer> w1 = new List<weapons_license_volunteer>();
             foreach (var item in wl)

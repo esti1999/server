@@ -45,7 +45,7 @@ namespace DTO
             }
             return a1;
         }
-        public static List<availability> convertavailabilityentitytolistavailabilityentity(List<Availability> al)
+        public static List<availability> convertavailabilityentitytolistavailabilitytable(List<Availability> al)
         {
             List<availability> a1 = new List<availability>();
             foreach (var item in al)

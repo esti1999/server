@@ -18,18 +18,58 @@ namespace BL
         }
         public static Volunteer getBtId(string id_volunteer)
         {
-            volunteer volunteer = db.volunteer.FirstOrDefault(x => id_volunteer == id_volunteer);
+            volunteer volunteer = db.volunteer.FirstOrDefault(x => x.id_volunteer == id_volunteer);
             return Volunteer.convertvolunteertabletovolunteerentity(volunteer);
         }
         public static bool AddVolunteer(Volunteer volunteer)
         {
             try
             {
-                db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
-                db.SaveChanges();
+                volunteer v = db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer);
+                if (v!=null)
+                {
+                    //v = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
+                    volunteer v1 = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
 
+                    v.availability_volunteer = v1.availability_volunteer;
+                    v.bulding_number = v1.bulding_number;
+                    v.car_license_volunteer = v1.car_license_volunteer;
+                    v.code_availability = v1.code_availability;
+                    v.code_city = v1.code_city;
+                    v.code_gender = v1.code_gender;
+                    v.code_language = v1.code_language;
+                    v.code_license_car = v1.code_license_car;
+                    v.code_license_weapon = v1.code_license_weapon;
+                    v.code_service = v1.code_service;
+                    v.code_status = v1.code_status;
+                    v.code_training = v1.code_training;
+                    v.code_volunteering_domain = v1.code_volunteering_domain;
+                    v.date_of_birth = v1.date_of_birth;
+                    v.e_mail = v1.e_mail;
+                    v.firstName_volunteer = v1.firstName_volunteer;
+                    v.house_number = v1.house_number;
+                    v.id_volunteer = v1.id_volunteer;
+                    v.lastName_volunteer = v1.lastName_volunteer;
+                    v.number_floor = v1.number_floor;
+                    v.password = v1.password;
+                    v.phone = v1.phone;
+                    v.postal_code = v1.postal_code;
+                    v.release_date = v1.release_date;
+                    v.services = v1.services;
+                    v.street = v1.street;
+                    v.training_volunteer = v1.training_volunteer;
+                    v.volunteer_domain = v1.volunteer_domain;
+                    v.volunteer_language = v1.volunteer_language;
+                    v.weapons_license_volunteer = v1.weapons_license_volunteer;
+                }
+                else
+                {
+                    db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
+                }
+                db.SaveChanges();
             }
-            catch(Exception e)
+
+            catch (Exception e)
             {
                 return false;
             }
@@ -142,6 +182,16 @@ namespace BL
                 list6.Add(new City { code_city = item.code_city, name_city = item.name_city });
             }
             return list6;
+        }
+        public static List<Services> GetServices()
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<Services> list7 = new List<Services>();
+            foreach (var item in db.services)
+            {
+                list7.Add(new Services { code_service = item.code_service, description = item.description });
+            }
+            return list7;
         }
     }
 }

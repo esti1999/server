@@ -42,7 +42,7 @@ namespace DTO
             }
             return a1;
         }
-        public static List<availability_volunteer> convertavailabilityentitytolistavailabilityentity(List<AvailabilityVolunteer> al)
+        public static List<availability_volunteer> convertavailabilityvolunteerentitytolistavailabilityvolunteertable(List<AvailabilityVolunteer> al)
         {
             List<availability_volunteer> a1 = new List<availability_volunteer>();
             foreach (var item in al)

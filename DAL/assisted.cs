@@ -18,6 +18,7 @@ namespace DAL
         public assisted()
         {
             this.assisted_domain = new HashSet<assisted_domain>();
+            this.assisted_language = new HashSet<assisted_language>();
         }
     
         public string id_assisted { get; set; }
@@ -30,12 +31,12 @@ namespace DAL
         public string street { get; set; }
         public int number_house { get; set; }
         public int number_building { get; set; }
+        public int number_floor { get; set; }
         public int postal_code { get; set; }
         public int code_language { get; set; }
         public string e_mail { get; set; }
         public int code_help_domain { get; set; }
         public string phone { get; set; }
-        public int number_floor { get; set; }
         public string password { get; set; }
     
         public virtual city city { get; set; }
@@ -43,6 +44,8 @@ namespace DAL
         public virtual ICollection<assisted_domain> assisted_domain { get; set; }
         public virtual gender gender { get; set; }
         public virtual language language { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<assisted_language> assisted_language { get; set; }
         public virtual personal_status personal_status { get; set; }
     }
 }

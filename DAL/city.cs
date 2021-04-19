@@ -18,7 +18,6 @@ namespace DAL
         public city()
         {
             this.assisted = new HashSet<assisted>();
-            this.volunteer = new HashSet<volunteer>();
         }
     
         public int code_city { get; set; }
@@ -26,7 +25,5 @@ namespace DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<assisted> assisted { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<volunteer> volunteer { get; set; }
     }
 }
