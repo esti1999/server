@@ -21,11 +21,17 @@
           <Property Name="number_building" Type="int" Nullable="false" />
           <Property Name="number_floor" Type="int" Nullable="false" />
           <Property Name="postal_code" Type="int" Nullable="false" />
-          <Property Name="code_language" Type="int" Nullable="false" />
           <Property Name="e-mail" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="code_help_domain" Type="int" Nullable="false" />
           <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="assisted_availability">
+          <Key>
+            <PropertyRef Name="code_availability_assisted" />
+          </Key>
+          <Property Name="code_availability_assisted" Type="int" Nullable="false" />
+          <Property Name="code_availability" Type="int" Nullable="false" />
+          <Property Name="id_assisted" Type="varchar" MaxLength="9" Nullable="false" />
         </EntityType>
         <EntityType Name="assisted_domain">
           <Key>
@@ -159,14 +165,8 @@
           <Property Name="house_number" Type="int" Nullable="false" />
           <Property Name="bulding_number" Type="int" Nullable="false" />
           <Property Name="number_floor" Type="int" Nullable="false" />
-          <Property Name="code_language" Type="int" Nullable="false" />
           <Property Name="e-mail" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="code_license_car" Type="int" Nullable="false" />
           <Property Name="code_service" Type="int" Nullable="false" />
-          <Property Name="code_license_weapon" Type="int" Nullable="false" />
-          <Property Name="code_training" Type="int" />
-          <Property Name="code_volunteering_domain" Type="int" Nullable="false" />
-          <Property Name="code_availability" Type="int" Nullable="false" />
           <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="release-date" Type="datetime" />
@@ -211,15 +211,27 @@
           <Property Name="id_volunteer" Type="varchar" MaxLength="9" Nullable="false" />
           <Property Name="validity" Type="datetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK_assisted_city">
-          <End Role="city" Type="Self.city" Multiplicity="1" />
-          <End Role="assisted" Type="Self.assisted" Multiplicity="*" />
+        <Association Name="FK_assisted_availability_assisted">
+          <End Role="assisted" Type="Self.assisted" Multiplicity="1" />
+          <End Role="assisted_availability" Type="Self.assisted_availability" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="city">
-              <PropertyRef Name="code_city" />
+            <Principal Role="assisted">
+              <PropertyRef Name="id_assisted" />
             </Principal>
-            <Dependent Role="assisted">
-              <PropertyRef Name="code_city" />
+            <Dependent Role="assisted_availability">
+              <PropertyRef Name="id_assisted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_assisted_availability_availability">
+          <End Role="availability" Type="Self.availability" Multiplicity="1" />
+          <End Role="assisted_availability" Type="Self.assisted_availability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="availability">
+              <PropertyRef Name="code_availability" />
+            </Principal>
+            <Dependent Role="assisted_availability">
+              <PropertyRef Name="code_availability" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -256,18 +268,6 @@
             </Principal>
             <Dependent Role="assisted">
               <PropertyRef Name="code_gender" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_assisted_language">
-          <End Role="language" Type="Self.language" Multiplicity="1" />
-          <End Role="assisted" Type="Self.assisted" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="language">
-              <PropertyRef Name="code_language" />
-            </Principal>
-            <Dependent Role="assisted">
-              <PropertyRef Name="code_language" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -379,6 +379,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_volunteer_city1">
+          <End Role="city" Type="Self.city" Multiplicity="1" />
+          <End Role="volunteer" Type="Self.volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="city">
+              <PropertyRef Name="code_city" />
+            </Principal>
+            <Dependent Role="volunteer">
+              <PropertyRef Name="code_city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_volunteer_domain_volunteer">
           <End Role="volunteer" Type="Self.volunteer" Multiplicity="1" />
           <End Role="volunteer_domain" Type="Self.volunteer_domain" Multiplicity="*" />
@@ -403,6 +415,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_volunteer_gender">
+          <End Role="gender" Type="Self.gender" Multiplicity="1" />
+          <End Role="volunteer" Type="Self.volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gender">
+              <PropertyRef Name="code_gender" />
+            </Principal>
+            <Dependent Role="volunteer">
+              <PropertyRef Name="code_gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_volunteer_language_language">
           <End Role="language" Type="Self.language" Multiplicity="1" />
           <End Role="volunteer_language" Type="Self.volunteer_language" Multiplicity="*" />
@@ -424,6 +448,18 @@
             </Principal>
             <Dependent Role="volunteer_language">
               <PropertyRef Name="id_volunteer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_volunteer_personal_status">
+          <End Role="personal_status" Type="Self.personal_status" Multiplicity="1" />
+          <End Role="volunteer" Type="Self.volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personal_status">
+              <PropertyRef Name="code_status" />
+            </Principal>
+            <Dependent Role="volunteer">
+              <PropertyRef Name="code_status" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -477,6 +513,7 @@
         </Association>
         <EntityContainer Name="Progect_lModelStoreContainer">
           <EntitySet Name="assisted" EntityType="Self.assisted" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="assisted_availability" EntityType="Self.assisted_availability" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="assisted_domain" EntityType="Self.assisted_domain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="assisted_language" EntityType="Self.assisted_language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="availability" EntityType="Self.availability" Schema="dbo" store:Type="Tables" />
@@ -498,9 +535,13 @@
           <EntitySet Name="volunteering_domain" EntityType="Self.volunteering_domain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="weapons_license" EntityType="Self.weapons_license" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="weapons_license_volunteer" EntityType="Self.weapons_license_volunteer" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_assisted_city" Association="Self.FK_assisted_city">
-            <End Role="city" EntitySet="city" />
+          <AssociationSet Name="FK_assisted_availability_assisted" Association="Self.FK_assisted_availability_assisted">
             <End Role="assisted" EntitySet="assisted" />
+            <End Role="assisted_availability" EntitySet="assisted_availability" />
+          </AssociationSet>
+          <AssociationSet Name="FK_assisted_availability_availability" Association="Self.FK_assisted_availability_availability">
+            <End Role="availability" EntitySet="availability" />
+            <End Role="assisted_availability" EntitySet="assisted_availability" />
           </AssociationSet>
           <AssociationSet Name="FK_assisted_domain_assisted" Association="Self.FK_assisted_domain_assisted">
             <End Role="assisted" EntitySet="assisted" />
@@ -512,10 +553,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_assisted_gender" Association="Self.FK_assisted_gender">
             <End Role="gender" EntitySet="gender" />
-            <End Role="assisted" EntitySet="assisted" />
-          </AssociationSet>
-          <AssociationSet Name="FK_assisted_language" Association="Self.FK_assisted_language">
-            <End Role="language" EntitySet="language" />
             <End Role="assisted" EntitySet="assisted" />
           </AssociationSet>
           <AssociationSet Name="FK_assisted_language_assisted" Association="Self.FK_assisted_language_assisted">
@@ -554,6 +591,10 @@
             <End Role="volunteer" EntitySet="volunteer" />
             <End Role="training_volunteer" EntitySet="training_volunteer" />
           </AssociationSet>
+          <AssociationSet Name="FK_volunteer_city1" Association="Self.FK_volunteer_city1">
+            <End Role="city" EntitySet="city" />
+            <End Role="volunteer" EntitySet="volunteer" />
+          </AssociationSet>
           <AssociationSet Name="FK_volunteer_domain_volunteer" Association="Self.FK_volunteer_domain_volunteer">
             <End Role="volunteer" EntitySet="volunteer" />
             <End Role="volunteer_domain" EntitySet="volunteer_domain" />
@@ -562,6 +603,10 @@
             <End Role="volunteering_domain" EntitySet="volunteering_domain" />
             <End Role="volunteer_domain" EntitySet="volunteer_domain" />
           </AssociationSet>
+          <AssociationSet Name="FK_volunteer_gender" Association="Self.FK_volunteer_gender">
+            <End Role="gender" EntitySet="gender" />
+            <End Role="volunteer" EntitySet="volunteer" />
+          </AssociationSet>
           <AssociationSet Name="FK_volunteer_language_language" Association="Self.FK_volunteer_language_language">
             <End Role="language" EntitySet="language" />
             <End Role="volunteer_language" EntitySet="volunteer_language" />
@@ -569,6 +614,10 @@
           <AssociationSet Name="FK_volunteer_language_volunteer" Association="Self.FK_volunteer_language_volunteer">
             <End Role="volunteer" EntitySet="volunteer" />
             <End Role="volunteer_language" EntitySet="volunteer_language" />
+          </AssociationSet>
+          <AssociationSet Name="FK_volunteer_personal_status" Association="Self.FK_volunteer_personal_status">
+            <End Role="personal_status" EntitySet="personal_status" />
+            <End Role="volunteer" EntitySet="volunteer" />
           </AssociationSet>
           <AssociationSet Name="FK_volunteer_services" Association="Self.FK_volunteer_services">
             <End Role="services" EntitySet="services" />
@@ -591,34 +640,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Progect_lModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="assisted">
-          <Key>
-            <PropertyRef Name="id_assisted" />
-          </Key>
-          <Property Name="id_assisted" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="date_birth" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="code_status" Type="Int32" Nullable="false" />
-          <Property Name="code_gender" Type="Int32" Nullable="false" />
-          <Property Name="code_city" Type="Int32" Nullable="false" />
-          <Property Name="street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="number_house" Type="Int32" Nullable="false" />
-          <Property Name="number_building" Type="Int32" Nullable="false" />
-          <Property Name="postal_code" Type="Int32" Nullable="false" />
-          <Property Name="code_language" Type="Int32" Nullable="false" />
-          <Property Name="e_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="code_help_domain" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="city" Relationship="Self.FK_assisted_city" FromRole="assisted" ToRole="city" />
-          <NavigationProperty Name="assisted_domain" Relationship="Self.FK_assisted_domain_assisted" FromRole="assisted" ToRole="assisted_domain" />
-          <NavigationProperty Name="gender" Relationship="Self.FK_assisted_gender" FromRole="assisted" ToRole="gender" />
-          <NavigationProperty Name="personal_status" Relationship="Self.FK_assisted_personal_status" FromRole="assisted" ToRole="personal_status" />
-          <Property Name="phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="number_floor" Type="Int32" Nullable="false" />
-          <Property Name="password" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="assisted_language" Relationship="Progect_lModel.FK_assisted_language_assisted" FromRole="assisted" ToRole="assisted_language" />
-          <NavigationProperty Name="language" Relationship="Progect_lModel.FK_assisted_language" FromRole="assisted" ToRole="language" />
-        </EntityType>
         <EntityType Name="assisted_domain">
           <Key>
             <PropertyRef Name="code_assisted_domain" />
@@ -626,8 +647,8 @@
           <Property Name="code_assisted_domain" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="code_volunteering" Type="Int32" Nullable="false" />
           <Property Name="id_assisted" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="assisted" Relationship="Self.FK_assisted_domain_assisted" FromRole="assisted_domain" ToRole="assisted" />
           <NavigationProperty Name="volunteering_domain" Relationship="Self.FK_assisted_domain_volunteering_domain" FromRole="assisted_domain" ToRole="volunteering_domain" />
+          <NavigationProperty Name="assisted" Relationship="Progect_lModel.FK_assisted_domain_assisted" FromRole="assisted_domain" ToRole="assisted" />
         </EntityType>
         <EntityType Name="availability">
           <Key>
@@ -638,6 +659,7 @@
           <Property Name="code_shift" Type="Int32" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="availability_volunteer" Relationship="Self.FK_availability_volunteer_availability" FromRole="availability" ToRole="availability_volunteer" />
+          <NavigationProperty Name="assisted_availability" Relationship="Progect_lModel.FK_assisted_availability_availability" FromRole="availability" ToRole="assisted_availability" />
         </EntityType>
         <EntityType Name="availability_volunteer">
           <Key>
@@ -674,8 +696,8 @@
           </Key>
           <Property Name="code_city" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name_city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="assisted" Relationship="Self.FK_assisted_city" FromRole="city" ToRole="assisted" />
-          <NavigationProperty Name="volunteer" Relationship="Progect_lModel.FK_volunteer_city" FromRole="city" ToRole="volunteer" />
+          <NavigationProperty Name="assisted" Relationship="Progect_lModel.FK_assisted_city" FromRole="city" ToRole="assisted" />
+          <NavigationProperty Name="volunteer" Relationship="Progect_lModel.FK_volunteer_city1" FromRole="city" ToRole="volunteer" />
         </EntityType>
         <EntityType Name="domain">
           <Key>
@@ -691,7 +713,8 @@
           </Key>
           <Property Name="code_gender" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="assisted" Relationship="Self.FK_assisted_gender" FromRole="gender" ToRole="assisted" />
+          <NavigationProperty Name="assisted" Relationship="Progect_lModel.FK_assisted_gender" FromRole="gender" ToRole="assisted" />
+          <NavigationProperty Name="volunteer" Relationship="Progect_lModel.FK_volunteer_gender" FromRole="gender" ToRole="volunteer" />
         </EntityType>
         <EntityType Name="language">
           <Key>
@@ -701,7 +724,6 @@
           <Property Name="name_language" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="assisted_language" Relationship="Progect_lModel.FK_assisted_language_language" FromRole="language" ToRole="assisted_language" />
           <NavigationProperty Name="volunteer_language" Relationship="Progect_lModel.FK_volunteer_language_language" FromRole="language" ToRole="volunteer_language" />
-          <NavigationProperty Name="assisted" Relationship="Progect_lModel.FK_assisted_language" FromRole="language" ToRole="assisted" />
         </EntityType>
         <EntityType Name="personal_status">
           <Key>
@@ -709,7 +731,8 @@
           </Key>
           <Property Name="code_status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="assisted" Relationship="Self.FK_assisted_personal_status" FromRole="personal_status" ToRole="assisted" />
+          <NavigationProperty Name="assisted" Relationship="Progect_lModel.FK_assisted_personal_status" FromRole="personal_status" ToRole="assisted" />
+          <NavigationProperty Name="volunteer" Relationship="Progect_lModel.FK_volunteer_personal_status" FromRole="personal_status" ToRole="volunteer" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -779,54 +802,6 @@
           <NavigationProperty Name="weapons_license" Relationship="Self.FK_weapons_license_volunteer_weapons_license" FromRole="weapons_license_volunteer" ToRole="weapons_license" />
           <NavigationProperty Name="volunteer" Relationship="Progect_lModel.FK_weapons_license_volunteer_volunteer" FromRole="weapons_license_volunteer" ToRole="volunteer" />
         </EntityType>
-        <Association Name="FK_assisted_city">
-          <End Role="city" Type="Self.city" Multiplicity="1" />
-          <End Role="assisted" Type="Self.assisted" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="city">
-              <PropertyRef Name="code_city" />
-            </Principal>
-            <Dependent Role="assisted">
-              <PropertyRef Name="code_city" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_assisted_domain_assisted">
-          <End Role="assisted" Type="Self.assisted" Multiplicity="1" />
-          <End Role="assisted_domain" Type="Self.assisted_domain" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="assisted">
-              <PropertyRef Name="id_assisted" />
-            </Principal>
-            <Dependent Role="assisted_domain">
-              <PropertyRef Name="id_assisted" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_assisted_gender">
-          <End Role="gender" Type="Self.gender" Multiplicity="1" />
-          <End Role="assisted" Type="Self.assisted" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="gender">
-              <PropertyRef Name="code_gender" />
-            </Principal>
-            <Dependent Role="assisted">
-              <PropertyRef Name="code_gender" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_assisted_personal_status">
-          <End Role="personal_status" Type="Self.personal_status" Multiplicity="1" />
-          <End Role="assisted" Type="Self.assisted" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="personal_status">
-              <PropertyRef Name="code_status" />
-            </Principal>
-            <Dependent Role="assisted">
-              <PropertyRef Name="code_status" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_assisted_domain_volunteering_domain">
           <End Role="volunteering_domain" Type="Self.volunteering_domain" Multiplicity="1" />
           <End Role="assisted_domain" Type="Self.assisted_domain" Multiplicity="*" />
@@ -912,7 +887,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Progect_lEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="assisted" EntityType="Self.assisted" />
           <EntitySet Name="assisted_domain" EntityType="Self.assisted_domain" />
           <EntitySet Name="availability" EntityType="Self.availability" />
           <EntitySet Name="availability_volunteer" EntityType="Self.availability_volunteer" />
@@ -930,22 +904,6 @@
           <EntitySet Name="volunteering_domain" EntityType="Self.volunteering_domain" />
           <EntitySet Name="weapons_license" EntityType="Self.weapons_license" />
           <EntitySet Name="weapons_license_volunteer" EntityType="Self.weapons_license_volunteer" />
-          <AssociationSet Name="FK_assisted_city" Association="Self.FK_assisted_city">
-            <End Role="city" EntitySet="city" />
-            <End Role="assisted" EntitySet="assisted" />
-          </AssociationSet>
-          <AssociationSet Name="FK_assisted_domain_assisted" Association="Self.FK_assisted_domain_assisted">
-            <End Role="assisted" EntitySet="assisted" />
-            <End Role="assisted_domain" EntitySet="assisted_domain" />
-          </AssociationSet>
-          <AssociationSet Name="FK_assisted_gender" Association="Self.FK_assisted_gender">
-            <End Role="gender" EntitySet="gender" />
-            <End Role="assisted" EntitySet="assisted" />
-          </AssociationSet>
-          <AssociationSet Name="FK_assisted_personal_status" Association="Self.FK_assisted_personal_status">
-            <End Role="personal_status" EntitySet="personal_status" />
-            <End Role="assisted" EntitySet="assisted" />
-          </AssociationSet>
           <AssociationSet Name="FK_assisted_domain_volunteering_domain" Association="Self.FK_assisted_domain_volunteering_domain">
             <End Role="volunteering_domain" EntitySet="volunteering_domain" />
             <End Role="assisted_domain" EntitySet="assisted_domain" />
@@ -975,7 +933,47 @@
             <End Role="weapons_license_volunteer" EntitySet="weapons_license_volunteer" />
           </AssociationSet>
           <EntitySet Name="services" EntityType="Progect_lModel.services" />
+          <EntitySet Name="assisted_language" EntityType="Progect_lModel.assisted_language" />
+          <EntitySet Name="volunteer_language" EntityType="Progect_lModel.volunteer_language" />
+          <AssociationSet Name="FK_assisted_language_language" Association="Progect_lModel.FK_assisted_language_language">
+            <End Role="language" EntitySet="language" />
+            <End Role="assisted_language" EntitySet="assisted_language" />
+          </AssociationSet>
+          <AssociationSet Name="FK_volunteer_language_language" Association="Progect_lModel.FK_volunteer_language_language">
+            <End Role="language" EntitySet="language" />
+            <End Role="volunteer_language" EntitySet="volunteer_language" />
+          </AssociationSet>
+          <EntitySet Name="assisted_availability" EntityType="Progect_lModel.assisted_availability" />
+          <AssociationSet Name="FK_assisted_availability_availability" Association="Progect_lModel.FK_assisted_availability_availability">
+            <End Role="availability" EntitySet="availability" />
+            <End Role="assisted_availability" EntitySet="assisted_availability" />
+          </AssociationSet>
+          <EntitySet Name="assisted" EntityType="Progect_lModel.assisted" />
           <EntitySet Name="volunteer" EntityType="Progect_lModel.volunteer" />
+          <AssociationSet Name="FK_assisted_availability_assisted" Association="Progect_lModel.FK_assisted_availability_assisted">
+            <End Role="assisted" EntitySet="assisted" />
+            <End Role="assisted_availability" EntitySet="assisted_availability" />
+          </AssociationSet>
+          <AssociationSet Name="FK_assisted_city" Association="Progect_lModel.FK_assisted_city">
+            <End Role="city" EntitySet="city" />
+            <End Role="assisted" EntitySet="assisted" />
+          </AssociationSet>
+          <AssociationSet Name="FK_assisted_domain_assisted" Association="Progect_lModel.FK_assisted_domain_assisted">
+            <End Role="assisted" EntitySet="assisted" />
+            <End Role="assisted_domain" EntitySet="assisted_domain" />
+          </AssociationSet>
+          <AssociationSet Name="FK_assisted_gender" Association="Progect_lModel.FK_assisted_gender">
+            <End Role="gender" EntitySet="gender" />
+            <End Role="assisted" EntitySet="assisted" />
+          </AssociationSet>
+          <AssociationSet Name="FK_assisted_language_assisted" Association="Progect_lModel.FK_assisted_language_assisted">
+            <End Role="assisted" EntitySet="assisted" />
+            <End Role="assisted_language" EntitySet="assisted_language" />
+          </AssociationSet>
+          <AssociationSet Name="FK_assisted_personal_status" Association="Progect_lModel.FK_assisted_personal_status">
+            <End Role="personal_status" EntitySet="personal_status" />
+            <End Role="assisted" EntitySet="assisted" />
+          </AssociationSet>
           <AssociationSet Name="FK_availability_volunteer_volunteer" Association="Progect_lModel.FK_availability_volunteer_volunteer">
             <End Role="volunteer" EntitySet="volunteer" />
             <End Role="availability_volunteer" EntitySet="availability_volunteer" />
@@ -983,10 +981,6 @@
           <AssociationSet Name="FK_car_license_volunteer_volunteer1" Association="Progect_lModel.FK_car_license_volunteer_volunteer1">
             <End Role="volunteer" EntitySet="volunteer" />
             <End Role="car_license_volunteer" EntitySet="car_license_volunteer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_volunteer_city" Association="Progect_lModel.FK_volunteer_city">
-            <End Role="city" EntitySet="city" />
-            <End Role="volunteer" EntitySet="volunteer" />
           </AssociationSet>
           <AssociationSet Name="FK_volunteer_services" Association="Progect_lModel.FK_volunteer_services">
             <End Role="services" EntitySet="services" />
@@ -1000,31 +994,25 @@
             <End Role="volunteer" EntitySet="volunteer" />
             <End Role="volunteer_domain" EntitySet="volunteer_domain" />
           </AssociationSet>
-          <AssociationSet Name="FK_weapons_license_volunteer_volunteer" Association="Progect_lModel.FK_weapons_license_volunteer_volunteer">
-            <End Role="volunteer" EntitySet="volunteer" />
-            <End Role="weapons_license_volunteer" EntitySet="weapons_license_volunteer" />
-          </AssociationSet>
-          <EntitySet Name="assisted_language" EntityType="Progect_lModel.assisted_language" />
-          <EntitySet Name="volunteer_language" EntityType="Progect_lModel.volunteer_language" />
-          <AssociationSet Name="FK_assisted_language_assisted" Association="Progect_lModel.FK_assisted_language_assisted">
-            <End Role="assisted" EntitySet="assisted" />
-            <End Role="assisted_language" EntitySet="assisted_language" />
-          </AssociationSet>
-          <AssociationSet Name="FK_assisted_language_language" Association="Progect_lModel.FK_assisted_language_language">
-            <End Role="language" EntitySet="language" />
-            <End Role="assisted_language" EntitySet="assisted_language" />
-          </AssociationSet>
-          <AssociationSet Name="FK_volunteer_language_language" Association="Progect_lModel.FK_volunteer_language_language">
-            <End Role="language" EntitySet="language" />
-            <End Role="volunteer_language" EntitySet="volunteer_language" />
-          </AssociationSet>
           <AssociationSet Name="FK_volunteer_language_volunteer" Association="Progect_lModel.FK_volunteer_language_volunteer">
             <End Role="volunteer" EntitySet="volunteer" />
             <End Role="volunteer_language" EntitySet="volunteer_language" />
           </AssociationSet>
-          <AssociationSet Name="FK_assisted_language" Association="Progect_lModel.FK_assisted_language">
-            <End Role="language" EntitySet="language" />
-            <End Role="assisted" EntitySet="assisted" />
+          <AssociationSet Name="FK_weapons_license_volunteer_volunteer" Association="Progect_lModel.FK_weapons_license_volunteer_volunteer">
+            <End Role="volunteer" EntitySet="volunteer" />
+            <End Role="weapons_license_volunteer" EntitySet="weapons_license_volunteer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_volunteer_city1" Association="Progect_lModel.FK_volunteer_city1">
+            <End Role="city" EntitySet="city" />
+            <End Role="volunteer" EntitySet="volunteer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_volunteer_gender" Association="Progect_lModel.FK_volunteer_gender">
+            <End Role="gender" EntitySet="gender" />
+            <End Role="volunteer" EntitySet="volunteer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_volunteer_personal_status" Association="Progect_lModel.FK_volunteer_personal_status">
+            <End Role="personal_status" EntitySet="personal_status" />
+            <End Role="volunteer" EntitySet="volunteer" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="services">
@@ -1034,6 +1022,98 @@
           <Property Name="code_service" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="volunteer" Relationship="Progect_lModel.FK_volunteer_services" FromRole="services" ToRole="volunteer" />
+        </EntityType>
+        <EntityType Name="assisted_language">
+          <Key>
+            <PropertyRef Name="code_assisted_language" />
+          </Key>
+          <Property Name="code_assisted_language" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_language" Type="Int32" Nullable="false" />
+          <Property Name="id_assisted" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="language" Relationship="Progect_lModel.FK_assisted_language_language" FromRole="assisted_language" ToRole="language" />
+          <NavigationProperty Name="assisted" Relationship="Progect_lModel.FK_assisted_language_assisted" FromRole="assisted_language" ToRole="assisted" />
+        </EntityType>
+        <EntityType Name="volunteer_language">
+          <Key>
+            <PropertyRef Name="code_volunteer_language" />
+          </Key>
+          <Property Name="code_volunteer_language" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_language" Type="Int32" Nullable="false" />
+          <Property Name="id_volunteer" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="language" Relationship="Progect_lModel.FK_volunteer_language_language" FromRole="volunteer_language" ToRole="language" />
+          <NavigationProperty Name="volunteer" Relationship="Progect_lModel.FK_volunteer_language_volunteer" FromRole="volunteer_language" ToRole="volunteer" />
+        </EntityType>
+        <Association Name="FK_assisted_language_language">
+          <End Type="Progect_lModel.language" Role="language" Multiplicity="1" />
+          <End Type="Progect_lModel.assisted_language" Role="assisted_language" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="language">
+              <PropertyRef Name="code_language" />
+            </Principal>
+            <Dependent Role="assisted_language">
+              <PropertyRef Name="code_language" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_volunteer_language_language">
+          <End Type="Progect_lModel.language" Role="language" Multiplicity="1" />
+          <End Type="Progect_lModel.volunteer_language" Role="volunteer_language" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="language">
+              <PropertyRef Name="code_language" />
+            </Principal>
+            <Dependent Role="volunteer_language">
+              <PropertyRef Name="code_language" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="assisted_availability">
+          <Key>
+            <PropertyRef Name="code_availability_assisted" />
+          </Key>
+          <Property Name="code_availability_assisted" Type="Int32" Nullable="false" />
+          <Property Name="code_availability" Type="Int32" Nullable="false" />
+          <Property Name="id_assisted" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="availability" Relationship="Progect_lModel.FK_assisted_availability_availability" FromRole="assisted_availability" ToRole="availability" />
+          <NavigationProperty Name="assisted" Relationship="Progect_lModel.FK_assisted_availability_assisted" FromRole="assisted_availability" ToRole="assisted" />
+        </EntityType>
+        <Association Name="FK_assisted_availability_availability">
+          <End Type="Progect_lModel.availability" Role="availability" Multiplicity="1" />
+          <End Type="Progect_lModel.assisted_availability" Role="assisted_availability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="availability">
+              <PropertyRef Name="code_availability" />
+            </Principal>
+            <Dependent Role="assisted_availability">
+              <PropertyRef Name="code_availability" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="assisted">
+          <Key>
+            <PropertyRef Name="id_assisted" />
+          </Key>
+          <Property Name="id_assisted" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date_birth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="code_status" Type="Int32" Nullable="false" />
+          <Property Name="code_gender" Type="Int32" Nullable="false" />
+          <Property Name="code_city" Type="Int32" Nullable="false" />
+          <Property Name="street" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="number_house" Type="Int32" Nullable="false" />
+          <Property Name="number_building" Type="Int32" Nullable="false" />
+          <Property Name="number_floor" Type="Int32" Nullable="false" />
+          <Property Name="postal_code" Type="Int32" Nullable="false" />
+          <Property Name="e_mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="assisted_availability" Relationship="Progect_lModel.FK_assisted_availability_assisted" FromRole="assisted" ToRole="assisted_availability" />
+          <NavigationProperty Name="city" Relationship="Progect_lModel.FK_assisted_city" FromRole="assisted" ToRole="city" />
+          <NavigationProperty Name="assisted_domain" Relationship="Progect_lModel.FK_assisted_domain_assisted" FromRole="assisted" ToRole="assisted_domain" />
+          <NavigationProperty Name="gender" Relationship="Progect_lModel.FK_assisted_gender" FromRole="assisted" ToRole="gender" />
+          <NavigationProperty Name="assisted_language" Relationship="Progect_lModel.FK_assisted_language_assisted" FromRole="assisted" ToRole="assisted_language" />
+          <NavigationProperty Name="personal_status" Relationship="Progect_lModel.FK_assisted_personal_status" FromRole="assisted" ToRole="personal_status" />
         </EntityType>
         <EntityType Name="volunteer">
           <Key>
@@ -1051,26 +1131,94 @@
           <Property Name="house_number" Type="Int32" Nullable="false" />
           <Property Name="bulding_number" Type="Int32" Nullable="false" />
           <Property Name="number_floor" Type="Int32" Nullable="false" />
-          <Property Name="code_language" Type="Int32" Nullable="false" />
           <Property Name="e_mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="code_license_car" Type="Int32" Nullable="false" />
           <Property Name="code_service" Type="Int32" Nullable="false" />
-          <Property Name="code_license_weapon" Type="Int32" Nullable="false" />
-          <Property Name="code_training" Type="Int32" />
-          <Property Name="code_volunteering_domain" Type="Int32" Nullable="false" />
-          <Property Name="code_availability" Type="Int32" Nullable="false" />
           <Property Name="phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="release_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="availability_volunteer" Relationship="Progect_lModel.FK_availability_volunteer_volunteer" FromRole="volunteer" ToRole="availability_volunteer" />
           <NavigationProperty Name="car_license_volunteer" Relationship="Progect_lModel.FK_car_license_volunteer_volunteer1" FromRole="volunteer" ToRole="car_license_volunteer" />
-          <NavigationProperty Name="city" Relationship="Progect_lModel.FK_volunteer_city" FromRole="volunteer" ToRole="city" />
           <NavigationProperty Name="services" Relationship="Progect_lModel.FK_volunteer_services" FromRole="volunteer" ToRole="services" />
           <NavigationProperty Name="training_volunteer" Relationship="Progect_lModel.FK_training_volunteer_volunteer1" FromRole="volunteer" ToRole="training_volunteer" />
           <NavigationProperty Name="volunteer_domain" Relationship="Progect_lModel.FK_volunteer_domain_volunteer" FromRole="volunteer" ToRole="volunteer_domain" />
-          <NavigationProperty Name="weapons_license_volunteer" Relationship="Progect_lModel.FK_weapons_license_volunteer_volunteer" FromRole="volunteer" ToRole="weapons_license_volunteer" />
           <NavigationProperty Name="volunteer_language" Relationship="Progect_lModel.FK_volunteer_language_volunteer" FromRole="volunteer" ToRole="volunteer_language" />
-          <Property Name="release_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="weapons_license_volunteer" Relationship="Progect_lModel.FK_weapons_license_volunteer_volunteer" FromRole="volunteer" ToRole="weapons_license_volunteer" />
+          <NavigationProperty Name="city" Relationship="Progect_lModel.FK_volunteer_city1" FromRole="volunteer" ToRole="city" />
+          <NavigationProperty Name="gender" Relationship="Progect_lModel.FK_volunteer_gender" FromRole="volunteer" ToRole="gender" />
+          <NavigationProperty Name="personal_status" Relationship="Progect_lModel.FK_volunteer_personal_status" FromRole="volunteer" ToRole="personal_status" />
         </EntityType>
+        <Association Name="FK_assisted_availability_assisted">
+          <End Type="Progect_lModel.assisted" Role="assisted" Multiplicity="1" />
+          <End Type="Progect_lModel.assisted_availability" Role="assisted_availability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="assisted">
+              <PropertyRef Name="id_assisted" />
+            </Principal>
+            <Dependent Role="assisted_availability">
+              <PropertyRef Name="id_assisted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_assisted_city">
+          <End Type="Progect_lModel.city" Role="city" Multiplicity="1" />
+          <End Type="Progect_lModel.assisted" Role="assisted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="city">
+              <PropertyRef Name="code_city" />
+            </Principal>
+            <Dependent Role="assisted">
+              <PropertyRef Name="code_city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_assisted_domain_assisted">
+          <End Type="Progect_lModel.assisted" Role="assisted" Multiplicity="1" />
+          <End Type="Progect_lModel.assisted_domain" Role="assisted_domain" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="assisted">
+              <PropertyRef Name="id_assisted" />
+            </Principal>
+            <Dependent Role="assisted_domain">
+              <PropertyRef Name="id_assisted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_assisted_gender">
+          <End Type="Progect_lModel.gender" Role="gender" Multiplicity="1" />
+          <End Type="Progect_lModel.assisted" Role="assisted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gender">
+              <PropertyRef Name="code_gender" />
+            </Principal>
+            <Dependent Role="assisted">
+              <PropertyRef Name="code_gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_assisted_language_assisted">
+          <End Type="Progect_lModel.assisted" Role="assisted" Multiplicity="1" />
+          <End Type="Progect_lModel.assisted_language" Role="assisted_language" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="assisted">
+              <PropertyRef Name="id_assisted" />
+            </Principal>
+            <Dependent Role="assisted_language">
+              <PropertyRef Name="id_assisted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_assisted_personal_status">
+          <End Type="Progect_lModel.personal_status" Role="personal_status" Multiplicity="1" />
+          <End Type="Progect_lModel.assisted" Role="assisted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personal_status">
+              <PropertyRef Name="code_status" />
+            </Principal>
+            <Dependent Role="assisted">
+              <PropertyRef Name="code_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_availability_volunteer_volunteer">
           <End Type="Progect_lModel.volunteer" Role="volunteer" Multiplicity="1" />
           <End Type="Progect_lModel.availability_volunteer" Role="availability_volunteer" Multiplicity="*" />
@@ -1092,18 +1240,6 @@
             </Principal>
             <Dependent Role="car_license_volunteer">
               <PropertyRef Name="id_volunteer" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_volunteer_city">
-          <End Type="Progect_lModel.city" Role="city" Multiplicity="1" />
-          <End Type="Progect_lModel.volunteer" Role="volunteer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="city">
-              <PropertyRef Name="code_city" />
-            </Principal>
-            <Dependent Role="volunteer">
-              <PropertyRef Name="code_city" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1143,74 +1279,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_weapons_license_volunteer_volunteer">
-          <End Type="Progect_lModel.volunteer" Role="volunteer" Multiplicity="1" />
-          <End Type="Progect_lModel.weapons_license_volunteer" Role="weapons_license_volunteer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="volunteer">
-              <PropertyRef Name="id_volunteer" />
-            </Principal>
-            <Dependent Role="weapons_license_volunteer">
-              <PropertyRef Name="id_volunteer" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="assisted_language">
-          <Key>
-            <PropertyRef Name="code_assisted_language" />
-          </Key>
-          <Property Name="code_assisted_language" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="code_language" Type="Int32" Nullable="false" />
-          <Property Name="id_assisted" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="assisted" Relationship="Progect_lModel.FK_assisted_language_assisted" FromRole="assisted_language" ToRole="assisted" />
-          <NavigationProperty Name="language" Relationship="Progect_lModel.FK_assisted_language_language" FromRole="assisted_language" ToRole="language" />
-        </EntityType>
-        <EntityType Name="volunteer_language">
-          <Key>
-            <PropertyRef Name="code_volunteer_language" />
-          </Key>
-          <Property Name="code_volunteer_language" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="code_language" Type="Int32" Nullable="false" />
-          <Property Name="id_volunteer" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="language" Relationship="Progect_lModel.FK_volunteer_language_language" FromRole="volunteer_language" ToRole="language" />
-          <NavigationProperty Name="volunteer" Relationship="Progect_lModel.FK_volunteer_language_volunteer" FromRole="volunteer_language" ToRole="volunteer" />
-        </EntityType>
-        <Association Name="FK_assisted_language_assisted">
-          <End Type="Progect_lModel.assisted" Role="assisted" Multiplicity="1" />
-          <End Type="Progect_lModel.assisted_language" Role="assisted_language" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="assisted">
-              <PropertyRef Name="id_assisted" />
-            </Principal>
-            <Dependent Role="assisted_language">
-              <PropertyRef Name="id_assisted" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_assisted_language_language">
-          <End Type="Progect_lModel.language" Role="language" Multiplicity="1" />
-          <End Type="Progect_lModel.assisted_language" Role="assisted_language" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="language">
-              <PropertyRef Name="code_language" />
-            </Principal>
-            <Dependent Role="assisted_language">
-              <PropertyRef Name="code_language" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_volunteer_language_language">
-          <End Type="Progect_lModel.language" Role="language" Multiplicity="1" />
-          <End Type="Progect_lModel.volunteer_language" Role="volunteer_language" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="language">
-              <PropertyRef Name="code_language" />
-            </Principal>
-            <Dependent Role="volunteer_language">
-              <PropertyRef Name="code_language" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_volunteer_language_volunteer">
           <End Type="Progect_lModel.volunteer" Role="volunteer" Multiplicity="1" />
           <End Type="Progect_lModel.volunteer_language" Role="volunteer_language" Multiplicity="*" />
@@ -1223,15 +1291,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_assisted_language">
-          <End Type="Progect_lModel.language" Role="language" Multiplicity="1" />
-          <End Type="Progect_lModel.assisted" Role="assisted" Multiplicity="*" />
+        <Association Name="FK_weapons_license_volunteer_volunteer">
+          <End Type="Progect_lModel.volunteer" Role="volunteer" Multiplicity="1" />
+          <End Type="Progect_lModel.weapons_license_volunteer" Role="weapons_license_volunteer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="language">
-              <PropertyRef Name="code_language" />
+            <Principal Role="volunteer">
+              <PropertyRef Name="id_volunteer" />
             </Principal>
-            <Dependent Role="assisted">
-              <PropertyRef Name="code_language" />
+            <Dependent Role="weapons_license_volunteer">
+              <PropertyRef Name="id_volunteer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_volunteer_city1">
+          <End Type="Progect_lModel.city" Role="city" Multiplicity="1" />
+          <End Type="Progect_lModel.volunteer" Role="volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="city">
+              <PropertyRef Name="code_city" />
+            </Principal>
+            <Dependent Role="volunteer">
+              <PropertyRef Name="code_city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_volunteer_gender">
+          <End Type="Progect_lModel.gender" Role="gender" Multiplicity="1" />
+          <End Type="Progect_lModel.volunteer" Role="volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gender">
+              <PropertyRef Name="code_gender" />
+            </Principal>
+            <Dependent Role="volunteer">
+              <PropertyRef Name="code_gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_volunteer_personal_status">
+          <End Type="Progect_lModel.personal_status" Role="personal_status" Multiplicity="1" />
+          <End Type="Progect_lModel.volunteer" Role="volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personal_status">
+              <PropertyRef Name="code_status" />
+            </Principal>
+            <Dependent Role="volunteer">
+              <PropertyRef Name="code_status" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1241,29 +1345,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Progect_lModelStoreContainer" CdmEntityContainer="Progect_lEntities1">
-          <EntitySetMapping Name="assisted">
-            <EntityTypeMapping TypeName="Progect_lModel.assisted">
-              <MappingFragment StoreEntitySet="assisted">
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="number_floor" ColumnName="number_floor" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="id_assisted" ColumnName="id_assisted" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="date_birth" ColumnName="date_birth" />
-                <ScalarProperty Name="code_status" ColumnName="code_status" />
-                <ScalarProperty Name="code_gender" ColumnName="code_gender" />
-                <ScalarProperty Name="code_city" ColumnName="code_city" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="number_house" ColumnName="number_house" />
-                <ScalarProperty Name="number_building" ColumnName="number_building" />
-                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
-                <ScalarProperty Name="code_language" ColumnName="code_language" />
-                <ScalarProperty Name="e_mail" ColumnName="e-mail" />
-                <ScalarProperty Name="code_help_domain" ColumnName="code_help_domain" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="assisted_domain">
             <EntityTypeMapping TypeName="Progect_lModel.assisted_domain">
               <MappingFragment StoreEntitySet="assisted_domain">
@@ -1422,35 +1503,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="volunteer">
-            <EntityTypeMapping TypeName="Progect_lModel.volunteer">
-              <MappingFragment StoreEntitySet="volunteer">
-                <ScalarProperty Name="release_date" ColumnName="release-date" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="code_availability" ColumnName="code_availability" />
-                <ScalarProperty Name="code_volunteering_domain" ColumnName="code_volunteering_domain" />
-                <ScalarProperty Name="code_training" ColumnName="code_training" />
-                <ScalarProperty Name="code_license_weapon" ColumnName="code_license_weapon" />
-                <ScalarProperty Name="code_service" ColumnName="code_service" />
-                <ScalarProperty Name="code_license_car" ColumnName="code_license_car" />
-                <ScalarProperty Name="e_mail" ColumnName="e-mail" />
-                <ScalarProperty Name="code_language" ColumnName="code_language" />
-                <ScalarProperty Name="number_floor" ColumnName="number_floor" />
-                <ScalarProperty Name="bulding_number" ColumnName="bulding_number" />
-                <ScalarProperty Name="house_number" ColumnName="house_number" />
-                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="code_city" ColumnName="code_city" />
-                <ScalarProperty Name="code_status" ColumnName="code_status" />
-                <ScalarProperty Name="code_gender" ColumnName="code_gender" />
-                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
-                <ScalarProperty Name="lastName_volunteer" ColumnName="lastName_volunteer" />
-                <ScalarProperty Name="firstName_volunteer" ColumnName="firstName_volunteer" />
-                <ScalarProperty Name="id_volunteer" ColumnName="id_volunteer" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="assisted_language">
             <EntityTypeMapping TypeName="Progect_lModel.assisted_language">
               <MappingFragment StoreEntitySet="assisted_language">
@@ -1466,6 +1518,59 @@
                 <ScalarProperty Name="id_volunteer" ColumnName="id_volunteer" />
                 <ScalarProperty Name="code_language" ColumnName="code_language" />
                 <ScalarProperty Name="code_volunteer_language" ColumnName="code_volunteer_language" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="assisted_availability">
+            <EntityTypeMapping TypeName="Progect_lModel.assisted_availability">
+              <MappingFragment StoreEntitySet="assisted_availability">
+                <ScalarProperty Name="id_assisted" ColumnName="id_assisted" />
+                <ScalarProperty Name="code_availability" ColumnName="code_availability" />
+                <ScalarProperty Name="code_availability_assisted" ColumnName="code_availability_assisted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="assisted">
+            <EntityTypeMapping TypeName="Progect_lModel.assisted">
+              <MappingFragment StoreEntitySet="assisted">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="e_mail" ColumnName="e-mail" />
+                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+                <ScalarProperty Name="number_floor" ColumnName="number_floor" />
+                <ScalarProperty Name="number_building" ColumnName="number_building" />
+                <ScalarProperty Name="number_house" ColumnName="number_house" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="code_city" ColumnName="code_city" />
+                <ScalarProperty Name="code_gender" ColumnName="code_gender" />
+                <ScalarProperty Name="code_status" ColumnName="code_status" />
+                <ScalarProperty Name="date_birth" ColumnName="date_birth" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="id_assisted" ColumnName="id_assisted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="volunteer">
+            <EntityTypeMapping TypeName="Progect_lModel.volunteer">
+              <MappingFragment StoreEntitySet="volunteer">
+                <ScalarProperty Name="release_date" ColumnName="release-date" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="code_service" ColumnName="code_service" />
+                <ScalarProperty Name="e_mail" ColumnName="e-mail" />
+                <ScalarProperty Name="number_floor" ColumnName="number_floor" />
+                <ScalarProperty Name="bulding_number" ColumnName="bulding_number" />
+                <ScalarProperty Name="house_number" ColumnName="house_number" />
+                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="code_city" ColumnName="code_city" />
+                <ScalarProperty Name="code_status" ColumnName="code_status" />
+                <ScalarProperty Name="code_gender" ColumnName="code_gender" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="lastName_volunteer" ColumnName="lastName_volunteer" />
+                <ScalarProperty Name="firstName_volunteer" ColumnName="firstName_volunteer" />
+                <ScalarProperty Name="id_volunteer" ColumnName="id_volunteer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

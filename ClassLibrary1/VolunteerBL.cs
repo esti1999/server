@@ -47,14 +47,8 @@ namespace BL
             db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).lastName_volunteer = volunteer.lastName_volunteer;
             db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).date_of_birth = volunteer.date_of_birth;
             db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).code_gender = volunteer.code_gender;
-            db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).code_language = volunteer.code_language;
             db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).code_service = volunteer.code_service;
             db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).code_status = volunteer.code_status;
-            db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).code_training = volunteer.code_training;
-            db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).code_availability = volunteer.code_availability;
-            db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).code_license_car = volunteer.code_license_car;
-            db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).code_license_weapon = volunteer.code_license_weapon;
-            db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).code_volunteering_domain = volunteer.code_volunteering_domain;
             db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).code_city = volunteer.code_city;
             db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).street = volunteer.street;
             db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer).bulding_number = volunteer.bulding_number;

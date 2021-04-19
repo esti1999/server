@@ -12,13 +12,13 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class assisted_language
+    public partial class assisted_availability
     {
-        public int code_assisted_language { get; set; }
-        public int code_language { get; set; }
+        public int code_availability_assisted { get; set; }
+        public int code_availability { get; set; }
         public string id_assisted { get; set; }
     
-        public virtual language language { get; set; }
+        public virtual availability availability { get; set; }
         public virtual assisted assisted { get; set; }
     }
 }

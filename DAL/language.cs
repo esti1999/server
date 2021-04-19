@@ -19,7 +19,6 @@ namespace DAL
         {
             this.assisted_language = new HashSet<assisted_language>();
             this.volunteer_language = new HashSet<volunteer_language>();
-            this.assisted = new HashSet<assisted>();
         }
     
         public int code_language { get; set; }
@@ -29,7 +28,5 @@ namespace DAL
         public virtual ICollection<assisted_language> assisted_language { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<volunteer_language> volunteer_language { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<assisted> assisted { get; set; }
     }
 }

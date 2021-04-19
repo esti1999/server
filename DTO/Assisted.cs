@@ -19,12 +19,10 @@ namespace DTO
         public string street { get; set; }
         public int number_house { get; set; }
         public int number_building { get; set; }
-        public int postal_code { get; set; }
-        public int code_language { get; set; }
-        public string e_mail { get; set; }
-        public int code_help_domain { get; set; }
-        public string phone { get; set; }
         public int number_floor { get; set; }
+        public int postal_code { get; set; }
+        public string e_mail { get; set; }
+        public string phone { get; set; }
         public string password { get; set; }
 
 
@@ -39,8 +37,6 @@ namespace DTO
                 date_birth=a.date_birth,
                 code_gender=a.code_gender,
                 code_city=a.code_city,
-                code_help_domain=a.code_help_domain,
-                code_language=a.code_language,
                 code_status=a.code_status,
                 postal_code=a.postal_code,
                 e_mail=a.e_mail,
@@ -63,8 +59,6 @@ namespace DTO
                 date_birth = a.date_birth,
                 code_gender = a.code_gender,
                 code_city = a.code_city,
-                code_help_domain = a.code_help_domain,
-                code_language = a.code_language,
                 code_status = a.code_status,
                 postal_code = a.postal_code,
                 e_mail = a.e_mail,

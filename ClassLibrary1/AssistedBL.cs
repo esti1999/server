@@ -3,6 +3,7 @@ using DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,6 +36,43 @@ namespace BL
 
             return true;
         }
+
+        public static bool EmbededAssisted(Assisted assisted)
+        {
+            List<volunteer> vDomain = new List<volunteer>();
+            var domainAssisted = db.assisted_domain.Where(ad => ad.id_assisted == assisted.id_assisted).ToList();
+            foreach (var item in db.volunteer.ToList())
+            {
+                foreach (var vd in item.volunteer_domain)
+                {
+                    if(domainAssisted.Find(x=>x.volunteering_domain == vd.volunteering_domain) != null)
+                    {
+                        if (!vDomain.Contains(item))
+                        {
+                            vDomain.Add(item);
+                        }
+                    }
+                }
+            }
+
+            var avalAssisted = db.assisted_availability.Where(av => av.id_assisted == assisted.id_assisted).ToList();
+            foreach (var item in vDomain)
+            {
+                var list = db.availability_volunteer.Where(x => x.id_volunteer == item.id_volunteer).ToList();
+                for (int i = 0; i < avalAssisted.Count; i++)
+                {
+                    if(list.Find(x=>x.code_availability == avalAssisted[i].code_availability) != null)
+                    {
+
+                        return true;
+                    }
+                }
+            }
+            return false;
+            //var domaim = db.volunteer_domain
+            //db.volunteer.Where(v=>v.code_volunteering_domain == )
+        }
+
         public static List<Assisted> RemoveAssisted(string id_assisted)
         {
             db.assisted.Remove(db.assisted.FirstOrDefault(x => x.id_assisted == id_assisted));
@@ -47,9 +85,7 @@ namespace BL
             db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).last_name = assisted.last_name;
             db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).date_birth = assisted.date_birth;
             db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).code_gender = assisted.code_gender;
-            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).code_language = assisted.code_language;
             db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).code_status = assisted.code_status;
-            db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).code_help_domain = assisted.code_help_domain;
             db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).code_city = assisted.code_city;
             db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).postal_code = assisted.postal_code;
             db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).street = assisted.street;
@@ -61,6 +97,33 @@ namespace BL
             db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted).password = assisted.password ;
             db.SaveChanges();
             return Assisted.convertassistedtabletolistassistedentity(db.assisted.ToList());
+        }
+
+        public void SendMail(volunteer volunteer, string subject, string message)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient client = new SmtpClient("srvExch2dag");
+            mail.From = new MailAddress("EruimHarigim@szmc.org.il");
+            mail.Subject = subject;
+            mail.Body = message;
+            mail.BodyEncoding = System.Text.Encoding.UTF8;
+            mail.IsBodyHtml = true;
+            mail.To.Add("");
+
+            try
+            {
+                client.Send(mail);
+            }
+            catch (System.Exception ex)
+            {
+
+                Console.WriteLine("Exception caught in sendMail(): {0}", ex.ToString());
+            }
+            finally
+            {
+                client.Dispose();
+            }
+
         }
         public static List<PersonalStatus> GetPersonalStatuses()
         {
