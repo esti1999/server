@@ -12,18 +12,18 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class city
+    public partial class shifts
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public city()
+        public shifts()
         {
-            this.volunteer = new HashSet<volunteer>();
+            this.availability = new HashSet<availability>();
         }
     
-        public int code_city { get; set; }
-        public string name_city { get; set; }
+        public int code_shift { get; set; }
+        public string description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<volunteer> volunteer { get; set; }
+        public virtual ICollection<availability> availability { get; set; }
     }
 }

@@ -29,21 +29,20 @@ namespace BL
                 if (v!=null)
                 {
                     //v = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
+                    List<volunteer_language> vlList = Volunteer.convertLanguageEntityListToVolenteerLanguage(volunteer.languages, volunteer.id_volunteer);
+
+
+                    foreach (volunteer_language l in vlList)
+                    {
+                        db.volunteer_language.Add(l);
+                    }
                     volunteer v1 = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
 
-                    v.availability_volunteer = v1.availability_volunteer;
                     v.bulding_number = v1.bulding_number;
-                    v.car_license_volunteer = v1.car_license_volunteer;
-                    v.code_availability = v1.code_availability;
                     v.code_city = v1.code_city;
                     v.code_gender = v1.code_gender;
-                    v.code_language = v1.code_language;
-                    v.code_license_car = v1.code_license_car;
-                    v.code_license_weapon = v1.code_license_weapon;
                     v.code_service = v1.code_service;
                     v.code_status = v1.code_status;
-                    v.code_training = v1.code_training;
-                    v.code_volunteering_domain = v1.code_volunteering_domain;
                     v.date_of_birth = v1.date_of_birth;
                     v.e_mail = v1.e_mail;
                     v.firstName_volunteer = v1.firstName_volunteer;
@@ -55,15 +54,17 @@ namespace BL
                     v.phone = v1.phone;
                     v.postal_code = v1.postal_code;
                     v.release_date = v1.release_date;
-                    v.services = v1.services;
                     v.street = v1.street;
-                    v.training_volunteer = v1.training_volunteer;
-                    v.volunteer_domain = v1.volunteer_domain;
-                    v.volunteer_language = v1.volunteer_language;
-                    v.weapons_license_volunteer = v1.weapons_license_volunteer;
                 }
                 else
                 {
+                    List<volunteer_language> vlList = Volunteer.convertLanguageEntityListToVolenteerLanguage(volunteer.languages, volunteer.id_volunteer);
+
+
+                    foreach (volunteer_language l in vlList)
+                    {
+                        db.volunteer_language.Add(l);
+                    }
                     db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
                 }
                 db.SaveChanges();
@@ -147,15 +148,41 @@ namespace BL
             }
             return list3;
         }
-        public static List<Availability> GetAvailability()
+        public static List<Days> GetDays()
         {
             Progect_lEntities db = new Progect_lEntities();
-            List<Availability> list4 = new List<Availability>();
-            foreach (var item in db.availability)
+            List<Days> list4 = new List<Days>();
+            foreach (var item in db.days)
             {
-                list4.Add(new Availability { code_availability = item.code_availability, code_day = item.code_day, code_shift = item.code_shift, description = item.description });
+                list4.Add(new Days { code_day = item.code_day, description = item.description});
             }
             return list4;
+        }
+        public static List<Shift> GetShift()
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<Shift> list8 = new List<Shift>();
+            foreach (var item in db.shifts)
+            {
+                list8.Add(new Shift { code_shift = item.code_shift, description = item.description });
+            }
+            return list8;
+        }
+        public static List<Language> GetLanguageVolunteer(string volunteer_id)
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<Language> list5 = new List<Language>();
+            List<int> myLanguages = db.volunteer_language.Where(x => x.id_volunteer == volunteer_id).Select(y => y.code_language).ToList();
+            foreach (var item in db.language)
+            {
+                bool isSelected = false;
+                if (myLanguages.Contains(item.code_language))
+                {
+                    isSelected = true;
+                }
+                list5.Add(new Language { code_language = item.code_language, name_language = item.name_language, IsSelected = isSelected });
+            }
+            return list5;
         }
         public static List<Language> GetLanguage()
         {
@@ -163,7 +190,8 @@ namespace BL
             List<Language> list5 = new List<Language>();
             foreach (var item in db.language)
             {
-                list5.Add(new Language { CodeLanguage = item.code_language, NameLanguage = item.name_language});
+             
+                list5.Add(new Language { code_language = item.code_language, name_language = item.name_language,IsSelected=false });
             }
             return list5;
         }

@@ -20,7 +20,7 @@ namespace DTO
         public int number_house { get; set; }
         public int number_building { get; set; }
         public int number_floor { get; set; }
-        public int postal_code { get; set; }
+        public string postal_code { get; set; }
         public string e_mail { get; set; }
         public string phone { get; set; }
         public string password { get; set; }

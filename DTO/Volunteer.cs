@@ -26,6 +26,8 @@ namespace DTO
         public string phone { get; set; }
         public string password { get; set; }
         public Nullable<System.DateTime> release_date { get; set; }
+        public List<Language> languages { get; set; }
+
 
 
         public static Volunteer convertvolunteertabletovolunteerentity(volunteer v)
@@ -46,19 +48,8 @@ namespace DTO
                 postal_code = v.postal_code,
                 e_mail = v.e_mail,
                 code_service = v.code_service,
-<<<<<<< HEAD
-<<<<<<< HEAD
-                code_training = v.code_training,
-                code_availability = v.code_availability,
-                code_volunteering_domain = v.code_volunteering_domain,
                 number_floor = v.number_floor,
                 phone = v.phone,
-=======
-=======
->>>>>>> 8052e0d920678382b409a855a2616810babf5883
-                number_floor=v.number_floor,
-                phone=v.phone,
->>>>>>> 8052e0d920678382b409a855a2616810babf5883
                 password = v.password,
                 release_date = v.release_date
 
@@ -66,22 +57,27 @@ namespace DTO
             return v1;
         }
 
-        public static volunteer convertvolunteerentitytovolunteertable(Volunteer v)
-<<<<<<< HEAD
-<<<<<<< HEAD
-        //car_license car_License1=new car_license()
+        public  static List<volunteer_language> convertLanguageEntityListToVolenteerLanguage(List<Language> languages,string volunteerId)
         {
-            //car_license car_License1 = new car_license()
-            //{
-            //    code_car_license=v.code_license_car,
-            //    description=v.code_license_car
-            //}
-=======
-        { 
->>>>>>> 8052e0d920678382b409a855a2616810babf5883
-=======
-        { 
->>>>>>> 8052e0d920678382b409a855a2616810babf5883
+            List<volunteer_language> vlList = new List<volunteer_language>();
+            foreach(Language l in languages)
+            {
+                if (l.IsSelected == true)
+                {
+                    volunteer_language vl = new volunteer_language();
+                    vl.id_volunteer = volunteerId;
+                    vl.code_language = l.code_language;
+                    vlList.Add(vl);
+
+                }
+            }
+            return vlList;
+
+        }
+
+        public static volunteer convertvolunteerentitytovolunteertable(Volunteer v)
+        {
+
             volunteer v1 = new volunteer()
             {
                 id_volunteer = v.id_volunteer,

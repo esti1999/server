@@ -18,7 +18,7 @@ namespace DAL
         public int code_availability { get; set; }
         public string id_assisted { get; set; }
     
-        public virtual availability availability { get; set; }
         public virtual assisted assisted { get; set; }
+        public virtual availability availability { get; set; }
     }
 }
