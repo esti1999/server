@@ -26,6 +26,7 @@ namespace DTO
         public string phone { get; set; }
         public string password { get; set; }
         public Nullable<System.DateTime> release_date { get; set; }
+        public Nullable<System.DateTime> validity { get; set; }
         public List<Language> languages { get; set; }
 
 
@@ -51,13 +52,14 @@ namespace DTO
                 number_floor = v.number_floor,
                 phone = v.phone,
                 password = v.password,
-                release_date = v.release_date
+                release_date = v.release_date,
+                validity=v.validity
 
             };
             return v1;
         }
 
-        public  static List<volunteer_language> convertLanguageEntityListToVolenteerLanguage(List<Language> languages,string volunteerId)
+        public  static List<volunteer_language> ConvertLanguageEntityListToVolenteerLanguage(List<Language> languages,string volunteerId)
         {
             List<volunteer_language> vlList = new List<volunteer_language>();
             foreach(Language l in languages)
@@ -96,7 +98,8 @@ namespace DTO
                 number_floor = v.number_floor,
                 phone = v.phone,
                 password = v.password,
-                release_date = v.release_date
+                release_date = v.release_date,
+                validity = v.validity
             };
             return v1;
         }

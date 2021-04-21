@@ -48,6 +48,13 @@ namespace BL
                 }
                 else
                 {
+                    List<assisted_language> alList = Assisted.ConvertLanguageEntityListToAssistedLanguage(assisted.languages, assisted.id_assisted);
+
+
+                    foreach (assisted_language l in alList)
+                    {
+                        db.assisted_language.Add(l);
+                    }
                     db.assisted.Add(Assisted.convertassistedentitytoassistedtable(assisted));
                 }
 
@@ -171,13 +178,29 @@ namespace BL
             }
             return list1;
         }
+        public static List<Language> GetLanguageAssisted(string assisted_id)
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<Language> list2 = new List<Language>();
+            List<int> myLanguages = db.assisted_language.Where(x => x.id_assisted == assisted_id).Select(y => y.code_language).ToList();
+            foreach (var item in db.language)
+            {
+                bool isSelected = false;
+                if (myLanguages.Contains(item.code_language))
+                {
+                    isSelected = true;
+                }
+                list2.Add(new Language { code_language = item.code_language, name_language = item.name_language, IsSelected = isSelected });
+            }
+            return list2;
+        }
         public static List<Language> GetLanguage()
         {
             Progect_lEntities db = new Progect_lEntities();
             List<Language> list2 = new List<Language>();
             foreach (var item in db.language)
             {
-                list2.Add(new Language { code_language = item.code_language, name_language = item.name_language });
+                list2.Add(new Language { code_language = item.code_language, name_language = item.name_language, IsSelected=false });
             }
             return list2;
         }

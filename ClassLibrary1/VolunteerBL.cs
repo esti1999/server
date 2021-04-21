@@ -29,7 +29,7 @@ namespace BL
                 if (v!=null)
                 {
                     //v = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
-                    List<volunteer_language> vlList = Volunteer.convertLanguageEntityListToVolenteerLanguage(volunteer.languages, volunteer.id_volunteer);
+                    List<volunteer_language> vlList = Volunteer.ConvertLanguageEntityListToVolenteerLanguage(volunteer.languages, volunteer.id_volunteer);
 
 
                     foreach (volunteer_language l in vlList)
@@ -58,7 +58,7 @@ namespace BL
                 }
                 else
                 {
-                    List<volunteer_language> vlList = Volunteer.convertLanguageEntityListToVolenteerLanguage(volunteer.languages, volunteer.id_volunteer);
+                    List<volunteer_language> vlList = Volunteer.ConvertLanguageEntityListToVolenteerLanguage(volunteer.languages, volunteer.id_volunteer);
 
 
                     foreach (volunteer_language l in vlList)
@@ -191,7 +191,7 @@ namespace BL
             foreach (var item in db.language)
             {
              
-                list5.Add(new Language { code_language = item.code_language, name_language = item.name_language,IsSelected=false });
+                list5.Add(new Language { code_language = item.code_language, name_language = item.name_language, IsSelected=false });
             }
             return list5;
         }

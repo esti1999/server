@@ -24,6 +24,7 @@ namespace DTO
         public string e_mail { get; set; }
         public string phone { get; set; }
         public string password { get; set; }
+        public List<Language> languages { get; set; }
 
 
 
@@ -48,6 +49,23 @@ namespace DTO
                 password = a.password
             };
             return a1;
+        }
+        public static List<assisted_language> ConvertLanguageEntityListToAssistedLanguage(List<Language> languages, string assistedId)
+        {
+            List<assisted_language> alList = new List<assisted_language>();
+            foreach (Language l in languages)
+            {
+                if (l.IsSelected == true)
+                {
+                    assisted_language al = new assisted_language();
+                    al.id_assisted = assistedId;
+                    al.code_language = l.code_language;
+                    alList.Add(al);
+
+                }
+            }
+            return alList;
+
         }
         public static assisted convertassistedentitytoassistedtable(Assisted a)
         {

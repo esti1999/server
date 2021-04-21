@@ -12,7 +12,7 @@ namespace DTO
         public int code_weapons_license_volunteer { get; set; }
         public int code_weapons_license { get; set; }
         public string id_volunteer { get; set; }
-        public System.DateTime validity { get; set; }
+
 
         public static WeaponsLicenseVolunteer convertweaponslicensevolunteertabletoweaponslicensevolunteerentity(weapons_license_volunteer w)
         {
@@ -20,7 +20,7 @@ namespace DTO
             {
                 code_weapons_license_volunteer = w.code_weapons_license_volunteer,
                 id_volunteer = w.id_volunteer,
-                validity=w.validity
+                code_weapons_license=w.code_weapons_license
 
             };
             return w1;
@@ -31,7 +31,7 @@ namespace DTO
             {
                 code_weapons_license_volunteer = w.code_weapons_license_volunteer,
                 id_volunteer = w.id_volunteer,
-                validity = w.validity
+                code_weapons_license = w.code_weapons_license
 
             };
             return w1;

@@ -42,6 +42,7 @@ namespace DAL
         public string phone { get; set; }
         public string password { get; set; }
         public Nullable<System.DateTime> release_date { get; set; }
+        public Nullable<System.DateTime> validity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<availability_volunteer> availability_volunteer { get; set; }
