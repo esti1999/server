@@ -18,7 +18,7 @@ namespace DAL
         public int code_language { get; set; }
         public string id_assisted { get; set; }
     
-        public virtual language language { get; set; }
         public virtual assisted assisted { get; set; }
+        public virtual language language { get; set; }
     }
 }

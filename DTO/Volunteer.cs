@@ -46,19 +46,8 @@ namespace DTO
                 postal_code = v.postal_code,
                 e_mail = v.e_mail,
                 code_service = v.code_service,
-<<<<<<< HEAD
-<<<<<<< HEAD
-                code_training = v.code_training,
-                code_availability = v.code_availability,
-                code_volunteering_domain = v.code_volunteering_domain,
                 number_floor = v.number_floor,
                 phone = v.phone,
-=======
-=======
->>>>>>> 8052e0d920678382b409a855a2616810babf5883
-                number_floor=v.number_floor,
-                phone=v.phone,
->>>>>>> 8052e0d920678382b409a855a2616810babf5883
                 password = v.password,
                 release_date = v.release_date
 
@@ -67,8 +56,7 @@ namespace DTO
         }
 
         public static volunteer convertvolunteerentitytovolunteertable(Volunteer v)
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         //car_license car_License1=new car_license()
         {
             //car_license car_License1 = new car_license()
@@ -76,12 +64,11 @@ namespace DTO
             //    code_car_license=v.code_license_car,
             //    description=v.code_license_car
             //}
-=======
-        { 
->>>>>>> 8052e0d920678382b409a855a2616810babf5883
-=======
-        { 
->>>>>>> 8052e0d920678382b409a855a2616810babf5883
+
+        
+
+        
+
             volunteer v1 = new volunteer()
             {
                 id_volunteer = v.id_volunteer,

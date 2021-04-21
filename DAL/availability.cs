@@ -17,8 +17,8 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public availability()
         {
-            this.availability_volunteer = new HashSet<availability_volunteer>();
             this.assisted_availability = new HashSet<assisted_availability>();
+            this.availability_volunteer = new HashSet<availability_volunteer>();
         }
     
         public int code_availability { get; set; }
@@ -27,8 +27,8 @@ namespace DAL
         public string description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<availability_volunteer> availability_volunteer { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<assisted_availability> assisted_availability { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<availability_volunteer> availability_volunteer { get; set; }
     }
 }

@@ -4,66 +4,47 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-<<<<<<< HEAD
-      <Diagram DiagramId="576561580fe54a4fb53aeadbeb18bbeb" Name="Diagram1">
-        <EntityTypeShape EntityType="Progect_lModel.assisted" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.assisted_domain" Width="1.5" PointX="10.5" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.assisted_language" Width="1.5" PointX="10.5" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.availability" Width="1.5" PointX="3" PointY="16.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.availability_volunteer" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.car_license" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.car_license_volunteer" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.city" Width="1.5" PointX="6" PointY="19.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.domain" Width="1.5" PointX="3.75" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.gender" Width="1.5" PointX="6" PointY="22.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.language" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.personal_status" Width="1.5" PointX="6" PointY="24.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.services" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.training" Width="1.5" PointX="3" PointY="19.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.training_volunteer" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.volunteer" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.volunteer_domain" Width="1.5" PointX="8.25" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.volunteer_language" Width="1.5" PointX="8.25" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.volunteering_domain" Width="1.5" PointX="6" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.weapons_license" Width="1.5" PointX="6" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.weapons_license_volunteer" Width="1.5" PointX="8.25" PointY="13.375" IsExpanded="true" />
-        <AssociationConnector Association="Progect_lModel.FK_assisted_city" ManuallyRouted="false" />
+      <Diagram DiagramId="30b3ec093ea0417cbfaea07d115be0d8" Name="Diagram1">
+        <EntityTypeShape EntityType="Progect_lModel.assisted" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.assisted_availability" Width="1.5" PointX="8.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.assisted_domain" Width="1.5" PointX="8.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.assisted_language" Width="1.5" PointX="8.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.availability" Width="1.5" PointX="6" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.availability_volunteer" Width="1.5" PointX="11.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.car_license" Width="1.5" PointX="9" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.car_license_volunteer" Width="1.5" PointX="11.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.city" Width="1.5" PointX="3.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.domain" Width="1.5" PointX="3.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.gender" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.language" Width="1.5" PointX="6" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.personal_status" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.services" Width="1.5" PointX="3.75" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.training" Width="1.5" PointX="9" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.training_volunteer" Width="1.5" PointX="11.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.volunteer" Width="1.5" PointX="6" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.volunteer_domain" Width="1.5" PointX="8.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.volunteer_language" Width="1.5" PointX="8.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.volunteering_domain" Width="1.5" PointX="6" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.weapons_license" Width="1.5" PointX="12" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Progect_lModel.weapons_license_volunteer" Width="1.5" PointX="14.25" PointY="13" IsExpanded="true" />
+        <AssociationConnector Association="Progect_lModel.FK_assisted_availability_assisted" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_assisted_domain_assisted" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_assisted_gender" ManuallyRouted="false" />
-        <AssociationConnector Association="Progect_lModel.FK_assisted_language" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_assisted_language_assisted" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_assisted_personal_status" ManuallyRouted="false" />
-=======
-      <Diagram DiagramId="9987ddb2af604cf0893b98617a987129" Name="Diagram1" ZoomLevel="73">
-        <EntityTypeShape EntityType="Progect_lModel.assisted_domain" Width="1.5" PointX="8.25" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.availability" Width="1.5" PointX="6" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.availability_volunteer" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.car_license" Width="1.5" PointX="6" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.car_license_volunteer" Width="1.5" PointX="8.25" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.city" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.domain" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.gender" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.language" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.personal_status" Width="1.5" PointX="0.75" PointY="18.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.training" Width="1.5" PointX="9" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.training_volunteer" Width="1.5" PointX="11.25" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.volunteer_domain" Width="1.5" PointX="11.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.volunteering_domain" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.weapons_license" Width="1.5" PointX="9" PointY="16.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Progect_lModel.weapons_license_volunteer" Width="1.5" PointX="11.25" PointY="13.125" IsExpanded="true" />
-<<<<<<< HEAD
->>>>>>> 8052e0d920678382b409a855a2616810babf5883
-=======
->>>>>>> 8052e0d920678382b409a855a2616810babf5883
+        <AssociationConnector Association="Progect_lModel.FK_assisted_availability_availability" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_assisted_domain_volunteering_domain" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_assisted_language_language" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_availability_volunteer_availability" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_availability_volunteer_volunteer" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_car_license_volunteer_car_license" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_car_license_volunteer_volunteer1" ManuallyRouted="false" />
+        <AssociationConnector Association="Progect_lModel.FK_volunteer_city1" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_volunteering_domain_domain" ManuallyRouted="false" />
+        <AssociationConnector Association="Progect_lModel.FK_volunteer_gender" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_volunteer_language_language" ManuallyRouted="false" />
+        <AssociationConnector Association="Progect_lModel.FK_volunteer_personal_status" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_volunteer_services" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_training_volunteer_training" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_training_volunteer_volunteer1" ManuallyRouted="false" />
@@ -72,37 +53,6 @@
         <AssociationConnector Association="Progect_lModel.FK_weapons_license_volunteer_volunteer" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_volunteer_domain_volunteering_domain" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_weapons_license_volunteer_weapons_license" ManuallyRouted="false" />
-<<<<<<< HEAD
-=======
-        <EntityTypeShape EntityType="Progect_lModel.services" Width="1.5" PointX="2.875" PointY="4.125" />
-        <EntityTypeShape EntityType="Progect_lModel.assisted_language" Width="1.5" PointX="5.25" PointY="12.25" />
-        <EntityTypeShape EntityType="Progect_lModel.volunteer_language" Width="1.5" PointX="16" PointY="8.125" />
-        <AssociationConnector Association="Progect_lModel.FK_assisted_language_language" />
-        <AssociationConnector Association="Progect_lModel.FK_volunteer_language_language" />
-        <EntityTypeShape EntityType="Progect_lModel.assisted_availability" Width="1.5" PointX="11.25" PointY="3.875" />
-        <AssociationConnector Association="Progect_lModel.FK_assisted_availability_availability" />
-        <EntityTypeShape EntityType="Progect_lModel.assisted" Width="1.5" PointX="3" PointY="11.5" />
-        <EntityTypeShape EntityType="Progect_lModel.volunteer" Width="1.5" PointX="5.125" PointY="18.125" />
-        <AssociationConnector Association="Progect_lModel.FK_assisted_availability_assisted" />
-        <AssociationConnector Association="Progect_lModel.FK_assisted_city" />
-        <AssociationConnector Association="Progect_lModel.FK_assisted_domain_assisted" />
-        <AssociationConnector Association="Progect_lModel.FK_assisted_gender" />
-        <AssociationConnector Association="Progect_lModel.FK_assisted_language_assisted" />
-        <AssociationConnector Association="Progect_lModel.FK_assisted_personal_status" />
-        <AssociationConnector Association="Progect_lModel.FK_availability_volunteer_volunteer" />
-        <AssociationConnector Association="Progect_lModel.FK_car_license_volunteer_volunteer1" />
-        <AssociationConnector Association="Progect_lModel.FK_volunteer_services" />
-        <AssociationConnector Association="Progect_lModel.FK_training_volunteer_volunteer1" />
-        <AssociationConnector Association="Progect_lModel.FK_volunteer_domain_volunteer" />
-        <AssociationConnector Association="Progect_lModel.FK_volunteer_language_volunteer" />
-        <AssociationConnector Association="Progect_lModel.FK_weapons_license_volunteer_volunteer" />
-        <AssociationConnector Association="Progect_lModel.FK_volunteer_city1" />
-        <AssociationConnector Association="Progect_lModel.FK_volunteer_gender" />
-        <AssociationConnector Association="Progect_lModel.FK_volunteer_personal_status" />
-<<<<<<< HEAD
->>>>>>> 8052e0d920678382b409a855a2616810babf5883
-=======
->>>>>>> 8052e0d920678382b409a855a2616810babf5883
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,13 +12,12 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class assisted_availability
+    public partial class sysdiagrams
     {
-        public int code_availability_assisted { get; set; }
-        public int code_availability { get; set; }
-        public string id_assisted { get; set; }
-    
-        public virtual assisted assisted { get; set; }
-        public virtual availability availability { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

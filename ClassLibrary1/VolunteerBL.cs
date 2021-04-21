@@ -30,20 +30,11 @@ namespace BL
                 {
                     //v = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
                     volunteer v1 = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
-
-                    v.availability_volunteer = v1.availability_volunteer;
                     v.bulding_number = v1.bulding_number;
-                    v.car_license_volunteer = v1.car_license_volunteer;
-                    v.code_availability = v1.code_availability;
                     v.code_city = v1.code_city;
                     v.code_gender = v1.code_gender;
-                    v.code_language = v1.code_language;
-                    v.code_license_car = v1.code_license_car;
-                    v.code_license_weapon = v1.code_license_weapon;
                     v.code_service = v1.code_service;
                     v.code_status = v1.code_status;
-                    v.code_training = v1.code_training;
-                    v.code_volunteering_domain = v1.code_volunteering_domain;
                     v.date_of_birth = v1.date_of_birth;
                     v.e_mail = v1.e_mail;
                     v.firstName_volunteer = v1.firstName_volunteer;
@@ -55,12 +46,7 @@ namespace BL
                     v.phone = v1.phone;
                     v.postal_code = v1.postal_code;
                     v.release_date = v1.release_date;
-                    v.services = v1.services;
                     v.street = v1.street;
-                    v.training_volunteer = v1.training_volunteer;
-                    v.volunteer_domain = v1.volunteer_domain;
-                    v.volunteer_language = v1.volunteer_language;
-                    v.weapons_license_volunteer = v1.weapons_license_volunteer;
                 }
                 else
                 {
@@ -77,10 +63,6 @@ namespace BL
             return true;
         }
 
-        //public static List<Language> GetLanguages()
-        //{
-        //    return db.language.ToList();
-        //}
 
         public static List<Volunteer> RemoveVolunteer(string id_volunteer)
         {
