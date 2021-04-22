@@ -25,6 +25,8 @@ namespace DTO
         public string phone { get; set; }
         public string password { get; set; }
         public List<Language> languages { get; set; }
+        public List<string> domain { get; set; }
+        public Availability availability { get; set; }
 
 
 

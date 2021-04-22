@@ -29,6 +29,28 @@ namespace BL
                 assisted a = db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted);
                 if (a != null)
                 {
+
+                    List<assisted_domain> dList = new List<assisted_domain>();
+                    foreach (string item in assisted.domain)
+                    {
+                        assisted_domain a_d = new assisted_domain();
+                        a_d.id_assisted = assisted.id_assisted;
+                        a_d.code_volunteering = db.volunteering_domain.Where(x => x.description == item).Select(s => s.code_volunteering).FirstOrDefault();
+                        dList.Add(a_d);
+                    }
+
+                    var aval = db.availability.Where(x => x.code_day == assisted.availability.code_day && x.code_shift == assisted.availability.code_shift).FirstOrDefault();
+                 
+                    foreach (assisted_domain item in dList)
+                    {
+                        db.assisted_domain.Add(item);
+                    }
+                    assisted_availability availability = new assisted_availability();
+                    availability.code_availability = aval.code_availability;
+                    availability.id_assisted = assisted.id_assisted;
+                    assisted_availability a_v = db.assisted_availability.Where(x => x.id_assisted == availability.id_assisted).FirstOrDefault();
+                    a_v.code_availability = availability.code_availability;
+
                     assisted a1 = Assisted.convertassistedentitytoassistedtable(assisted);             
                     a.id_assisted = a1.id_assisted;
                     a.first_name = a1.first_name;
@@ -49,7 +71,26 @@ namespace BL
                 else
                 {
                     List<assisted_language> alList = Assisted.ConvertLanguageEntityListToAssistedLanguage(assisted.languages, assisted.id_assisted);
+                    List<assisted_domain> dList = new List<assisted_domain>();
+                    foreach (string item in assisted.domain)
+                    {
+                        assisted_domain vvo = new assisted_domain();
+                        vvo.id_assisted = assisted.id_assisted;
+                        vvo.code_volunteering = db.volunteering_domain.Where(x => x.description == item).Select(s => s.code_volunteering).FirstOrDefault();
+                        dList.Add(vvo);
+                    }
+                 
 
+                    foreach (assisted_domain item in dList)
+                    {
+                        db.assisted_domain.Add(item);
+                    }
+                    var aval = db.availability.Where(x => x.code_day == assisted.availability.code_day && x.code_shift == assisted.availability.code_shift).FirstOrDefault();
+
+                    assisted_availability availability = new assisted_availability();
+                    availability.code_availability = aval.code_availability;
+                    availability.id_assisted = assisted.id_assisted;
+                    db.assisted_availability.Add(availability);
 
                     foreach (assisted_language l in alList)
                     {
@@ -75,7 +116,7 @@ namespace BL
             {
                 foreach (var vd in item.volunteer_domain)
                 {
-                    if(domainAssisted.Find(x=>x.volunteering_domain == vd.volunteering_domain) != null)
+                    if(domainAssisted.Find(x=>x.code_volunteering == vd.code_volunteering) != null)
                     {
                         if (!vDomain.Contains(item))
                         {
