@@ -20,7 +20,7 @@
           <Property Name="number_house" Type="int" Nullable="false" />
           <Property Name="number_building" Type="int" Nullable="false" />
           <Property Name="number_floor" Type="int" Nullable="false" />
-          <Property Name="postal_code" Type="int" Nullable="false" />
+          <Property Name="postal_code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="e-mail" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="8" Nullable="false" />
@@ -56,7 +56,6 @@
           <Property Name="code_availability" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="code_day" Type="int" Nullable="false" />
           <Property Name="code_shift" Type="int" Nullable="false" />
-          <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="availability_volunteer">
           <Key>
@@ -80,7 +79,6 @@
           <Property Name="code_car_license_volunteer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="code_car_license" Type="int" Nullable="false" />
           <Property Name="id_volunteer" Type="varchar" MaxLength="9" Nullable="false" />
-          <Property Name="validity" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="city">
           <Key>
@@ -88,6 +86,13 @@
           </Key>
           <Property Name="code_city" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name_city" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="days">
+          <Key>
+            <PropertyRef Name="code_day" />
+          </Key>
+          <Property Name="code_day" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="domain">
           <Key>
@@ -124,15 +129,12 @@
           <Property Name="code_service" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
+        <EntityType Name="shifts">
           <Key>
-            <PropertyRef Name="diagram_id" />
+            <PropertyRef Name="code_shift" />
           </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
+          <Property Name="code_shift" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="training">
           <Key>
@@ -170,6 +172,7 @@
           <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="release-date" Type="datetime" />
+          <Property Name="validity" Type="datetime" />
         </EntityType>
         <EntityType Name="volunteer_domain">
           <Key>
@@ -209,7 +212,6 @@
           <Property Name="code_weapons_license_volunteer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="code_weapons_license" Type="int" Nullable="false" />
           <Property Name="id_volunteer" Type="varchar" MaxLength="9" Nullable="false" />
-          <Property Name="validity" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_assisted_availability_assisted">
           <End Role="assisted" Type="Self.assisted" Multiplicity="1" />
@@ -304,6 +306,30 @@
             </Principal>
             <Dependent Role="assisted">
               <PropertyRef Name="code_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_availability_days">
+          <End Role="days" Type="Self.days" Multiplicity="1" />
+          <End Role="availability" Type="Self.availability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="days">
+              <PropertyRef Name="code_day" />
+            </Principal>
+            <Dependent Role="availability">
+              <PropertyRef Name="code_day" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_availability_shifts">
+          <End Role="shifts" Type="Self.shifts" Multiplicity="1" />
+          <End Role="availability" Type="Self.availability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shifts">
+              <PropertyRef Name="code_shift" />
+            </Principal>
+            <Dependent Role="availability">
+              <PropertyRef Name="code_shift" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -521,12 +547,13 @@
           <EntitySet Name="car_license" EntityType="Self.car_license" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="car_license_volunteer" EntityType="Self.car_license_volunteer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="city" EntityType="Self.city" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="days" EntityType="Self.days" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="domain" EntityType="Self.domain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="gender" EntityType="Self.gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="language" EntityType="Self.language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="personal_status" EntityType="Self.personal_status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="services" EntityType="Self.services" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shifts" EntityType="Self.shifts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="training" EntityType="Self.training" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="training_volunteer" EntityType="Self.training_volunteer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="volunteer" EntityType="Self.volunteer" Schema="dbo" store:Type="Tables" />
@@ -566,6 +593,14 @@
           <AssociationSet Name="FK_assisted_personal_status" Association="Self.FK_assisted_personal_status">
             <End Role="personal_status" EntitySet="personal_status" />
             <End Role="assisted" EntitySet="assisted" />
+          </AssociationSet>
+          <AssociationSet Name="FK_availability_days" Association="Self.FK_availability_days">
+            <End Role="days" EntitySet="days" />
+            <End Role="availability" EntitySet="availability" />
+          </AssociationSet>
+          <AssociationSet Name="FK_availability_shifts" Association="Self.FK_availability_shifts">
+            <End Role="shifts" EntitySet="shifts" />
+            <End Role="availability" EntitySet="availability" />
           </AssociationSet>
           <AssociationSet Name="FK_availability_volunteer_availability" Association="Self.FK_availability_volunteer_availability">
             <End Role="availability" EntitySet="availability" />
@@ -656,7 +691,7 @@
           <Property Name="number_house" Type="Int32" Nullable="false" />
           <Property Name="number_building" Type="Int32" Nullable="false" />
           <Property Name="number_floor" Type="Int32" Nullable="false" />
-          <Property Name="postal_code" Type="Int32" Nullable="false" />
+          <Property Name="postal_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="e_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
@@ -703,8 +738,9 @@
           <Property Name="code_availability" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="code_day" Type="Int32" Nullable="false" />
           <Property Name="code_shift" Type="Int32" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="assisted_availability" Relationship="Self.FK_assisted_availability_availability" FromRole="availability" ToRole="assisted_availability" />
+          <NavigationProperty Name="days" Relationship="Self.FK_availability_days" FromRole="availability" ToRole="days" />
+          <NavigationProperty Name="shifts" Relationship="Self.FK_availability_shifts" FromRole="availability" ToRole="shifts" />
           <NavigationProperty Name="availability_volunteer" Relationship="Self.FK_availability_volunteer_availability" FromRole="availability" ToRole="availability_volunteer" />
         </EntityType>
         <EntityType Name="availability_volunteer">
@@ -732,7 +768,6 @@
           <Property Name="code_car_license_volunteer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="code_car_license" Type="Int32" Nullable="false" />
           <Property Name="id_volunteer" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="validity" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="car_license" Relationship="Self.FK_car_license_volunteer_car_license" FromRole="car_license_volunteer" ToRole="car_license" />
           <NavigationProperty Name="volunteer" Relationship="Self.FK_car_license_volunteer_volunteer1" FromRole="car_license_volunteer" ToRole="volunteer" />
         </EntityType>
@@ -743,6 +778,14 @@
           <Property Name="code_city" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name_city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="volunteer" Relationship="Self.FK_volunteer_city1" FromRole="city" ToRole="volunteer" />
+        </EntityType>
+        <EntityType Name="days">
+          <Key>
+            <PropertyRef Name="code_day" />
+          </Key>
+          <Property Name="code_day" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="availability" Relationship="Self.FK_availability_days" FromRole="days" ToRole="availability" />
         </EntityType>
         <EntityType Name="domain">
           <Key>
@@ -787,15 +830,13 @@
           <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="volunteer" Relationship="Self.FK_volunteer_services" FromRole="services" ToRole="volunteer" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
+        <EntityType Name="shifts">
           <Key>
-            <PropertyRef Name="diagram_id" />
+            <PropertyRef Name="code_shift" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="code_shift" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="availability" Relationship="Self.FK_availability_shifts" FromRole="shifts" ToRole="availability" />
         </EntityType>
         <EntityType Name="training">
           <Key>
@@ -836,6 +877,7 @@
           <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="release_date" Type="DateTime" Precision="3" />
+          <Property Name="validity" Type="DateTime" Precision="3" />
           <NavigationProperty Name="availability_volunteer" Relationship="Self.FK_availability_volunteer_volunteer" FromRole="volunteer" ToRole="availability_volunteer" />
           <NavigationProperty Name="car_license_volunteer" Relationship="Self.FK_car_license_volunteer_volunteer1" FromRole="volunteer" ToRole="car_license_volunteer" />
           <NavigationProperty Name="city" Relationship="Self.FK_volunteer_city1" FromRole="volunteer" ToRole="city" />
@@ -893,7 +935,6 @@
           <Property Name="code_weapons_license_volunteer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="code_weapons_license" Type="Int32" Nullable="false" />
           <Property Name="id_volunteer" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="validity" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="volunteer" Relationship="Self.FK_weapons_license_volunteer_volunteer" FromRole="weapons_license_volunteer" ToRole="volunteer" />
           <NavigationProperty Name="weapons_license" Relationship="Self.FK_weapons_license_volunteer_weapons_license" FromRole="weapons_license_volunteer" ToRole="weapons_license" />
         </EntityType>
@@ -990,6 +1031,30 @@
             </Principal>
             <Dependent Role="assisted_language">
               <PropertyRef Name="code_language" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_availability_days">
+          <End Role="days" Type="Self.days" Multiplicity="1" />
+          <End Role="availability" Type="Self.availability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="days">
+              <PropertyRef Name="code_day" />
+            </Principal>
+            <Dependent Role="availability">
+              <PropertyRef Name="code_day" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_availability_shifts">
+          <End Role="shifts" Type="Self.shifts" Multiplicity="1" />
+          <End Role="availability" Type="Self.availability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="shifts">
+              <PropertyRef Name="code_shift" />
+            </Principal>
+            <Dependent Role="availability">
+              <PropertyRef Name="code_shift" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1207,12 +1272,13 @@
           <EntitySet Name="car_license" EntityType="Self.car_license" />
           <EntitySet Name="car_license_volunteer" EntityType="Self.car_license_volunteer" />
           <EntitySet Name="city" EntityType="Self.city" />
+          <EntitySet Name="days" EntityType="Self.days" />
           <EntitySet Name="domain" EntityType="Self.domain" />
           <EntitySet Name="gender" EntityType="Self.gender" />
           <EntitySet Name="language" EntityType="Self.language" />
           <EntitySet Name="personal_status" EntityType="Self.personal_status" />
           <EntitySet Name="services" EntityType="Self.services" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="shifts" EntityType="Self.shifts" />
           <EntitySet Name="training" EntityType="Self.training" />
           <EntitySet Name="training_volunteer" EntityType="Self.training_volunteer" />
           <EntitySet Name="volunteer" EntityType="Self.volunteer" />
@@ -1252,6 +1318,14 @@
           <AssociationSet Name="FK_assisted_language_language" Association="Self.FK_assisted_language_language">
             <End Role="language" EntitySet="language" />
             <End Role="assisted_language" EntitySet="assisted_language" />
+          </AssociationSet>
+          <AssociationSet Name="FK_availability_days" Association="Self.FK_availability_days">
+            <End Role="days" EntitySet="days" />
+            <End Role="availability" EntitySet="availability" />
+          </AssociationSet>
+          <AssociationSet Name="FK_availability_shifts" Association="Self.FK_availability_shifts">
+            <End Role="shifts" EntitySet="shifts" />
+            <End Role="availability" EntitySet="availability" />
           </AssociationSet>
           <AssociationSet Name="FK_availability_volunteer_availability" Association="Self.FK_availability_volunteer_availability">
             <End Role="availability" EntitySet="availability" />
@@ -1382,7 +1456,6 @@
                 <ScalarProperty Name="code_availability" ColumnName="code_availability" />
                 <ScalarProperty Name="code_day" ColumnName="code_day" />
                 <ScalarProperty Name="code_shift" ColumnName="code_shift" />
-                <ScalarProperty Name="description" ColumnName="description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1409,7 +1482,6 @@
                 <ScalarProperty Name="code_car_license_volunteer" ColumnName="code_car_license_volunteer" />
                 <ScalarProperty Name="code_car_license" ColumnName="code_car_license" />
                 <ScalarProperty Name="id_volunteer" ColumnName="id_volunteer" />
-                <ScalarProperty Name="validity" ColumnName="validity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1418,6 +1490,14 @@
               <MappingFragment StoreEntitySet="city">
                 <ScalarProperty Name="code_city" ColumnName="code_city" />
                 <ScalarProperty Name="name_city" ColumnName="name_city" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="days">
+            <EntityTypeMapping TypeName="Progect_lModel.days">
+              <MappingFragment StoreEntitySet="days">
+                <ScalarProperty Name="code_day" ColumnName="code_day" />
+                <ScalarProperty Name="description" ColumnName="description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1461,14 +1541,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="Progect_lModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
+          <EntitySetMapping Name="shifts">
+            <EntityTypeMapping TypeName="Progect_lModel.shifts">
+              <MappingFragment StoreEntitySet="shifts">
+                <ScalarProperty Name="code_shift" ColumnName="code_shift" />
+                <ScalarProperty Name="description" ColumnName="description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1509,6 +1586,7 @@
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="release_date" ColumnName="release-date" />
+                <ScalarProperty Name="validity" ColumnName="validity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1553,7 +1631,6 @@
                 <ScalarProperty Name="code_weapons_license_volunteer" ColumnName="code_weapons_license_volunteer" />
                 <ScalarProperty Name="code_weapons_license" ColumnName="code_weapons_license" />
                 <ScalarProperty Name="id_volunteer" ColumnName="id_volunteer" />
-                <ScalarProperty Name="validity" ColumnName="validity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

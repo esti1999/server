@@ -75,10 +75,16 @@ namespace WebApplication4.Controllers
             return BL.VolunteerBL.GetWeaponsLicense();
         }
         [HttpGet]
-        [Route("GetAvailability")]
-        public List<Availability> GetAvailability()
+        [Route("GetDays")]
+        public List<Days> GetDays()
         {
-            return BL.VolunteerBL.GetAvailability();
+            return BL.VolunteerBL.GetDays();
+        }
+        [HttpGet]
+        [Route("GetShift")]
+        public List<Shift> GetShift()
+        {
+            return BL.VolunteerBL.GetShift();
         }
         [HttpGet]
         [Route("GetLanguage")]

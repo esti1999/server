@@ -31,23 +31,39 @@ namespace BL
                 {
                     assisted a1 = Assisted.convertassistedentitytoassistedtable(assisted);
                     a.code_city = a1.code_city;
-                    a.code_gender = a1.code_gender;
-                    a.code_status = a1.code_status;
+                    a.code_gender = a1.code_gender;            
+                    a.id_assisted = a1.id_assisted;
+                    a.first_name = a1.first_name;
+                    a.last_name = a1.last_name;
                     a.date_birth = a1.date_birth;
+                    a.code_gender = a1.code_gender;
+                    a.code_city = a1.code_city;
+
+                    a.code_status = a1.code_status;
                     a.e_mail = a1.e_mail;
+
                     a.first_name = a1.first_name;
                     a.id_assisted = a1.id_assisted;
                     a.last_name = a1.last_name;
+
+                    a.street = a1.street;
+
                     a.number_building = a1.number_building;
                     a.number_floor = a1.number_floor;
                     a.number_house = a1.number_house;
                     a.password = a1.password;
                     a.phone = a1.phone;
                     a.postal_code = a1.postal_code;
-                    a.street = a1.street;
                 }
                 else
                 {
+                    List<assisted_language> alList = Assisted.ConvertLanguageEntityListToAssistedLanguage(assisted.languages, assisted.id_assisted);
+
+
+                    foreach (assisted_language l in alList)
+                    {
+                        db.assisted_language.Add(l);
+                    }
                     db.assisted.Add(Assisted.convertassistedentitytoassistedtable(assisted));
                 }
 
@@ -60,7 +76,6 @@ namespace BL
 
             return true;
         }
-
         public static bool EmbededAssisted(Assisted assisted)
         {
             List<volunteer> vDomain = new List<volunteer>();
@@ -78,7 +93,6 @@ namespace BL
                     }
                 }
             }
-
             var avalAssisted = db.assisted_availability.Where(av => av.id_assisted == assisted.id_assisted).ToList();
             foreach (var item in vDomain)
             {
@@ -95,6 +109,10 @@ namespace BL
             return false;
             //var domaim = db.volunteer_domain
             //db.volunteer.Where(v=>v.code_volunteering_domain == )
+
+            //SendMail(assisted.e_mail, "ddd" , "ddd");
+
+
         }
 
         public static List<Assisted> RemoveAssisted(string id_assisted)
@@ -123,16 +141,16 @@ namespace BL
             return Assisted.convertassistedtabletolistassistedentity(db.assisted.ToList());
         }
 
-        public void SendMail(volunteer volunteer, string subject, string message)
+        public void SendMail(string Email, string subject, string message)
         {
             MailMessage mail = new MailMessage();
             SmtpClient client = new SmtpClient("srvExch2dag");
-            mail.From = new MailAddress("EruimHarigim@szmc.org.il");
+            mail.From = new MailAddress("lielb1005@gmail.com");
             mail.Subject = subject;
             mail.Body = message;
             mail.BodyEncoding = System.Text.Encoding.UTF8;
             mail.IsBodyHtml = true;
-            mail.To.Add("");
+            mail.To.Add(Email);
 
             try
             {
@@ -169,13 +187,29 @@ namespace BL
             }
             return list1;
         }
+        public static List<Language> GetLanguageAssisted(string assisted_id)
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<Language> list2 = new List<Language>();
+            List<int> myLanguages = db.assisted_language.Where(x => x.id_assisted == assisted_id).Select(y => y.code_language).ToList();
+            foreach (var item in db.language)
+            {
+                bool isSelected = false;
+                if (myLanguages.Contains(item.code_language))
+                {
+                    isSelected = true;
+                }
+                list2.Add(new Language { code_language = item.code_language, name_language = item.name_language, IsSelected = isSelected });
+            }
+            return list2;
+        }
         public static List<Language> GetLanguage()
         {
             Progect_lEntities db = new Progect_lEntities();
             List<Language> list2 = new List<Language>();
             foreach (var item in db.language)
             {
-                list2.Add(new Language { CodeLanguage = item.code_language, NameLanguage = item.name_language });
+                list2.Add(new Language { code_language = item.code_language, name_language = item.name_language, IsSelected=false });
             }
             return list2;
         }
@@ -188,6 +222,26 @@ namespace BL
                 list3.Add(new City { code_city = item.code_city, name_city = item.name_city });
             }
             return list3;
+        }
+        public static List<Days> GetDays()
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<Days> list4 = new List<Days>();
+            foreach (var item in db.days)
+            {
+                list4.Add(new Days { code_day = item.code_day, description = item.description });
+            }
+            return list4;
+        }
+        public static List<Shift> GetShift()
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<Shift> list5 = new List<Shift>();
+            foreach (var item in db.shifts)
+            {
+                list5.Add(new Shift { code_shift = item.code_shift, description = item.description });
+            }
+            return list5;
         }
     }    
 }

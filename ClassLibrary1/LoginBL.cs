@@ -15,7 +15,11 @@ namespace BL
         {
             var v = (db.volunteer.FirstOrDefault(x => x.e_mail == e_mail && x.password == password));
             if (v != null)
-                return Volunteer.convertvolunteertabletovolunteerentity(v);
+            {
+                Volunteer volunteer=Volunteer.convertvolunteertabletovolunteerentity(v);
+                volunteer.languages = VolunteerBL.GetLanguageVolunteer(volunteer.id_volunteer);
+                return volunteer;
+            }
             return null;
         }
         public static Assisted GetEmailAddressPassword1(string e_mail, string password)

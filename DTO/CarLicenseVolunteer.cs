@@ -12,7 +12,6 @@ namespace DTO
         public int code_car_license_volunteer { get; set; }
         public int code_car_license { get; set; }
         public string id_volunteer { get; set; }
-        public System.DateTime validity { get; set; }
 
         public static CarLicenseVolunteer convertcarlicensevolunteertabletocarlicensevolunteerentity(car_license_volunteer c)
         {
@@ -20,8 +19,7 @@ namespace DTO
             {
                 code_car_license=c.code_car_license,
                 code_car_license_volunteer=c.code_car_license_volunteer,
-                id_volunteer=c.id_volunteer,
-                validity=c.validity
+                id_volunteer=c.id_volunteer
             };
             return c1;
         }
@@ -32,8 +30,7 @@ namespace DTO
             {
                 code_car_license = c.code_car_license,
                 code_car_license_volunteer = c.code_car_license_volunteer,
-                id_volunteer = c.id_volunteer,
-                validity = c.validity
+                id_volunteer = c.id_volunteer
             };
             return c1;
         }

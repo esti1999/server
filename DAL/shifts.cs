@@ -12,24 +12,18 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class availability
+    public partial class shifts
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public availability()
+        public shifts()
         {
-            this.assisted_availability = new HashSet<assisted_availability>();
-            this.availability_volunteer = new HashSet<availability_volunteer>();
+            this.availability = new HashSet<availability>();
         }
     
-        public int code_availability { get; set; }
-        public int code_day { get; set; }
         public int code_shift { get; set; }
+        public string description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<assisted_availability> assisted_availability { get; set; }
-        public virtual days days { get; set; }
-        public virtual shifts shifts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<availability_volunteer> availability_volunteer { get; set; }
+        public virtual ICollection<availability> availability { get; set; }
     }
 }

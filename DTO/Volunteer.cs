@@ -26,6 +26,9 @@ namespace DTO
         public string phone { get; set; }
         public string password { get; set; }
         public Nullable<System.DateTime> release_date { get; set; }
+        public Nullable<System.DateTime> validity { get; set; }
+        public List<Language> languages { get; set; }
+
 
 
         public static Volunteer convertvolunteertabletovolunteerentity(volunteer v)
@@ -49,69 +52,82 @@ namespace DTO
                 number_floor = v.number_floor,
                 phone = v.phone,
                 password = v.password,
-                release_date = v.release_date
+                release_date = v.release_date,
+                validity = v.validity
 
             };
             return v1;
+        }
+
+        public static List<volunteer_language> ConvertLanguageEntityListToVolenteerLanguage(List<Language> languages, string volunteerId)
+        {
+            List<volunteer_language> vlList = new List<volunteer_language>();
+            foreach (Language l in languages)
+            {
+                if (l.IsSelected == true)
+                {
+                    volunteer_language vl = new volunteer_language();
+                    vl.id_volunteer = volunteerId;
+                    vl.code_language = l.code_language;
+                    vlList.Add(vl);
+
+                }
+            }
+            return vlList;
+
         }
 
         public static volunteer convertvolunteerentitytovolunteertable(Volunteer v)
-
-        //car_license car_License1=new car_license()
         {
-            //car_license car_License1 = new car_license()
-            //{
-            //    code_car_license=v.code_license_car,
-            //    description=v.code_license_car
-            //}
 
-        
 
-        
-
-            volunteer v1 = new volunteer()
-            {
-                id_volunteer = v.id_volunteer,
-                firstName_volunteer = v.firstName_volunteer,
-                lastName_volunteer = v.lastName_volunteer,
-                date_of_birth = v.date_of_birth,
-                code_gender = v.code_gender,
-                code_status = v.code_status,
-                code_city = v.code_city,
-                street = v.street,
-                house_number = v.house_number,
-                bulding_number = v.bulding_number,
-                postal_code = v.postal_code,
-                e_mail = v.e_mail,
-                code_service = v.code_service,
-                number_floor = v.number_floor,
-                phone = v.phone,
-                password = v.password,
-                release_date = v.release_date
-            };
-            return v1;
-        }
-        public static List<Volunteer> convertvolunteertabletolistvolunteerentity(List<volunteer> vl)
-        {
-            List<Volunteer> v1 = new List<Volunteer>();
-            foreach (var item in vl)
-            {
-                v1.Add(convertvolunteertabletovolunteerentity(item));
+                volunteer v1 = new volunteer()
+                {
+                    id_volunteer = v.id_volunteer,
+                    firstName_volunteer = v.firstName_volunteer,
+                    lastName_volunteer = v.lastName_volunteer,
+                    date_of_birth = v.date_of_birth,
+                    code_gender = v.code_gender,
+                    code_status = v.code_status,
+                    code_city = v.code_city,
+                    street = v.street,
+                    house_number = v.house_number,
+                    bulding_number = v.bulding_number,
+                    postal_code = v.postal_code,
+                    e_mail = v.e_mail,
+                    code_service = v.code_service,
+                    number_floor = v.number_floor,
+                    phone = v.phone,
+                    password = v.password,
+                    release_date = v.release_date,
+                    validity = v.validity
+                };
+                return v1;
             }
-            return v1;
-        }
-        public static List<volunteer> convertvolunteerentitytolistvolunteertable(List<Volunteer> vl)
-        {
-            List<volunteer> v1 = new List<volunteer>();
-            foreach (var item in vl)
+            public static List<Volunteer> convertvolunteertabletolistvolunteerentity(List<volunteer> vl)
             {
-                v1.Add(convertvolunteerentitytovolunteertable(item));
+                List<Volunteer> v1 = new List<Volunteer>();
+                foreach (var item in vl)
+                {
+                    v1.Add(convertvolunteertabletovolunteerentity(item));
+                }
+                return v1;
             }
-            return v1;
-        }
+            public static List<volunteer> convertvolunteerentitytolistvolunteertable(List<Volunteer> vl)
+            {
+                List<volunteer> v1 = new List<volunteer>();
+                foreach (var item in vl)
+                {
+                    v1.Add(convertvolunteerentitytovolunteertable(item));
+                }
+                return v1;
+            }
     }
 }
-        
-    
+
+
+
+
+
 
 
