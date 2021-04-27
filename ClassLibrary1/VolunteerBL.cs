@@ -30,26 +30,33 @@ namespace BL
                 {
 
                     //v = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
-                    List<volunteer_language> vlList = Volunteer.ConvertLanguageEntityListToVolenteerLanguage(volunteer.languages, volunteer.id_volunteer);
+                  
                     List<volunteer_domain> dList = new List<volunteer_domain>();
-                    foreach (string item in volunteer.domain)
+                    foreach (Domain item in volunteer.domains)
                     {
                         volunteer_domain vvo = new volunteer_domain();
                         vvo.id_volunteer = volunteer.id_volunteer;
-                        vvo.code_volunteering = db.volunteering_domain.Where(x => x.description == item).Select(s => s.code_volunteering).FirstOrDefault();
+                        vvo.code_volunteering = db.volunteering_domain.Where(x => x.description == item.description).Select(s => s.code_volunteering).FirstOrDefault();
                         dList.Add(vvo);
                     }
+                    foreach (volunteer_domain item in dList)
+                    {
+                        db.volunteer_domain.Add(item);
+                    }
 
-                    var aval = db.availability.Where(x => x.code_day == volunteer.availability.code_day && x.code_shift == volunteer.availability.code_shift).FirstOrDefault();
+                    List<volunteer_language> vlList = Volunteer.ConvertLanguageEntityListToVolenteerLanguage(volunteer.languages, volunteer.id_volunteer);
                     foreach (volunteer_language l in vlList)
                     {
                         db.volunteer_language.Add(l);
                     }
 
-                    foreach (volunteer_domain item in dList)
+                    List<availability_volunteer> AvailabilityList = Volunteer.ConvertAvailabilityEntityListToVolenteerAvailability(volunteer.availabilitys, volunteer.id_volunteer);
+                    foreach (availability_volunteer a in AvailabilityList)
                     {
-                        db.volunteer_domain.Add(item);
+                        db.availability_volunteer.Add(a);
                     }
+
+                    var aval = db.availability.Where(x => x.code_day == volunteer.availability.code_day && x.code_shift == volunteer.availability.code_shift).FirstOrDefault();
                     availability_volunteer availability = new availability_volunteer();
                     availability.code_availability = aval.code_availability;
                     availability.id_volunteer = volunteer.id_volunteer;
@@ -78,27 +85,26 @@ namespace BL
                 }
                 else
                 {
-                    List<volunteer_language> vlList = Volunteer.ConvertLanguageEntityListToVolenteerLanguage(volunteer.languages, volunteer.id_volunteer);
                     // List<volunteer_domain> dList = VolunteerDomain.convertvolunteerdomainentitytolistvolunteerdomaintable(volunteer.domain);
                     List<volunteer_domain> dList = new List<volunteer_domain>();
-                    foreach (string item in volunteer.domain)
+                    foreach (Domain item in volunteer.domains)
                     {
                         volunteer_domain vvo = new volunteer_domain();
                         vvo.id_volunteer = volunteer.id_volunteer;
-                        vvo.code_volunteering = db.volunteering_domain.Where(x => x.description == item).Select(s => s.code_volunteering).FirstOrDefault();
+                        vvo.code_volunteering = db.volunteering_domain.Where(x => x.description == item.description).Select(s => s.code_volunteering).FirstOrDefault();
                         dList.Add(vvo);
                     }
+                    foreach (volunteer_domain item in dList)
+                    {
+                        db.volunteer_domain.Add(item);
+                    }
+                    List<volunteer_language> vlList = Volunteer.ConvertLanguageEntityListToVolenteerLanguage(volunteer.languages, volunteer.id_volunteer);
                     foreach (volunteer_language l in vlList)
                     {
                         db.volunteer_language.Add(l);
                     }
 
-                    foreach (volunteer_domain item in dList)
-                    {
-                        db.volunteer_domain.Add(item);
-                    }
                     var aval = db.availability.Where(x => x.code_day == volunteer.availability.code_day && x.code_shift == volunteer.availability.code_shift).FirstOrDefault();
-
                     availability_volunteer availability = new availability_volunteer();
                     availability.code_availability = aval.code_availability;
                     availability.id_volunteer = volunteer.id_volunteer;
@@ -185,6 +191,23 @@ namespace BL
                 list3.Add(new WeaponsLicense { code_weapons_license = item.code_weapons_license, description = item.description });
             }
             return list3;
+        }
+        public static List<Availability> GetAvailabilityVolunteer(string volunteer_id)
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<Availability> ListAvailabilities = new List<Availability>();
+            List<int> myAvailability = db.availability_volunteer.Where(x => x.id_volunteer == volunteer_id).Select(y => y.code_availability).ToList();
+            
+            foreach (var item in db.availability)
+            {
+                bool isSelected = false;
+                if (myAvailability.Contains(item.code_availability))
+                {
+                    isSelected = true;
+                }
+                ListAvailabilities.Add(new Availability { code_availability = item.code_availability, code_day=item.code_day, code_shift=item.code_shift, isSelected = isSelected });
+            }
+            return ListAvailabilities;
         }
         public static List<Days> GetDays()
         {

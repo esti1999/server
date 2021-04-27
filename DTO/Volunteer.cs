@@ -26,10 +26,12 @@ namespace DTO
         public string phone { get; set; }
         public string password { get; set; }
         public Nullable<System.DateTime> release_date { get; set; }
-        public Nullable<System.DateTime> validity { get; set; }
+        public Nullable<System.DateTime> validityc { get; set; }
+        public Nullable<System.DateTime> validityw { get; set; }
         public List<Language> languages { get; set; }
-        public List<string> domain { get; set; }
+        public List<Domain> domains { get; set; }
         public Availability availability { get; set; }
+        public List<Availability> availabilitys { get; set; }
 
 
         public static Volunteer convertvolunteertabletovolunteerentity(volunteer v)
@@ -54,13 +56,15 @@ namespace DTO
                 phone = v.phone,
                 password = v.password,
                 release_date = v.release_date,
-                validity=v.validity
+                validityc=v.validityc,
+                validityw=v.validityw
+                
 
             };
             return v1;
         }
 
-        public  static List<volunteer_language> ConvertLanguageEntityListToVolenteerLanguage(List<Language> languages,string volunteerId)
+        public static List<volunteer_language> ConvertLanguageEntityListToVolenteerLanguage(List<Language> languages,string volunteerId)
         {
             List<volunteer_language> vlList = new List<volunteer_language>();
             foreach(Language l in languages)
@@ -75,7 +79,23 @@ namespace DTO
                 }
             }
             return vlList;
+        }
 
+        public static List<availability_volunteer> ConvertAvailabilityEntityListToVolenteerAvailability(List<Availability> availabilitys, string volunteerId)
+        {
+            List<availability_volunteer> AvailabilityList = new List<availability_volunteer>();
+            foreach (Availability a in availabilitys)
+            {
+                if (a.isSelected == true)
+                {
+                    availability_volunteer vl = new availability_volunteer();
+                    vl.id_volunteer = volunteerId;
+                    vl.code_availability = a.code_availability;
+                    AvailabilityList.Add(vl);
+
+                }
+            }
+            return AvailabilityList;
         }
 
         public static volunteer convertvolunteerentitytovolunteertable(Volunteer v)
@@ -100,7 +120,8 @@ namespace DTO
                 phone = v.phone,
                 password = v.password,
                 release_date = v.release_date,
-                validity = v.validity
+                validityc = v.validityc,
+                validityw = v.validityw
             };
             return v1;
         }
