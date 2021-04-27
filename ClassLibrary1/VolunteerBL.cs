@@ -28,15 +28,40 @@ namespace BL
                 volunteer v = db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer);
                 if (v!=null)
                 {
+
                     //v = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
                     List<volunteer_language> vlList = Volunteer.ConvertLanguageEntityListToVolenteerLanguage(volunteer.languages, volunteer.id_volunteer);
+                    List<volunteer_domain> dList = new List<volunteer_domain>();
+                    foreach (string item in volunteer.domain)
+                    {
+                        volunteer_domain vvo = new volunteer_domain();
+                        vvo.id_volunteer = volunteer.id_volunteer;
+                        vvo.code_volunteering = db.volunteering_domain.Where(x => x.description == item).Select(s => s.code_volunteering).FirstOrDefault();
+                        dList.Add(vvo);
+                    }
 
-
+                    var aval = db.availability.Where(x => x.code_day == volunteer.availability.code_day && x.code_shift == volunteer.availability.code_shift).FirstOrDefault();
                     foreach (volunteer_language l in vlList)
                     {
                         db.volunteer_language.Add(l);
                     }
+
+                    //volunteer v1 = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
+
+
+                    foreach (volunteer_domain item in dList)
+                    {
+                        db.volunteer_domain.Add(item);
+                    }
+                    availability_volunteer availability = new availability_volunteer();
+                    availability.code_availability = aval.code_availability;
+                    availability.id_volunteer = volunteer.id_volunteer;
+                    availability_volunteer a_v = db.availability_volunteer.Where(x => x.id_volunteer == availability.id_volunteer).FirstOrDefault();
+                    a_v.code_availability = availability.code_availability;
+
                     volunteer v1 = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
+                   
+
                     v.bulding_number = v1.bulding_number;
                     v.code_city = v1.code_city;
                     v.code_gender = v1.code_gender;
@@ -58,12 +83,30 @@ namespace BL
                 else
                 {
                     List<volunteer_language> vlList = Volunteer.ConvertLanguageEntityListToVolenteerLanguage(volunteer.languages, volunteer.id_volunteer);
-
-
+                    // List<volunteer_domain> dList = VolunteerDomain.convertvolunteerdomainentitytolistvolunteerdomaintable(volunteer.domain);
+                    List<volunteer_domain> dList = new List<volunteer_domain>();
+                    foreach (string item in volunteer.domain)
+                    {
+                        volunteer_domain vvo = new volunteer_domain();
+                        vvo.id_volunteer = volunteer.id_volunteer;
+                        vvo.code_volunteering = db.volunteering_domain.Where(x => x.description == item).Select(s => s.code_volunteering).FirstOrDefault();
+                        dList.Add(vvo);
+                    }
                     foreach (volunteer_language l in vlList)
                     {
                         db.volunteer_language.Add(l);
                     }
+
+                    foreach (volunteer_domain item in dList)
+                    {
+                        db.volunteer_domain.Add(item);
+                    }
+                    var aval = db.availability.Where(x => x.code_day == volunteer.availability.code_day && x.code_shift == volunteer.availability.code_shift).FirstOrDefault();
+
+                    availability_volunteer availability = new availability_volunteer();
+                    availability.code_availability = aval.code_availability;
+                    availability.id_volunteer = volunteer.id_volunteer;
+                    db.availability_volunteer.Add(availability);
                     db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
                 }
                 db.SaveChanges();

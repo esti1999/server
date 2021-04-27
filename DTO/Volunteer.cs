@@ -28,7 +28,8 @@ namespace DTO
         public Nullable<System.DateTime> release_date { get; set; }
         public Nullable<System.DateTime> validity { get; set; }
         public List<Language> languages { get; set; }
-
+        public List<string> domain { get; set; }
+        public Availability availability { get; set; }
 
 
         public static Volunteer convertvolunteertabletovolunteerentity(volunteer v)

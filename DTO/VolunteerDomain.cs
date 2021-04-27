@@ -43,7 +43,7 @@ namespace DTO
             }
             return v1;
         }
-        public static List<volunteer_domain> convertassisteddomainentitytolistassisteddomaintable(List<VolunteerDomain> vl)
+        public static List<volunteer_domain> convertvolunteerdomainentitytolistvolunteerdomaintable(List<VolunteerDomain> vl)
         {
             List<volunteer_domain> v1 = new List<volunteer_domain>();
             foreach (var item in vl)
