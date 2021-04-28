@@ -32,7 +32,7 @@ namespace BL
                     //v = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
                   
                     List<volunteer_domain> dList = new List<volunteer_domain>();
-                    foreach (Domain item in volunteer.domains)
+                    foreach (VolunteeringDomain item in volunteer.volunteeringdomains)
                     {
                         volunteer_domain vvo = new volunteer_domain();
                         vvo.id_volunteer = volunteer.id_volunteer;
@@ -87,7 +87,7 @@ namespace BL
                 {
                     // List<volunteer_domain> dList = VolunteerDomain.convertvolunteerdomainentitytolistvolunteerdomaintable(volunteer.domain);
                     List<volunteer_domain> dList = new List<volunteer_domain>();
-                    foreach (Domain item in volunteer.domains)
+                    foreach (VolunteeringDomain item in volunteer.volunteeringdomains)
                     {
                         volunteer_domain vvo = new volunteer_domain();
                         vvo.id_volunteer = volunteer.id_volunteer;
@@ -103,7 +103,11 @@ namespace BL
                     {
                         db.volunteer_language.Add(l);
                     }
-
+                    List<availability_volunteer> AvailabilityList = Volunteer.ConvertAvailabilityEntityListToVolenteerAvailability(volunteer.availabilitys, volunteer.id_volunteer);
+                    foreach (availability_volunteer a in AvailabilityList)
+                    {
+                        db.availability_volunteer.Add(a);
+                    }
                     var aval = db.availability.Where(x => x.code_day == volunteer.availability.code_day && x.code_shift == volunteer.availability.code_shift).FirstOrDefault();
                     availability_volunteer availability = new availability_volunteer();
                     availability.code_availability = aval.code_availability;
@@ -121,6 +125,8 @@ namespace BL
 
             return true;
         }
+
+    
 
         //public static List<Language> GetLanguages()
         //{
@@ -182,6 +188,7 @@ namespace BL
             }
             return list2;
         }
+
         public static List<WeaponsLicense> GetWeaponsLicense()
         {
             Progect_lEntities db = new Progect_lEntities();
@@ -192,6 +199,23 @@ namespace BL
             }
             return list3;
         }
+        //public static List<Domain> GetDomainVolunteer(string volunteer_id)
+        //{
+        //    Progect_lEntities db = new Progect_lEntities();
+        //    List<VolunteeringDomain> ListDomain = new List<VolunteeringDomain>();
+        //    List<int> myDomain = db.volunteer_domain.Where(x => x.id_volunteer == volunteer_id).Select(y => y.code_volunteering).ToList();
+
+        //    foreach (var item in db.volunteering_domain)
+        //    {
+        //        bool isSelected = false;
+        //        if (myDomain.Contains(item.code_volunteering))
+        //        {
+        //            isSelected = true;
+        //        }
+        //        ListDomain.Add(new VolunteeringDomain { code_domain = item.code_domain, code_volunteering = item.code_volunteering, isSelected = isSelected });
+        //    }
+        //    return ListDomain;
+        //}
         public static List<Availability> GetAvailabilityVolunteer(string volunteer_id)
         {
             Progect_lEntities db = new Progect_lEntities();
@@ -208,6 +232,16 @@ namespace BL
                 ListAvailabilities.Add(new Availability { code_availability = item.code_availability, code_day=item.code_day, code_shift=item.code_shift, isSelected = isSelected });
             }
             return ListAvailabilities;
+        }
+        public static List<Availability> GetAvailability()
+        {
+            Progect_lEntities db = new Progect_lEntities();
+            List<Availability> lista = new List<Availability>();
+            foreach (var item in db.availability)
+            {
+                lista.Add(new Availability { code_availability = item.code_availability, code_day = item.code_day, code_shift=item.code_shift });
+            }
+            return lista;
         }
         public static List<Days> GetDays()
         {

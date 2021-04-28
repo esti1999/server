@@ -19,6 +19,5 @@ namespace DAL
         public string id_volunteer { get; set; }
     
         public virtual car_license car_license { get; set; }
-        public virtual volunteer volunteer { get; set; }
     }
 }

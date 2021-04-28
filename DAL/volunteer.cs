@@ -18,11 +18,9 @@ namespace DAL
         public volunteer()
         {
             this.availability_volunteer = new HashSet<availability_volunteer>();
-            this.car_license_volunteer = new HashSet<car_license_volunteer>();
             this.training_volunteer = new HashSet<training_volunteer>();
             this.volunteer_domain = new HashSet<volunteer_domain>();
             this.volunteer_language = new HashSet<volunteer_language>();
-            this.weapons_license_volunteer = new HashSet<weapons_license_volunteer>();
         }
     
         public string id_volunteer { get; set; }
@@ -44,11 +42,11 @@ namespace DAL
         public Nullable<System.DateTime> release_date { get; set; }
         public Nullable<System.DateTime> validityc { get; set; }
         public Nullable<System.DateTime> validityw { get; set; }
+        public Nullable<int> code_weapons_license { get; set; }
+        public Nullable<int> code_car_license { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<availability_volunteer> availability_volunteer { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<car_license_volunteer> car_license_volunteer { get; set; }
         public virtual city city { get; set; }
         public virtual gender gender { get; set; }
         public virtual personal_status personal_status { get; set; }
@@ -59,7 +57,7 @@ namespace DAL
         public virtual ICollection<volunteer_domain> volunteer_domain { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<volunteer_language> volunteer_language { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<weapons_license_volunteer> weapons_license_volunteer { get; set; }
+        public virtual car_license car_license { get; set; }
+        public virtual weapons_license weapons_license { get; set; }
     }
 }

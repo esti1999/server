@@ -19,7 +19,7 @@ namespace BL
                 Volunteer volunteer=Volunteer.convertvolunteertabletovolunteerentity(v);
                 volunteer.languages = VolunteerBL.GetLanguageVolunteer(volunteer.id_volunteer);
                 volunteer.availabilitys = VolunteerBL.GetAvailabilityVolunteer(volunteer.id_volunteer);
-                //volunteer.domains = VolunteerBL.GetLanguageVolunteer(volunteer.id_volunteer);
+                //volunteer.domains = VolunteerBL.GetDomainVolunteer(volunteer.id_volunteer);
                 
                 return volunteer;
             }

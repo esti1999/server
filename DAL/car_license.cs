@@ -18,6 +18,7 @@ namespace DAL
         public car_license()
         {
             this.car_license_volunteer = new HashSet<car_license_volunteer>();
+            this.volunteer = new HashSet<volunteer>();
         }
     
         public int code_car_license { get; set; }
@@ -25,5 +26,7 @@ namespace DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<car_license_volunteer> car_license_volunteer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<volunteer> volunteer { get; set; }
     }
 }

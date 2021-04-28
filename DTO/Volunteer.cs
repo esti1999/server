@@ -28,8 +28,10 @@ namespace DTO
         public Nullable<System.DateTime> release_date { get; set; }
         public Nullable<System.DateTime> validityc { get; set; }
         public Nullable<System.DateTime> validityw { get; set; }
+        public Nullable<int> code_weapons_license { get; set; }
+        public Nullable<int> code_car_license { get; set; }
         public List<Language> languages { get; set; }
-        public List<Domain> domains { get; set; }
+        public List<VolunteeringDomain> volunteeringdomains { get; set; }
         public Availability availability { get; set; }
         public List<Availability> availabilitys { get; set; }
 
@@ -57,8 +59,10 @@ namespace DTO
                 password = v.password,
                 release_date = v.release_date,
                 validityc=v.validityc,
-                validityw=v.validityw
-                
+                validityw=v.validityw,
+                code_weapons_license=v.code_weapons_license,
+                code_car_license=v.code_weapons_license
+
 
             };
             return v1;
@@ -121,7 +125,9 @@ namespace DTO
                 password = v.password,
                 release_date = v.release_date,
                 validityc = v.validityc,
-                validityw = v.validityw
+                validityw = v.validityw,
+                code_weapons_license = v.code_weapons_license,
+                code_car_license = v.code_weapons_license
             };
             return v1;
         }

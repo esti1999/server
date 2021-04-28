@@ -87,6 +87,12 @@ namespace WebApplication4.Controllers
             return BL.VolunteerBL.GetShift();
         }
         [HttpGet]
+        [Route("GetAvailability")]
+        public List<Availability> GetAvailability()
+        {
+            return BL.VolunteerBL.GetAvailability();
+        }
+        [HttpGet]
         [Route("GetLanguage")]
         public List<Language> GetLanguage()
         {
