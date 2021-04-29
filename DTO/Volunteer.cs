@@ -26,10 +26,12 @@ namespace DTO
         public string phone { get; set; }
         public string password { get; set; }
         public Nullable<System.DateTime> release_date { get; set; }
-        public Nullable<System.DateTime> validity { get; set; }
+        public Nullable<System.DateTime> validityc { get; set; }
+        public Nullable<System.DateTime> validityw { get; set; }
         public List<Language> languages { get; set; }
-        public List<string> domain { get; set; }
+        public List<Domain> domains { get; set; }
         public Availability availability { get; set; }
+        public List<Availability> availabilitys { get; set; }
 
 
         public static Volunteer convertvolunteertabletovolunteerentity(volunteer v)
@@ -54,11 +56,16 @@ namespace DTO
                 phone = v.phone,
                 password = v.password,
                 release_date = v.release_date,
-                validity = v.validity
+                validityc = v.validityc,
+                validityw = v.validityw
+
+
 
             };
             return v1;
         }
+
+
 
         public static List<volunteer_language> ConvertLanguageEntityListToVolenteerLanguage(List<Language> languages, string volunteerId)
         {
@@ -75,54 +82,71 @@ namespace DTO
                 }
             }
             return vlList;
+        }
 
+        public static List<availability_volunteer> ConvertAvailabilityEntityListToVolenteerAvailability(List<Availability> availabilitys, string volunteerId)
+        {
+            List<availability_volunteer> AvailabilityList = new List<availability_volunteer>();
+            foreach (Availability a in availabilitys)
+            {
+                if (a.isSelected == true)
+                {
+                    availability_volunteer vl = new availability_volunteer();
+                    vl.id_volunteer = volunteerId;
+                    vl.code_availability = a.code_availability;
+                    AvailabilityList.Add(vl);
+
+                }
+            }
+            return AvailabilityList;
         }
 
         public static volunteer convertvolunteerentitytovolunteertable(Volunteer v)
         {
-
-
-                volunteer v1 = new volunteer()
-                {
-                    id_volunteer = v.id_volunteer,
-                    firstName_volunteer = v.firstName_volunteer,
-                    lastName_volunteer = v.lastName_volunteer,
-                    date_of_birth = v.date_of_birth,
-                    code_gender = v.code_gender,
-                    code_status = v.code_status,
-                    code_city = v.code_city,
-                    street = v.street,
-                    house_number = v.house_number,
-                    bulding_number = v.bulding_number,
-                    postal_code = v.postal_code,
-                    e_mail = v.e_mail,
-                    code_service = v.code_service,
-                    number_floor = v.number_floor,
-                    phone = v.phone,
-                    password = v.password,
-                    release_date = v.release_date,
-                    validity = v.validity
-                };
-                return v1;
-            }
-            public static List<Volunteer> convertvolunteertabletolistvolunteerentity(List<volunteer> vl)
+            volunteer v1 = new volunteer()
             {
-                List<Volunteer> v1 = new List<Volunteer>();
+                id_volunteer = v.id_volunteer,
+                firstName_volunteer = v.firstName_volunteer,
+                lastName_volunteer = v.lastName_volunteer,
+                date_of_birth = v.date_of_birth,
+                code_gender = v.code_gender,
+                code_status = v.code_status,
+                code_city = v.code_city,
+                street = v.street,
+                house_number = v.house_number,
+                bulding_number = v.bulding_number,
+                postal_code = v.postal_code,
+                e_mail = v.e_mail,
+                code_service = v.code_service,
+                number_floor = v.number_floor,
+                phone = v.phone,
+                password = v.password,
+                release_date = v.release_date,
+
+            };
+            return v1;
+        }
+        public static List<Volunteer> convertvolunteertabletolistvolunteerentity(List<volunteer> vl)
+        {
+            List<Volunteer> v1 = new List<Volunteer>();
+          
+
                 foreach (var item in vl)
                 {
                     v1.Add(convertvolunteertabletovolunteerentity(item));
                 }
                 return v1;
-            }
-            public static List<volunteer> convertvolunteerentitytolistvolunteertable(List<Volunteer> vl)
-            {
+        }
+        public static List<volunteer> convertvolunteerentitytolistvolunteertable(List<Volunteer> vl)
+        {
                 List<volunteer> v1 = new List<volunteer>();
                 foreach (var item in vl)
                 {
                     v1.Add(convertvolunteerentitytovolunteertable(item));
                 }
                 return v1;
-            }
+        }
+          
     }
 }
 

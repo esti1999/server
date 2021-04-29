@@ -11,7 +11,9 @@ namespace DTO
     {
         public int code_availability { get; set; }
         public int code_day { get; set; }
-        public int code_shift { get; set; }
+        public int code_shift { get; set;  }
+        public bool isSelected { get; set; }
+
 
         public static Availability convertavailabilitytabletoavailabilityentity(availability a)
         {
@@ -19,7 +21,8 @@ namespace DTO
             {
                 code_availability = a.code_availability,
                 code_day = a.code_day,
-                code_shift = a.code_shift
+                code_shift = a.code_shift,
+                
             };
             return a1;
         }

@@ -67,7 +67,6 @@ namespace DTO
                 }
             }
             return alList;
-
         }
         public static assisted convertassistedentitytoassistedtable(Assisted a)
         {
