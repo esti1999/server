@@ -53,12 +53,12 @@ namespace BL
                         db.assisted_domain.Add(item);
                     }
 
-                    var aval = db.availability.Where(x => x.code_day == assisted.availability.code_day && x.code_shift == assisted.availability.code_shift).FirstOrDefault();
-                    assisted_availability availability = new assisted_availability();
-                    availability.code_availability = aval.code_availability;
-                    availability.id_assisted = assisted.id_assisted;
-                    assisted_availability a_v = db.assisted_availability.Where(x => x.id_assisted == availability.id_assisted).FirstOrDefault();
-                    a_v.code_availability = availability.code_availability;
+                    //var aval = db.availability.Where(x => x.code_day == assisted.availability.code_day && x.code_shift == assisted.availability.code_shift).FirstOrDefault();
+                    //assisted_availability availability = new assisted_availability();
+                    //availability.code_availability = aval.code_availability;
+                    //availability.id_assisted = assisted.id_assisted;
+                    //assisted_availability a_v = db.assisted_availability.Where(x => x.id_assisted == availability.id_assisted).FirstOrDefault();
+                    //a_v.code_availability = availability.code_availability;
 
                     assisted a1 = Assisted.convertassistedentitytoassistedtable(assisted);      
                     a.id_assisted = a1.id_assisted;
@@ -104,11 +104,11 @@ namespace BL
                     {
                         db.assisted_domain.Add(item);
                     }
-                    var aval = db.availability.Where(x => x.code_day == assisted.availability.code_day && x.code_shift == assisted.availability.code_shift).FirstOrDefault();
-                    assisted_availability availability = new assisted_availability();
-                    availability.code_availability = aval.code_availability;
-                    availability.id_assisted = assisted.id_assisted;
-                    db.assisted_availability.Add(availability);
+                    //var aval = db.availability.Where(x => x.code_day == assisted.availability.code_day && x.code_shift == assisted.availability.code_shift).FirstOrDefault();
+                    //assisted_availability availability = new assisted_availability();
+                    //availability.code_availability = aval.code_availability;
+                    //availability.id_assisted = assisted.id_assisted;
+                    //db.assisted_availability.Add(availability);
                 }
 
                 db.SaveChanges();

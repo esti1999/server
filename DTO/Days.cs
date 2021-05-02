@@ -12,6 +12,7 @@ namespace DTO
 
         public int code_day { get; set; }
         public string description { get; set; }
+        public bool isSelected { get; set; }
 
         public static Days convertdaytabletodayentity(days d)
         {

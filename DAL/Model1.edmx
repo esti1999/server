@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Progect_lModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Progect_lModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="assisted">
           <Key>
             <PropertyRef Name="id_assisted" />
@@ -29,7 +29,7 @@
           <Key>
             <PropertyRef Name="code_availability_assisted" />
           </Key>
-          <Property Name="code_availability_assisted" Type="int" Nullable="false" />
+          <Property Name="code_availability_assisted" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="code_availability" Type="int" Nullable="false" />
           <Property Name="id_assisted" Type="varchar" MaxLength="9" Nullable="false" />
         </EntityType>
@@ -71,14 +71,6 @@
           </Key>
           <Property Name="code_car_license" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="car_license_volunteer">
-          <Key>
-            <PropertyRef Name="code_car_license_volunteer" />
-          </Key>
-          <Property Name="code_car_license_volunteer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="code_car_license" Type="int" Nullable="false" />
-          <Property Name="id_volunteer" Type="varchar" MaxLength="9" Nullable="false" />
         </EntityType>
         <EntityType Name="city">
           <Key>
@@ -136,6 +128,16 @@
           <Property Name="code_shift" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="training">
           <Key>
             <PropertyRef Name="code_training" />
@@ -171,9 +173,12 @@
           <Property Name="code_service" Type="int" Nullable="false" />
           <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="8" Nullable="false" />
-          <Property Name="release-date" Type="datetime" />
-          <Property Name="validityc" Type="datetime" />
-          <Property Name="validityw" Type="datetime" />
+          <Property Name="release-date" Type="date" />
+          <Property Name="validityc" Type="date" />
+          <Property Name="validityw" Type="date" />
+          <Property Name="code_weapons_license" Type="int" Nullable="false" />
+          <Property Name="code_car_license" Type="int" Nullable="false" />
+          <Property Name="description_service" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="volunteer_domain">
           <Key>
@@ -206,14 +211,6 @@
           <Property Name="code_weapons_license" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="weapons_license_volunteer">
-          <Key>
-            <PropertyRef Name="code_weapons_license_volunteer" />
-          </Key>
-          <Property Name="code_weapons_license_volunteer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="code_weapons_license" Type="int" Nullable="false" />
-          <Property Name="id_volunteer" Type="varchar" MaxLength="9" Nullable="false" />
-        </EntityType>
         <Association Name="FK_assisted_availability_assisted">
           <End Role="assisted" Type="Self.assisted" Multiplicity="1" />
           <End Role="assisted_availability" Type="Self.assisted_availability" Multiplicity="*" />
@@ -235,6 +232,18 @@
             </Principal>
             <Dependent Role="assisted_availability">
               <PropertyRef Name="code_availability" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_assisted_city">
+          <End Role="city" Type="Self.city" Multiplicity="1" />
+          <End Role="assisted" Type="Self.assisted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="city">
+              <PropertyRef Name="code_city" />
+            </Principal>
+            <Dependent Role="assisted">
+              <PropertyRef Name="code_city" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -358,30 +367,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_car_license_volunteer_car_license">
-          <End Role="car_license" Type="Self.car_license" Multiplicity="1" />
-          <End Role="car_license_volunteer" Type="Self.car_license_volunteer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="car_license">
-              <PropertyRef Name="code_car_license" />
-            </Principal>
-            <Dependent Role="car_license_volunteer">
-              <PropertyRef Name="code_car_license" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_car_license_volunteer_volunteer1">
-          <End Role="volunteer" Type="Self.volunteer" Multiplicity="1" />
-          <End Role="car_license_volunteer" Type="Self.car_license_volunteer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="volunteer">
-              <PropertyRef Name="id_volunteer" />
-            </Principal>
-            <Dependent Role="car_license_volunteer">
-              <PropertyRef Name="id_volunteer" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_training_volunteer_training">
           <End Role="training" Type="Self.training" Multiplicity="1" />
           <End Role="training_volunteer" Type="Self.training_volunteer" Multiplicity="*" />
@@ -406,7 +391,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_volunteer_city1">
+        <Association Name="FK_volunteer_car_license">
+          <End Role="car_license" Type="Self.car_license" Multiplicity="1" />
+          <End Role="volunteer" Type="Self.volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="car_license">
+              <PropertyRef Name="code_car_license" />
+            </Principal>
+            <Dependent Role="volunteer">
+              <PropertyRef Name="code_car_license" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_volunteer_city">
           <End Role="city" Type="Self.city" Multiplicity="1" />
           <End Role="volunteer" Type="Self.volunteer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -502,6 +499,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_volunteer_weapons_license">
+          <End Role="weapons_license" Type="Self.weapons_license" Multiplicity="1" />
+          <End Role="volunteer" Type="Self.volunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="weapons_license">
+              <PropertyRef Name="code_weapons_license" />
+            </Principal>
+            <Dependent Role="volunteer">
+              <PropertyRef Name="code_weapons_license" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_volunteering_domain_domain">
           <End Role="domain" Type="Self.domain" Multiplicity="1" />
           <End Role="volunteering_domain" Type="Self.volunteering_domain" Multiplicity="*" />
@@ -514,30 +523,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_weapons_license_volunteer_volunteer">
-          <End Role="volunteer" Type="Self.volunteer" Multiplicity="1" />
-          <End Role="weapons_license_volunteer" Type="Self.weapons_license_volunteer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="volunteer">
-              <PropertyRef Name="id_volunteer" />
-            </Principal>
-            <Dependent Role="weapons_license_volunteer">
-              <PropertyRef Name="id_volunteer" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_weapons_license_volunteer_weapons_license">
-          <End Role="weapons_license" Type="Self.weapons_license" Multiplicity="1" />
-          <End Role="weapons_license_volunteer" Type="Self.weapons_license_volunteer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="weapons_license">
-              <PropertyRef Name="code_weapons_license" />
-            </Principal>
-            <Dependent Role="weapons_license_volunteer">
-              <PropertyRef Name="code_weapons_license" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Progect_lModelStoreContainer">
           <EntitySet Name="assisted" EntityType="Self.assisted" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="assisted_availability" EntityType="Self.assisted_availability" Schema="dbo" store:Type="Tables" />
@@ -546,7 +531,6 @@
           <EntitySet Name="availability" EntityType="Self.availability" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="availability_volunteer" EntityType="Self.availability_volunteer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="car_license" EntityType="Self.car_license" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="car_license_volunteer" EntityType="Self.car_license_volunteer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="city" EntityType="Self.city" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="days" EntityType="Self.days" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="domain" EntityType="Self.domain" Schema="dbo" store:Type="Tables" />
@@ -555,6 +539,7 @@
           <EntitySet Name="personal_status" EntityType="Self.personal_status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="services" EntityType="Self.services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="shifts" EntityType="Self.shifts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="training" EntityType="Self.training" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="training_volunteer" EntityType="Self.training_volunteer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="volunteer" EntityType="Self.volunteer" Schema="dbo" store:Type="Tables" />
@@ -562,7 +547,6 @@
           <EntitySet Name="volunteer_language" EntityType="Self.volunteer_language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="volunteering_domain" EntityType="Self.volunteering_domain" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="weapons_license" EntityType="Self.weapons_license" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="weapons_license_volunteer" EntityType="Self.weapons_license_volunteer" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_assisted_availability_assisted" Association="Self.FK_assisted_availability_assisted">
             <End Role="assisted" EntitySet="assisted" />
             <End Role="assisted_availability" EntitySet="assisted_availability" />
@@ -570,6 +554,10 @@
           <AssociationSet Name="FK_assisted_availability_availability" Association="Self.FK_assisted_availability_availability">
             <End Role="availability" EntitySet="availability" />
             <End Role="assisted_availability" EntitySet="assisted_availability" />
+          </AssociationSet>
+          <AssociationSet Name="FK_assisted_city" Association="Self.FK_assisted_city">
+            <End Role="city" EntitySet="city" />
+            <End Role="assisted" EntitySet="assisted" />
           </AssociationSet>
           <AssociationSet Name="FK_assisted_domain_assisted" Association="Self.FK_assisted_domain_assisted">
             <End Role="assisted" EntitySet="assisted" />
@@ -611,14 +599,6 @@
             <End Role="volunteer" EntitySet="volunteer" />
             <End Role="availability_volunteer" EntitySet="availability_volunteer" />
           </AssociationSet>
-          <AssociationSet Name="FK_car_license_volunteer_car_license" Association="Self.FK_car_license_volunteer_car_license">
-            <End Role="car_license" EntitySet="car_license" />
-            <End Role="car_license_volunteer" EntitySet="car_license_volunteer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_car_license_volunteer_volunteer1" Association="Self.FK_car_license_volunteer_volunteer1">
-            <End Role="volunteer" EntitySet="volunteer" />
-            <End Role="car_license_volunteer" EntitySet="car_license_volunteer" />
-          </AssociationSet>
           <AssociationSet Name="FK_training_volunteer_training" Association="Self.FK_training_volunteer_training">
             <End Role="training" EntitySet="training" />
             <End Role="training_volunteer" EntitySet="training_volunteer" />
@@ -627,7 +607,11 @@
             <End Role="volunteer" EntitySet="volunteer" />
             <End Role="training_volunteer" EntitySet="training_volunteer" />
           </AssociationSet>
-          <AssociationSet Name="FK_volunteer_city1" Association="Self.FK_volunteer_city1">
+          <AssociationSet Name="FK_volunteer_car_license" Association="Self.FK_volunteer_car_license">
+            <End Role="car_license" EntitySet="car_license" />
+            <End Role="volunteer" EntitySet="volunteer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_volunteer_city" Association="Self.FK_volunteer_city">
             <End Role="city" EntitySet="city" />
             <End Role="volunteer" EntitySet="volunteer" />
           </AssociationSet>
@@ -659,20 +643,17 @@
             <End Role="services" EntitySet="services" />
             <End Role="volunteer" EntitySet="volunteer" />
           </AssociationSet>
+          <AssociationSet Name="FK_volunteer_weapons_license" Association="Self.FK_volunteer_weapons_license">
+            <End Role="weapons_license" EntitySet="weapons_license" />
+            <End Role="volunteer" EntitySet="volunteer" />
+          </AssociationSet>
           <AssociationSet Name="FK_volunteering_domain_domain" Association="Self.FK_volunteering_domain_domain">
             <End Role="domain" EntitySet="domain" />
             <End Role="volunteering_domain" EntitySet="volunteering_domain" />
           </AssociationSet>
-          <AssociationSet Name="FK_weapons_license_volunteer_volunteer" Association="Self.FK_weapons_license_volunteer_volunteer">
-            <End Role="volunteer" EntitySet="volunteer" />
-            <End Role="weapons_license_volunteer" EntitySet="weapons_license_volunteer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_weapons_license_volunteer_weapons_license" Association="Self.FK_weapons_license_volunteer_weapons_license">
-            <End Role="weapons_license" EntitySet="weapons_license" />
-            <End Role="weapons_license_volunteer" EntitySet="weapons_license_volunteer" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Progect_lModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -696,6 +677,7 @@
           <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="assisted_availability" Relationship="Self.FK_assisted_availability_assisted" FromRole="assisted" ToRole="assisted_availability" />
+          <NavigationProperty Name="city" Relationship="Self.FK_assisted_city" FromRole="assisted" ToRole="city" />
           <NavigationProperty Name="assisted_domain" Relationship="Self.FK_assisted_domain_assisted" FromRole="assisted" ToRole="assisted_domain" />
           <NavigationProperty Name="gender" Relationship="Self.FK_assisted_gender" FromRole="assisted" ToRole="gender" />
           <NavigationProperty Name="assisted_language" Relationship="Self.FK_assisted_language_assisted" FromRole="assisted" ToRole="assisted_language" />
@@ -705,7 +687,7 @@
           <Key>
             <PropertyRef Name="code_availability_assisted" />
           </Key>
-          <Property Name="code_availability_assisted" Type="Int32" Nullable="false" />
+          <Property Name="code_availability_assisted" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="code_availability" Type="Int32" Nullable="false" />
           <Property Name="id_assisted" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="assisted" Relationship="Self.FK_assisted_availability_assisted" FromRole="assisted_availability" ToRole="assisted" />
@@ -759,17 +741,7 @@
           </Key>
           <Property Name="code_car_license" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="car_license_volunteer" Relationship="Self.FK_car_license_volunteer_car_license" FromRole="car_license" ToRole="car_license_volunteer" />
-        </EntityType>
-        <EntityType Name="car_license_volunteer">
-          <Key>
-            <PropertyRef Name="code_car_license_volunteer" />
-          </Key>
-          <Property Name="code_car_license_volunteer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="code_car_license" Type="Int32" Nullable="false" />
-          <Property Name="id_volunteer" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="car_license" Relationship="Self.FK_car_license_volunteer_car_license" FromRole="car_license_volunteer" ToRole="car_license" />
-          <NavigationProperty Name="volunteer" Relationship="Self.FK_car_license_volunteer_volunteer1" FromRole="car_license_volunteer" ToRole="volunteer" />
+          <NavigationProperty Name="volunteer" Relationship="Self.FK_volunteer_car_license" FromRole="car_license" ToRole="volunteer" />
         </EntityType>
         <EntityType Name="city">
           <Key>
@@ -777,7 +749,8 @@
           </Key>
           <Property Name="code_city" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name_city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="volunteer" Relationship="Self.FK_volunteer_city1" FromRole="city" ToRole="volunteer" />
+          <NavigationProperty Name="assisted" Relationship="Self.FK_assisted_city" FromRole="city" ToRole="assisted" />
+          <NavigationProperty Name="volunteer" Relationship="Self.FK_volunteer_city" FromRole="city" ToRole="volunteer" />
         </EntityType>
         <EntityType Name="days">
           <Key>
@@ -838,6 +811,16 @@
           <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="availability" Relationship="Self.FK_availability_shifts" FromRole="shifts" ToRole="availability" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="training">
           <Key>
             <PropertyRef Name="code_training" />
@@ -876,19 +859,22 @@
           <Property Name="code_service" Type="Int32" Nullable="false" />
           <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="release_date" Type="DateTime" Precision="3" />
+          <Property Name="release_date" Type="DateTime" Precision="0" />
+          <Property Name="validityc" Type="DateTime" Precision="0" />
+          <Property Name="validityw" Type="DateTime" Precision="0" />
+          <Property Name="code_weapons_license" Type="Int32" Nullable="false" />
+          <Property Name="code_car_license" Type="Int32" Nullable="false" />
+          <Property Name="description_service" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="availability_volunteer" Relationship="Self.FK_availability_volunteer_volunteer" FromRole="volunteer" ToRole="availability_volunteer" />
-          <NavigationProperty Name="car_license_volunteer" Relationship="Self.FK_car_license_volunteer_volunteer1" FromRole="volunteer" ToRole="car_license_volunteer" />
-          <NavigationProperty Name="city" Relationship="Self.FK_volunteer_city1" FromRole="volunteer" ToRole="city" />
+          <NavigationProperty Name="car_license" Relationship="Self.FK_volunteer_car_license" FromRole="volunteer" ToRole="car_license" />
+          <NavigationProperty Name="city" Relationship="Self.FK_volunteer_city" FromRole="volunteer" ToRole="city" />
           <NavigationProperty Name="gender" Relationship="Self.FK_volunteer_gender" FromRole="volunteer" ToRole="gender" />
           <NavigationProperty Name="personal_status" Relationship="Self.FK_volunteer_personal_status" FromRole="volunteer" ToRole="personal_status" />
           <NavigationProperty Name="services" Relationship="Self.FK_volunteer_services" FromRole="volunteer" ToRole="services" />
           <NavigationProperty Name="training_volunteer" Relationship="Self.FK_training_volunteer_volunteer1" FromRole="volunteer" ToRole="training_volunteer" />
           <NavigationProperty Name="volunteer_domain" Relationship="Self.FK_volunteer_domain_volunteer" FromRole="volunteer" ToRole="volunteer_domain" />
           <NavigationProperty Name="volunteer_language" Relationship="Self.FK_volunteer_language_volunteer" FromRole="volunteer" ToRole="volunteer_language" />
-          <NavigationProperty Name="weapons_license_volunteer" Relationship="Self.FK_weapons_license_volunteer_volunteer" FromRole="volunteer" ToRole="weapons_license_volunteer" />
-          <Property Name="validityc" Type="DateTime" Precision="3" />
-          <Property Name="validityw" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="weapons_license" Relationship="Self.FK_volunteer_weapons_license" FromRole="volunteer" ToRole="weapons_license" />
         </EntityType>
         <EntityType Name="volunteer_domain">
           <Key>
@@ -927,17 +913,7 @@
           </Key>
           <Property Name="code_weapons_license" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="weapons_license_volunteer" Relationship="Self.FK_weapons_license_volunteer_weapons_license" FromRole="weapons_license" ToRole="weapons_license_volunteer" />
-        </EntityType>
-        <EntityType Name="weapons_license_volunteer">
-          <Key>
-            <PropertyRef Name="code_weapons_license_volunteer" />
-          </Key>
-          <Property Name="code_weapons_license_volunteer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="code_weapons_license" Type="Int32" Nullable="false" />
-          <Property Name="id_volunteer" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="volunteer" Relationship="Self.FK_weapons_license_volunteer_volunteer" FromRole="weapons_license_volunteer" ToRole="volunteer" />
-          <NavigationProperty Name="weapons_license" Relationship="Self.FK_weapons_license_volunteer_weapons_license" FromRole="weapons_license_volunteer" ToRole="weapons_license" />
+          <NavigationProperty Name="volunteer" Relationship="Self.FK_volunteer_weapons_license" FromRole="weapons_license" ToRole="volunteer" />
         </EntityType>
         <Association Name="FK_assisted_availability_assisted">
           <End Role="assisted" Type="Self.assisted" Multiplicity="1" />
@@ -948,6 +924,18 @@
             </Principal>
             <Dependent Role="assisted_availability">
               <PropertyRef Name="id_assisted" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_assisted_city">
+          <End Role="city" Type="Self.city" Multiplicity="1" />
+          <End Role="assisted" Type="Self.assisted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="city">
+              <PropertyRef Name="code_city" />
+            </Principal>
+            <Dependent Role="assisted">
+              <PropertyRef Name="code_city" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1083,31 +1071,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_car_license_volunteer_car_license">
+        <Association Name="FK_volunteer_car_license">
           <End Role="car_license" Type="Self.car_license" Multiplicity="1" />
-          <End Role="car_license_volunteer" Type="Self.car_license_volunteer" Multiplicity="*" />
+          <End Role="volunteer" Type="Self.volunteer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="car_license">
               <PropertyRef Name="code_car_license" />
             </Principal>
-            <Dependent Role="car_license_volunteer">
+            <Dependent Role="volunteer">
               <PropertyRef Name="code_car_license" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_car_license_volunteer_volunteer1">
-          <End Role="volunteer" Type="Self.volunteer" Multiplicity="1" />
-          <End Role="car_license_volunteer" Type="Self.car_license_volunteer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="volunteer">
-              <PropertyRef Name="id_volunteer" />
-            </Principal>
-            <Dependent Role="car_license_volunteer">
-              <PropertyRef Name="id_volunteer" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_volunteer_city1">
+        <Association Name="FK_volunteer_city">
           <End Role="city" Type="Self.city" Multiplicity="1" />
           <End Role="volunteer" Type="Self.volunteer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1227,15 +1203,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_weapons_license_volunteer_volunteer">
-          <End Role="volunteer" Type="Self.volunteer" Multiplicity="1" />
-          <End Role="weapons_license_volunteer" Type="Self.weapons_license_volunteer" Multiplicity="*" />
+        <Association Name="FK_volunteer_weapons_license">
+          <End Role="weapons_license" Type="Self.weapons_license" Multiplicity="1" />
+          <End Role="volunteer" Type="Self.volunteer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="volunteer">
-              <PropertyRef Name="id_volunteer" />
+            <Principal Role="weapons_license">
+              <PropertyRef Name="code_weapons_license" />
             </Principal>
-            <Dependent Role="weapons_license_volunteer">
-              <PropertyRef Name="id_volunteer" />
+            <Dependent Role="volunteer">
+              <PropertyRef Name="code_weapons_license" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1251,18 +1227,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_weapons_license_volunteer_weapons_license">
-          <End Role="weapons_license" Type="Self.weapons_license" Multiplicity="1" />
-          <End Role="weapons_license_volunteer" Type="Self.weapons_license_volunteer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="weapons_license">
-              <PropertyRef Name="code_weapons_license" />
-            </Principal>
-            <Dependent Role="weapons_license_volunteer">
-              <PropertyRef Name="code_weapons_license" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Progect_lEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="assisted" EntityType="Self.assisted" />
           <EntitySet Name="assisted_availability" EntityType="Self.assisted_availability" />
@@ -1271,7 +1235,6 @@
           <EntitySet Name="availability" EntityType="Self.availability" />
           <EntitySet Name="availability_volunteer" EntityType="Self.availability_volunteer" />
           <EntitySet Name="car_license" EntityType="Self.car_license" />
-          <EntitySet Name="car_license_volunteer" EntityType="Self.car_license_volunteer" />
           <EntitySet Name="city" EntityType="Self.city" />
           <EntitySet Name="days" EntityType="Self.days" />
           <EntitySet Name="domain" EntityType="Self.domain" />
@@ -1280,6 +1243,7 @@
           <EntitySet Name="personal_status" EntityType="Self.personal_status" />
           <EntitySet Name="services" EntityType="Self.services" />
           <EntitySet Name="shifts" EntityType="Self.shifts" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="training" EntityType="Self.training" />
           <EntitySet Name="training_volunteer" EntityType="Self.training_volunteer" />
           <EntitySet Name="volunteer" EntityType="Self.volunteer" />
@@ -1287,10 +1251,13 @@
           <EntitySet Name="volunteer_language" EntityType="Self.volunteer_language" />
           <EntitySet Name="volunteering_domain" EntityType="Self.volunteering_domain" />
           <EntitySet Name="weapons_license" EntityType="Self.weapons_license" />
-          <EntitySet Name="weapons_license_volunteer" EntityType="Self.weapons_license_volunteer" />
           <AssociationSet Name="FK_assisted_availability_assisted" Association="Self.FK_assisted_availability_assisted">
             <End Role="assisted" EntitySet="assisted" />
             <End Role="assisted_availability" EntitySet="assisted_availability" />
+          </AssociationSet>
+          <AssociationSet Name="FK_assisted_city" Association="Self.FK_assisted_city">
+            <End Role="city" EntitySet="city" />
+            <End Role="assisted" EntitySet="assisted" />
           </AssociationSet>
           <AssociationSet Name="FK_assisted_domain_assisted" Association="Self.FK_assisted_domain_assisted">
             <End Role="assisted" EntitySet="assisted" />
@@ -1336,15 +1303,11 @@
             <End Role="volunteer" EntitySet="volunteer" />
             <End Role="availability_volunteer" EntitySet="availability_volunteer" />
           </AssociationSet>
-          <AssociationSet Name="FK_car_license_volunteer_car_license" Association="Self.FK_car_license_volunteer_car_license">
+          <AssociationSet Name="FK_volunteer_car_license" Association="Self.FK_volunteer_car_license">
             <End Role="car_license" EntitySet="car_license" />
-            <End Role="car_license_volunteer" EntitySet="car_license_volunteer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_car_license_volunteer_volunteer1" Association="Self.FK_car_license_volunteer_volunteer1">
             <End Role="volunteer" EntitySet="volunteer" />
-            <End Role="car_license_volunteer" EntitySet="car_license_volunteer" />
           </AssociationSet>
-          <AssociationSet Name="FK_volunteer_city1" Association="Self.FK_volunteer_city1">
+          <AssociationSet Name="FK_volunteer_city" Association="Self.FK_volunteer_city">
             <End Role="city" EntitySet="city" />
             <End Role="volunteer" EntitySet="volunteer" />
           </AssociationSet>
@@ -1384,17 +1347,13 @@
             <End Role="volunteer" EntitySet="volunteer" />
             <End Role="volunteer_language" EntitySet="volunteer_language" />
           </AssociationSet>
-          <AssociationSet Name="FK_weapons_license_volunteer_volunteer" Association="Self.FK_weapons_license_volunteer_volunteer">
+          <AssociationSet Name="FK_volunteer_weapons_license" Association="Self.FK_volunteer_weapons_license">
+            <End Role="weapons_license" EntitySet="weapons_license" />
             <End Role="volunteer" EntitySet="volunteer" />
-            <End Role="weapons_license_volunteer" EntitySet="weapons_license_volunteer" />
           </AssociationSet>
           <AssociationSet Name="FK_volunteer_domain_volunteering_domain" Association="Self.FK_volunteer_domain_volunteering_domain">
             <End Role="volunteering_domain" EntitySet="volunteering_domain" />
             <End Role="volunteer_domain" EntitySet="volunteer_domain" />
-          </AssociationSet>
-          <AssociationSet Name="FK_weapons_license_volunteer_weapons_license" Association="Self.FK_weapons_license_volunteer_weapons_license">
-            <End Role="weapons_license" EntitySet="weapons_license" />
-            <End Role="weapons_license_volunteer" EntitySet="weapons_license_volunteer" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -1477,15 +1436,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="car_license_volunteer">
-            <EntityTypeMapping TypeName="Progect_lModel.car_license_volunteer">
-              <MappingFragment StoreEntitySet="car_license_volunteer">
-                <ScalarProperty Name="code_car_license_volunteer" ColumnName="code_car_license_volunteer" />
-                <ScalarProperty Name="code_car_license" ColumnName="code_car_license" />
-                <ScalarProperty Name="id_volunteer" ColumnName="id_volunteer" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="city">
             <EntityTypeMapping TypeName="Progect_lModel.city">
               <MappingFragment StoreEntitySet="city">
@@ -1550,6 +1500,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Progect_lModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="training">
             <EntityTypeMapping TypeName="Progect_lModel.training">
               <MappingFragment StoreEntitySet="training">
@@ -1570,8 +1531,6 @@
           <EntitySetMapping Name="volunteer">
             <EntityTypeMapping TypeName="Progect_lModel.volunteer">
               <MappingFragment StoreEntitySet="volunteer">
-                <ScalarProperty Name="validityw" ColumnName="validityw" />
-                <ScalarProperty Name="validityc" ColumnName="validityc" />
                 <ScalarProperty Name="id_volunteer" ColumnName="id_volunteer" />
                 <ScalarProperty Name="firstName_volunteer" ColumnName="firstName_volunteer" />
                 <ScalarProperty Name="lastName_volunteer" ColumnName="lastName_volunteer" />
@@ -1589,6 +1548,11 @@
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="release_date" ColumnName="release-date" />
+                <ScalarProperty Name="validityc" ColumnName="validityc" />
+                <ScalarProperty Name="validityw" ColumnName="validityw" />
+                <ScalarProperty Name="code_weapons_license" ColumnName="code_weapons_license" />
+                <ScalarProperty Name="code_car_license" ColumnName="code_car_license" />
+                <ScalarProperty Name="description_service" ColumnName="description_service" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1624,15 +1588,6 @@
               <MappingFragment StoreEntitySet="weapons_license">
                 <ScalarProperty Name="code_weapons_license" ColumnName="code_weapons_license" />
                 <ScalarProperty Name="description" ColumnName="description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="weapons_license_volunteer">
-            <EntityTypeMapping TypeName="Progect_lModel.weapons_license_volunteer">
-              <MappingFragment StoreEntitySet="weapons_license_volunteer">
-                <ScalarProperty Name="code_weapons_license_volunteer" ColumnName="code_weapons_license_volunteer" />
-                <ScalarProperty Name="code_weapons_license" ColumnName="code_weapons_license" />
-                <ScalarProperty Name="id_volunteer" ColumnName="id_volunteer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
