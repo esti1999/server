@@ -35,18 +35,18 @@ namespace BL
                         db.assisted_language.Add(l);
                     }
 
-                    List<assisted_domain> dList = new List<assisted_domain>();
-                    foreach (string item in assisted.domain)
-                    {
-                        assisted_domain a_d = new assisted_domain();
-                        a_d.id_assisted = assisted.id_assisted;
-                        a_d.code_volunteering = db.volunteering_domain.Where(x => x.description == item).Select(s => s.code_volunteering).FirstOrDefault();
-                        dList.Add(a_d);
-                    }
-                    foreach (assisted_domain item in dList)
-                    {
-                        db.assisted_domain.Add(item);
-                    }
+                    //List<assisted_domain> dList = new List<assisted_domain>();
+                    //foreach (string item in assisted.domain)
+                    //{
+                    //    assisted_domain a_d = new assisted_domain();
+                    //    a_d.id_assisted = assisted.id_assisted;
+                    //    a_d.code_volunteering = db.volunteering_domain.Where(x => x.description == item).Select(s => s.code_volunteering).FirstOrDefault();
+                    //    dList.Add(a_d);
+                    //}
+                    //foreach (assisted_domain item in dList)
+                    //{
+                    //    db.assisted_domain.Add(item);
+                    //}
 
                     //var aval = db.availability.Where(x => x.code_day == assisted.availability.code_day && x.code_shift == assisted.availability.code_shift).FirstOrDefault();
                     //assisted_availability availability = new assisted_availability();
@@ -80,18 +80,18 @@ namespace BL
                         db.assisted_language.Add(l);
                     }
                     db.assisted.Add(Assisted.convertassistedentitytoassistedtable(assisted));
-                    List<assisted_domain> dList = new List<assisted_domain>();
-                    foreach (string item in assisted.domain)
-                    {
-                        assisted_domain vvo = new assisted_domain();
-                        vvo.id_assisted = assisted.id_assisted;
-                        vvo.code_volunteering = db.volunteering_domain.Where(x => x.description == item).Select(s => s.code_volunteering).FirstOrDefault();
-                        dList.Add(vvo);
-                    }
-                    foreach (assisted_domain item in dList)
-                    {
-                        db.assisted_domain.Add(item);
-                    }
+                    //List<assisted_domain> dList = new List<assisted_domain>();
+                    //foreach (string item in assisted.domain)
+                    //{
+                    //    assisted_domain vvo = new assisted_domain();
+                    //    vvo.id_assisted = assisted.id_assisted;
+                    //    vvo.code_volunteering = db.volunteering_domain.Where(x => x.description == item).Select(s => s.code_volunteering).FirstOrDefault();
+                    //    dList.Add(vvo);
+                    //}
+                    //foreach (assisted_domain item in dList)
+                    //{
+                    //    db.assisted_domain.Add(item);
+                    //}
                     //var aval = db.availability.Where(x => x.code_day == assisted.availability.code_day && x.code_shift == assisted.availability.code_shift).FirstOrDefault();
                     //assisted_availability availability = new assisted_availability();
                     //availability.code_availability = aval.code_availability;

@@ -41,11 +41,12 @@ namespace BL
             db.SaveChanges();
             return Domain.convertdomaintabletolistdomainentity(db.domain.ToList());
         }
-        public static List<VolunteeringDomain> GetVolunteeringByDomain(int code_domain)
+        public static List<VolunteeringDomain> GetVolunteeringDomain(int code_domain)
         {
             try
             {
-                List<volunteering_domain> volunteerings = db.volunteering_domain.Where(x => x.code_domain == code_domain).ToList();
+                List<volunteering_domain> volunteerings = new List<volunteering_domain>();
+                 volunteerings = db.volunteering_domain.Where(x => x.code_domain == code_domain).ToList();
                 return VolunteeringDomain.convertvolunteeringdomaintabletolistvolunteeringdomainentity(volunteerings);
             }
             catch (Exception)
@@ -54,7 +55,7 @@ namespace BL
             }
         }
 
-        public static List<Domain> GetVolunteeringDomain()
+        public static List<Domain> GetDomain()
         {
             Progect_lEntities db = new Progect_lEntities();
             List<Domain> list = new List<Domain>();

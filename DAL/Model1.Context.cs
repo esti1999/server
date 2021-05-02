@@ -32,13 +32,14 @@ namespace DAL
         public virtual DbSet<availability> availability { get; set; }
         public virtual DbSet<availability_volunteer> availability_volunteer { get; set; }
         public virtual DbSet<car_license> car_license { get; set; }
-        public virtual DbSet<car_license_volunteer> car_license_volunteer { get; set; }
         public virtual DbSet<city> city { get; set; }
+        public virtual DbSet<days> days { get; set; }
         public virtual DbSet<domain> domain { get; set; }
         public virtual DbSet<gender> gender { get; set; }
         public virtual DbSet<language> language { get; set; }
         public virtual DbSet<personal_status> personal_status { get; set; }
         public virtual DbSet<services> services { get; set; }
+        public virtual DbSet<shifts> shifts { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<training> training { get; set; }
         public virtual DbSet<training_volunteer> training_volunteer { get; set; }
@@ -47,8 +48,5 @@ namespace DAL
         public virtual DbSet<volunteer_language> volunteer_language { get; set; }
         public virtual DbSet<volunteering_domain> volunteering_domain { get; set; }
         public virtual DbSet<weapons_license> weapons_license { get; set; }
-        public virtual DbSet<weapons_license_volunteer> weapons_license_volunteer { get; set; }
-        public virtual DbSet<days> days { get; set; }
-        public virtual DbSet<shifts> shifts { get; set; }
     }
 }

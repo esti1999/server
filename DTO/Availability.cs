@@ -12,7 +12,7 @@ namespace DTO
         public int code_availability { get; set; }
         public int code_day { get; set; }
         public int code_shift { get; set;  }
-        public bool isSelected { get; set; }
+        public bool IsSelected { get; set; }
 
 
         public static Availability convertavailabilitytabletoavailabilityentity(availability a)

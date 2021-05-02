@@ -12,6 +12,7 @@ namespace DTO
         public int code_volunteer_domain { get; set; }
         public int code_volunteering { get; set; }
         public string id_volunteer { get; set; }
+      
 
         public static VolunteerDomain convertvolunteerdomaintabletovolunteerdomainentity(volunteer_domain v)
         {

@@ -28,13 +28,13 @@ namespace DTO
         public Nullable<System.DateTime> release_date { get; set; }
         public Nullable<System.DateTime> validityc { get; set; }
         public Nullable<System.DateTime> validityw { get; set; }
-        public Nullable<int> code_weapons_license { get; set; }
-        public Nullable<int> code_car_license { get; set; }
+        public int code_weapons_license { get; set; }
+        public int code_car_license { get; set; }
         public List<Language> languages { get; set; }
         public List<VolunteeringDomain> volunteeringdomains { get; set; }
         public Availability availability { get; set; }
         public List<Availability> availabilitys { get; set; }
-
+        public string description_service { get; set; }
 
         public static Volunteer convertvolunteertabletovolunteerentity(volunteer v)
         {
@@ -61,14 +61,15 @@ namespace DTO
                 validityc=v.validityc,
                 validityw=v.validityw,
                 code_weapons_license=v.code_weapons_license,
-                code_car_license=v.code_weapons_license
+                code_car_license=v.code_weapons_license,
+                description_service=v.description_service
 
 
             };
             return v1;
         }
 
-        public static List<volunteer_language> ConvertLanguageEntityListToVolenteerLanguage(List<Language> languages,string volunteerId)
+        public static List<volunteer_language> ConvertLanguageEntityListToVolunteerLanguage(List<Language> languages,string volunteerId)
         {
             List<volunteer_language> vlList = new List<volunteer_language>();
             foreach(Language l in languages)
@@ -79,18 +80,32 @@ namespace DTO
                     vl.id_volunteer = volunteerId;
                     vl.code_language = l.code_language;
                     vlList.Add(vl);
-
                 }
             }
             return vlList;
         }
 
-        public static List<availability_volunteer> ConvertAvailabilityEntityListToVolenteerAvailability(List<Availability> availabilitys, string volunteerId)
+        public static List<volunteer_domain> ConvertVolunteeringDomainEntityListToVolunteerDomain(List<VolunteeringDomain> volunteeringdomains, string volunteerId)
+        {
+            List<volunteer_domain> vdList = new List<volunteer_domain>();
+            foreach (VolunteeringDomain d in volunteeringdomains)
+            {
+                if (d.IsSelected == true)
+                {
+                    volunteer_domain vl = new volunteer_domain();
+                    vl.id_volunteer = volunteerId;
+                    vl.code_volunteering = d.code_volunteering;
+                    vdList.Add(vl);
+                }
+            }
+            return vdList;
+        }
+        public static List<availability_volunteer> ConvertAvailabilityEntityListToVolunteerAvailability(List<Availability> availabilitys, string volunteerId)
         {
             List<availability_volunteer> AvailabilityList = new List<availability_volunteer>();
             foreach (Availability a in availabilitys)
             {
-                if (a.isSelected == true)
+                if (a.IsSelected == true)
                 {
                     availability_volunteer vl = new availability_volunteer();
                     vl.id_volunteer = volunteerId;
@@ -127,7 +142,8 @@ namespace DTO
                 validityc = v.validityc,
                 validityw = v.validityw,
                 code_weapons_license = v.code_weapons_license,
-                code_car_license = v.code_weapons_license
+                code_car_license = v.code_weapons_license,
+                description_service = v.description_service
             };
             return v1;
         }

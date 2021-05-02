@@ -34,10 +34,10 @@ namespace WebApplication4.Controllers
         //    return  BL.DomainBL.GetDomainsLists();
         //}
         [HttpGet]
-        [Route("getVolunteeringByDomain/{code_domain}")]
-        public List<VolunteeringDomain> GetVolunteeringByDomain(int code_domain)
+        [Route("getVolunteeringDomain/{code_domain}")]
+        public List<VolunteeringDomain> GetVolunteeringDomain(int code_domain)
         {
-            return BL.DomainBL.GetVolunteeringByDomain(code_domain);
+            return BL.DomainBL.GetVolunteeringDomain(code_domain);
         }
         // POST: api/VolunteeringDomain
         public void Post([FromBody]string value)
@@ -55,10 +55,10 @@ namespace WebApplication4.Controllers
         }
 
         [HttpGet]
-        [Route("GetVolunteeringDomain")]
-        public List<Domain> GetVolunteeringDomain()
+        [Route("GetDomain")]
+        public List<Domain> GetDomain()
         {
-            return BL.DomainBL.GetVolunteeringDomain();
+            return BL.DomainBL.GetDomain();
         }
     }
 }
