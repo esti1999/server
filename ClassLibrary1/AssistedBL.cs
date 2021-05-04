@@ -35,6 +35,24 @@ namespace BL
                         db.assisted_language.Add(l);
                     }
 
+                    //assisted a1 = Assisted.convertassistedentitytoassistedtable(assisted);
+                    //a.code_city = a1.code_city;
+                    //a.code_gender = a1.code_gender;            
+
+
+                    List<assisted_domain> dList = new List<assisted_domain>();
+                    foreach (string item in assisted.domain)
+                    {
+                        assisted_domain a_d = new assisted_domain();
+                        a_d.id_assisted = assisted.id_assisted;
+                        a_d.code_volunteering = db.volunteering_domain.Where(x => x.description == item).Select(s => s.code_volunteering).FirstOrDefault();
+                        dList.Add(a_d);
+                    }
+                    foreach (assisted_domain item in dList)
+                    {
+                        db.assisted_domain.Add(item);
+                    }
+
                     //List<assisted_domain> dList = new List<assisted_domain>();
                     //foreach (string item in assisted.domain)
                     //{
@@ -55,16 +73,23 @@ namespace BL
                     //assisted_availability a_v = db.assisted_availability.Where(x => x.id_assisted == availability.id_assisted).FirstOrDefault();
                     //a_v.code_availability = availability.code_availability;
 
-                    assisted a1 = Assisted.convertassistedentitytoassistedtable(assisted);             
+                    assisted a1 = Assisted.convertassistedentitytoassistedtable(assisted);      
                     a.id_assisted = a1.id_assisted;
                     a.first_name = a1.first_name;
                     a.last_name = a1.last_name;
                     a.date_birth = a1.date_birth;
                     a.code_gender = a1.code_gender;
                     a.code_city = a1.code_city;
+
                     a.code_status = a1.code_status;
                     a.e_mail = a1.e_mail;
+
+                    a.first_name = a1.first_name;
+                    a.id_assisted = a1.id_assisted;
+                    a.last_name = a1.last_name;
+
                     a.street = a1.street;
+
                     a.number_building = a1.number_building;
                     a.number_floor = a1.number_floor;
                     a.number_house = a1.number_house;

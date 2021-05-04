@@ -57,22 +57,45 @@ namespace DTO
                 number_floor = v.number_floor,
                 phone = v.phone,
                 password = v.password,
-                release_date = v.release_date,
-                validityc=v.validityc,
-                validityw=v.validityw,
-                code_weapons_license=v.code_weapons_license,
-                code_car_license=v.code_weapons_license,
-                description_service=v.description_service
-
 
             };
+
+            if (v.release_date.HasValue)
+            {
+                v1.release_date = v.release_date.Value;
+            }
+
+            if(v.validityc.HasValue)
+            {
+                v1.validityc = v.validityc.Value;
+            }
+            
+            if( v.validityw.HasValue)
+            {
+                v1.validityw = v.validityw.Value;
+            }
+             
+            if(v.code_weapons_license.HasValue)
+            {
+                v1.code_weapons_license = v.code_weapons_license.Value;
+            }
+
+            if(v.code_car_license.HasValue)
+            {
+                v1.code_car_license = v.code_car_license.Value;
+            }
+            
+          
+            //description_service = v.description_service
             return v1;
         }
+
+
 
         public static List<volunteer_language> ConvertLanguageEntityListToVolunteerLanguage(List<Language> languages,string volunteerId)
         {
             List<volunteer_language> vlList = new List<volunteer_language>();
-            foreach(Language l in languages)
+            foreach (Language l in languages)
             {
                 if (l.IsSelected == true)
                 {
@@ -119,7 +142,6 @@ namespace DTO
 
         public static volunteer convertvolunteerentitytovolunteertable(Volunteer v)
         {
-
             volunteer v1 = new volunteer()
             {
                 id_volunteer = v.id_volunteer,
@@ -139,35 +161,53 @@ namespace DTO
                 phone = v.phone,
                 password = v.password,
                 release_date = v.release_date,
+
                 validityc = v.validityc,
                 validityw = v.validityw,
+  
+
+
                 code_weapons_license = v.code_weapons_license,
                 code_car_license = v.code_weapons_license,
                 description_service = v.description_service
             };
+            if (v1.code_car_license == 0)
+            {
+                v1.code_car_license = null;
+            }
+            if (v1.code_weapons_license == 0)
+            {
+                v1.code_weapons_license = null;
+            }
             return v1;
         }
         public static List<Volunteer> convertvolunteertabletolistvolunteerentity(List<volunteer> vl)
         {
             List<Volunteer> v1 = new List<Volunteer>();
-            foreach (var item in vl)
-            {
-                v1.Add(convertvolunteertabletovolunteerentity(item));
-            }
-            return v1;
+          
+
+                foreach (var item in vl)
+                {
+                    v1.Add(convertvolunteertabletovolunteerentity(item));
+                }
+                return v1;
         }
         public static List<volunteer> convertvolunteerentitytolistvolunteertable(List<Volunteer> vl)
         {
-            List<volunteer> v1 = new List<volunteer>();
-            foreach (var item in vl)
-            {
-                v1.Add(convertvolunteerentitytovolunteertable(item));
-            }
-            return v1;
+                List<volunteer> v1 = new List<volunteer>();
+                foreach (var item in vl)
+                {
+                    v1.Add(convertvolunteerentitytovolunteertable(item));
+                }
+                return v1;
         }
+          
     }
 }
-        
-    
+
+
+
+
+
 
 

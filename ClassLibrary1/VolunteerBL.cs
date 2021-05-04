@@ -94,6 +94,25 @@ namespace BL
                     //    db.volunteer_language.Add(l);
                     //}
 
+                    //volunteer v1 = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
+
+
+                    //foreach (volunteer_domain item in dList)
+                    //{
+                    //    List<availability_volunteer> AvailabilityList = Volunteer.ConvertAvailabilityEntityListToVolenteerAvailability(volunteer.availabilitys, volunteer.id_volunteer);
+                    //    foreach (availability_volunteer a in AvailabilityList)
+
+                    //    {
+                    //        db.availability_volunteer.Add(a);
+                    //    }
+                    //}
+
+                        var aval = db.availability.Where(x => x.code_day == volunteer.availability.code_day && x.code_shift == volunteer.availability.code_shift).FirstOrDefault();
+                    availability_volunteer availability = new availability_volunteer();
+                    availability.code_availability = aval.code_availability;
+                    availability.id_volunteer = volunteer.id_volunteer;
+                    availability_volunteer a_v = db.availability_volunteer.Where(x => x.id_volunteer == availability.id_volunteer).FirstOrDefault();
+                    a_v.code_availability = availability.code_availability;
                     List<availability_volunteer> aList = new List<availability_volunteer>();
                     List<availability_volunteer> vaList = db.availability_volunteer.Where(x => x.id_volunteer == volunteer.id_volunteer).ToList();
                     foreach (Availability item in volunteer.availabilitys)
@@ -128,8 +147,18 @@ namespace BL
                     //}
 
 
+
                     volunteer v1 = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
                    
+                    v.bulding_number = v1.bulding_number;
+                    v.code_city = v1.code_city;
+                    v.code_gender = v1.code_gender;
+                    v.code_service = v1.code_service;
+                    v.code_status = v1.code_status;
+                    v.date_of_birth = v1.date_of_birth;
+                    v.e_mail = v1.e_mail;
+                    v.firstName_volunteer = v1.firstName_volunteer;
+                    v.house_number = v1.house_number;
                     v.id_volunteer = v1.id_volunteer;
                     v.firstName_volunteer = v1.firstName_volunteer;
                     v.lastName_volunteer = v1.lastName_volunteer;
@@ -209,13 +238,12 @@ namespace BL
                     {
                         db.availability_volunteer.Add(a);
                     }
-                    //var aval = db.availability.Where(x => x.code_day == volunteer.availabilitys.code_day && x.code_shift == volunteer.availabilitys.code_shift).FirstOrDefault();
-                    //availability_volunteer availability = new availability_volunteer();
-                    //availability.code_availability = aval.code_availability;
-                    //availability.id_volunteer = volunteer.id_volunteer;
-                    //db.availability_volunteer.Add(availability);
-                    //db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
-
+                    var aval = db.availability.Where(x => x.code_day == volunteer.availability.code_day && x.code_shift == volunteer.availability.code_shift).FirstOrDefault();
+                    availability_volunteer availability = new availability_volunteer();
+                    availability.code_availability = aval.code_availability;
+                    availability.id_volunteer = volunteer.id_volunteer;
+                    db.availability_volunteer.Add(availability);
+                    db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
                 }
                 db.SaveChanges();
             }
@@ -228,12 +256,7 @@ namespace BL
             return true;
         }
 
-    
 
-        //public static List<Language> GetLanguages()
-        //{
-        //    return db.language.ToList();
-        //}
 
         public static List<Volunteer> RemoveVolunteer(string id_volunteer)
         {
@@ -392,6 +415,24 @@ namespace BL
             }
             return list5;
         }
+
+        public static List<Availability> GetAvailabilitys()
+        {
+            List<Availability> availabilitys = new List<Availability>();
+            var days = db.days.ToList();
+            var shifts = db.shifts.ToList();
+            foreach (availability item in db.availability)
+            {
+                availabilitys.Add(new Availability {
+                    code_day = item.code_day,
+                    day_description= days.FirstOrDefault(x=>x.code_day==item.code_day).description,
+                    shift_description= shifts.FirstOrDefault(x => x.code_shift == item.code_shift).description,
+                    code_shift = item.code_shift,
+                    IsSelected = false });
+            }
+            return availabilitys;
+        }
+
         public static List<City> GetCity()
         {
             Progect_lEntities db = new Progect_lEntities();

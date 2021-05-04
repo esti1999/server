@@ -1,14 +1,16 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
 
 namespace DTO
 {
-   public  class Shift
-   {
+    public class Shift
+    {
+        
+   
         public int code_shift { get; set; }
         public string description { get; set; }
 

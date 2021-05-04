@@ -1,14 +1,15 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
 
 namespace DTO
 {
-   public  class Days
-   {
+    public class Days
+    {
+
         public int code_day { get; set; }
         public string description { get; set; }
 

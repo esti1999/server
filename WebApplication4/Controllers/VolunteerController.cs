@@ -99,6 +99,13 @@ namespace WebApplication4.Controllers
             return BL.VolunteerBL.GetLanguage();
         }
         [HttpGet]
+        [Route("GetAvailabilitys")]
+        public List<Availability> GetAvailabilitys()
+        {
+            return BL.VolunteerBL.GetAvailabilitys();
+        }
+
+        [HttpGet]
         [Route("GetCity")]
         public List<City> GetCity()
         {

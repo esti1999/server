@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e2ec85895f764842b42e6a904a07494f" Name="Diagram1" ZoomLevel="50">
+      <Diagram DiagramId="e2ec85895f764842b42e6a904a07494f" Name="Diagram1">
         <EntityTypeShape EntityType="Progect_lModel.assisted" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Progect_lModel.assisted_availability" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="Progect_lModel.assisted_domain" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
@@ -29,6 +29,7 @@
         <EntityTypeShape EntityType="Progect_lModel.volunteering_domain" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="Progect_lModel.weapons_license" Width="1.5" PointX="9.75" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="Progect_lModel.FK_assisted_availability_assisted" ManuallyRouted="false" />
+        <AssociationConnector Association="Progect_lModel.FK_assisted_city" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_assisted_domain_assisted" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_assisted_gender" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_assisted_language_assisted" ManuallyRouted="false" />
@@ -40,20 +41,19 @@
         <AssociationConnector Association="Progect_lModel.FK_availability_shifts" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_availability_volunteer_availability" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_availability_volunteer_volunteer" ManuallyRouted="false" />
+        <AssociationConnector Association="Progect_lModel.FK_volunteer_car_license" ManuallyRouted="false" />
+        <AssociationConnector Association="Progect_lModel.FK_volunteer_city" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_volunteering_domain_domain" ManuallyRouted="false" />
+        <AssociationConnector Association="Progect_lModel.FK_volunteer_gender" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_volunteer_language_language" ManuallyRouted="false" />
+        <AssociationConnector Association="Progect_lModel.FK_volunteer_personal_status" ManuallyRouted="false" />
+        <AssociationConnector Association="Progect_lModel.FK_volunteer_services" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_training_volunteer_training" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_training_volunteer_volunteer1" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_volunteer_domain_volunteer" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_volunteer_language_volunteer" ManuallyRouted="false" />
+        <AssociationConnector Association="Progect_lModel.FK_volunteer_weapons_license" ManuallyRouted="false" />
         <AssociationConnector Association="Progect_lModel.FK_volunteer_domain_volunteering_domain" ManuallyRouted="false" />
-        <AssociationConnector Association="Progect_lModel.FK_assisted_city" />
-        <AssociationConnector Association="Progect_lModel.FK_volunteer_city" />
-        <AssociationConnector Association="Progect_lModel.FK_volunteer_gender" />
-        <AssociationConnector Association="Progect_lModel.FK_volunteer_personal_status" />
-        <AssociationConnector Association="Progect_lModel.FK_volunteer_services" />
-        <AssociationConnector Association="Progect_lModel.FK_volunteer_car_license" />
-        <AssociationConnector Association="Progect_lModel.FK_volunteer_weapons_license" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
