@@ -42,8 +42,8 @@ namespace DAL
         public Nullable<System.DateTime> release_date { get; set; }
         public Nullable<System.DateTime> validityc { get; set; }
         public Nullable<System.DateTime> validityw { get; set; }
-        public int code_weapons_license { get; set; }
-        public int code_car_license { get; set; }
+        public Nullable<int> code_weapons_license { get; set; }
+        public Nullable<int> code_car_license { get; set; }
         public string description_service { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

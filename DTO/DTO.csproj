@@ -51,9 +51,9 @@
     <Compile Include="AssistedDomain.cs" />
     <Compile Include="AssistedLanguage.cs" />
     <Compile Include="Availability.cs" />
+    <Compile Include="AvailabilityAssisted.cs" />
     <Compile Include="AvailabilityVolunteer.cs" />
     <Compile Include="CarLicense.cs" />
-    <Compile Include="CarLicenseVolunteer.cs" />
     <Compile Include="City.cs" />
     <Compile Include="Days.cs" />
     <Compile Include="Gender.cs" />
@@ -70,7 +70,6 @@
     <Compile Include="VolunteeringDomain.cs" />
     <Compile Include="VolunteerLanguage.cs" />
     <Compile Include="WeaponsLicense.cs" />
-    <Compile Include="WeaponsLicenseVolunteer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

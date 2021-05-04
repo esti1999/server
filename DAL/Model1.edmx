@@ -12,7 +12,7 @@
           <Property Name="id_assisted" Type="varchar" MaxLength="9" Nullable="false" />
           <Property Name="first_name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="date_birth" Type="datetime" Nullable="false" />
+          <Property Name="date_birth" Type="date" Nullable="false" />
           <Property Name="code_status" Type="int" Nullable="false" />
           <Property Name="code_gender" Type="int" Nullable="false" />
           <Property Name="code_city" Type="int" Nullable="false" />
@@ -23,7 +23,7 @@
           <Property Name="postal_code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="e-mail" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="password" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="assisted_availability">
           <Key>
@@ -160,7 +160,7 @@
           <Property Name="id_volunteer" Type="varchar" MaxLength="9" Nullable="false" />
           <Property Name="firstName_volunteer" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="lastName_volunteer" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="date_of_birth" Type="datetime" Nullable="false" />
+          <Property Name="date_of_birth" Type="date" Nullable="false" />
           <Property Name="code_gender" Type="int" Nullable="false" />
           <Property Name="code_status" Type="int" Nullable="false" />
           <Property Name="code_city" Type="int" Nullable="false" />
@@ -172,12 +172,12 @@
           <Property Name="e-mail" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="code_service" Type="int" Nullable="false" />
           <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="password" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="release-date" Type="date" />
           <Property Name="validityc" Type="date" />
           <Property Name="validityw" Type="date" />
-          <Property Name="code_weapons_license" Type="int" Nullable="false" />
-          <Property Name="code_car_license" Type="int" Nullable="false" />
+          <Property Name="code_weapons_license" Type="int" />
+          <Property Name="code_car_license" Type="int" />
           <Property Name="description_service" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="volunteer_domain">
@@ -392,7 +392,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_volunteer_car_license">
-          <End Role="car_license" Type="Self.car_license" Multiplicity="1" />
+          <End Role="car_license" Type="Self.car_license" Multiplicity="0..1" />
           <End Role="volunteer" Type="Self.volunteer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="car_license">
@@ -500,7 +500,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_volunteer_weapons_license">
-          <End Role="weapons_license" Type="Self.weapons_license" Multiplicity="1" />
+          <End Role="weapons_license" Type="Self.weapons_license" Multiplicity="0..1" />
           <End Role="volunteer" Type="Self.volunteer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="weapons_license">
@@ -664,7 +664,7 @@
           <Property Name="id_assisted" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="date_birth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="date_birth" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="code_status" Type="Int32" Nullable="false" />
           <Property Name="code_gender" Type="Int32" Nullable="false" />
           <Property Name="code_city" Type="Int32" Nullable="false" />
@@ -675,7 +675,7 @@
           <Property Name="postal_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="e_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="assisted_availability" Relationship="Self.FK_assisted_availability_assisted" FromRole="assisted" ToRole="assisted_availability" />
           <NavigationProperty Name="city" Relationship="Self.FK_assisted_city" FromRole="assisted" ToRole="city" />
           <NavigationProperty Name="assisted_domain" Relationship="Self.FK_assisted_domain_assisted" FromRole="assisted" ToRole="assisted_domain" />
@@ -846,7 +846,7 @@
           <Property Name="id_volunteer" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="firstName_volunteer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="lastName_volunteer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="code_gender" Type="Int32" Nullable="false" />
           <Property Name="code_status" Type="Int32" Nullable="false" />
           <Property Name="code_city" Type="Int32" Nullable="false" />
@@ -858,12 +858,12 @@
           <Property Name="e_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="code_service" Type="Int32" Nullable="false" />
           <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="release_date" Type="DateTime" Precision="0" />
           <Property Name="validityc" Type="DateTime" Precision="0" />
           <Property Name="validityw" Type="DateTime" Precision="0" />
-          <Property Name="code_weapons_license" Type="Int32" Nullable="false" />
-          <Property Name="code_car_license" Type="Int32" Nullable="false" />
+          <Property Name="code_weapons_license" Type="Int32" />
+          <Property Name="code_car_license" Type="Int32" />
           <Property Name="description_service" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="availability_volunteer" Relationship="Self.FK_availability_volunteer_volunteer" FromRole="volunteer" ToRole="availability_volunteer" />
           <NavigationProperty Name="car_license" Relationship="Self.FK_volunteer_car_license" FromRole="volunteer" ToRole="car_license" />
@@ -1072,7 +1072,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_volunteer_car_license">
-          <End Role="car_license" Type="Self.car_license" Multiplicity="1" />
+          <End Role="car_license" Type="Self.car_license" Multiplicity="0..1" />
           <End Role="volunteer" Type="Self.volunteer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="car_license">
@@ -1204,7 +1204,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_volunteer_weapons_license">
-          <End Role="weapons_license" Type="Self.weapons_license" Multiplicity="1" />
+          <End Role="weapons_license" Type="Self.weapons_license" Multiplicity="0..1" />
           <End Role="volunteer" Type="Self.volunteer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="weapons_license">
