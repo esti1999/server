@@ -24,6 +24,8 @@ namespace BL
         }
         public static bool AddVolunteer(Volunteer volunteer)
         {
+
+          
             try
             {
                 volunteer v = db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer);
@@ -128,26 +130,62 @@ namespace BL
 
                     volunteer v1 = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
                    
-                    v.bulding_number = v1.bulding_number;
-                    v.code_city = v1.code_city;
-                    v.code_gender = v1.code_gender;
-                    v.code_service = v1.code_service;
-                    v.code_status = v1.code_status;
-                    v.date_of_birth = v1.date_of_birth;
-                    v.e_mail = v1.e_mail;
-                    v.firstName_volunteer = v1.firstName_volunteer;
-                    v.house_number = v1.house_number;
                     v.id_volunteer = v1.id_volunteer;
+                    v.firstName_volunteer = v1.firstName_volunteer;
                     v.lastName_volunteer = v1.lastName_volunteer;
+                    v.date_of_birth = v1.date_of_birth;
+                    v.code_gender = v1.code_gender;
+                    v.code_status = v1.code_status;
+                    v.code_city = v1.code_city;
+                    v.street = v1.street;
+                    v.postal_code = v1.postal_code;
                     v.number_floor = v1.number_floor;
+                    v.house_number = v1.house_number;
+                    v.bulding_number = v1.bulding_number;
                     v.password = v1.password;
                     v.phone = v1.phone;
-                    v.postal_code = v1.postal_code;
+                    v.e_mail = v1.e_mail;
+                    v.code_service = v1.code_service;
+                    v.description_service = v1.description_service;
                     v.release_date = v1.release_date;
-                    v.street = v1.street;
+                    v.code_car_license = v1.code_car_license;
+                    v.code_weapons_license = v1.code_weapons_license;
+                    v.validityc = v1.validityc;
+                    v.validityw = v1.validityw;
+                    v.password = v1.password;
                 }
                 else
                 {
+
+                    volunteer v1 = Volunteer.convertvolunteerentitytovolunteertable(volunteer);
+                    volunteer vo = db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer);
+                    vo.id_volunteer = v1.id_volunteer;
+                    vo.firstName_volunteer = v1.firstName_volunteer;
+                    vo.lastName_volunteer = v1.lastName_volunteer;
+                    vo.date_of_birth = v1.date_of_birth;
+                    vo.code_gender = v1.code_gender;
+                    vo.code_status = v1.code_status;
+                    vo.code_city = v1.code_city;
+                    vo.street = v1.street;
+                    vo.postal_code = v1.postal_code;
+                    vo.number_floor = v1.number_floor;
+                    vo.house_number = v1.house_number;
+                    vo.bulding_number = v1.bulding_number;
+                    vo.password = v1.password;
+                    vo.phone = v1.phone;
+                    vo.e_mail = v1.e_mail;
+                    vo.code_service = v1.code_service;
+                    vo.description_service = v1.description_service;
+                    vo.release_date = v1.release_date;
+                    vo.code_car_license = v1.code_car_license;
+                    vo.code_weapons_license = v1.code_weapons_license;
+                    vo.validityc = v1.validityc;
+                    vo.validityw = v1.validityw;
+                    vo.password = v1.password;
+                    db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
+                    db.SaveChanges();
+
+
                     // List<volunteer_domain> dList = VolunteerDomain.convertvolunteerdomainentitytolistvolunteerdomaintable(volunteer.domain);
                     List<volunteer_domain> dList = new List<volunteer_domain>();
                     foreach (VolunteeringDomain item in volunteer.volunteeringdomains)
@@ -171,12 +209,13 @@ namespace BL
                     {
                         db.availability_volunteer.Add(a);
                     }
-                    var aval = db.availability.Where(x => x.code_day == volunteer.availability.code_day && x.code_shift == volunteer.availability.code_shift).FirstOrDefault();
-                    availability_volunteer availability = new availability_volunteer();
-                    availability.code_availability = aval.code_availability;
-                    availability.id_volunteer = volunteer.id_volunteer;
-                    db.availability_volunteer.Add(availability);
-                    db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
+                    //var aval = db.availability.Where(x => x.code_day == volunteer.availabilitys.code_day && x.code_shift == volunteer.availabilitys.code_shift).FirstOrDefault();
+                    //availability_volunteer availability = new availability_volunteer();
+                    //availability.code_availability = aval.code_availability;
+                    //availability.id_volunteer = volunteer.id_volunteer;
+                    //db.availability_volunteer.Add(availability);
+                    //db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
+
                 }
                 db.SaveChanges();
             }
@@ -302,7 +341,7 @@ namespace BL
             List<Availability> lista = new List<Availability>();
             foreach (var item in db.availability)
             {
-                lista.Add(new Availability { code_availability = item.code_availability, code_day = item.code_day, code_shift=item.code_shift });
+                lista.Add(new Availability { code_availability = item.code_availability, code_day = item.code_day, code_shift=item.code_shift, IsSelected = false });
             }
             return lista;
         }

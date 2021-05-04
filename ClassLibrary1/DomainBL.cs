@@ -28,7 +28,6 @@ namespace BL
             return Domain.convertdomaintabletolistdomainentity(db.domain.ToList());
         }
 
-
         public static List<Domain> RemoveDomain(int code_domaim)
         {
             db.domain.Remove(db.domain.FirstOrDefault(x => x.code_domain == code_domaim));

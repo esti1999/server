@@ -12,6 +12,7 @@ namespace DTO
 
         public int code_weapons_license { get; set; }
         public string description { get; set; }
+        public bool IsSelected { get; set; }
 
         public static WeaponsLicense convertweaponslicensetabletoweaponslicenseentity(weapons_license w)
         {
