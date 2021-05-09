@@ -86,6 +86,18 @@ namespace WebApplication4.Controllers
         {
             return BL.VolunteerBL.GetShift();
         }
+        [HttpGet]
+        [Route("GetAvailabilitys")]
+        public List<Availability> GetAvailabilitys()
+        {
+            return BL.AssistedBL.GetAvailabilitys();
+        }
+        [HttpGet]
+        [Route("GetAvailability")]
+        public List<Availability> GetAvailability()
+        {
+            return BL.VolunteerBL.GetAvailability();
+        }
         //[HttpPost("SendMail/{volunteer}")]
         //public IActionResult SendMail(volunteer volunteer, [FromBody]  )
         //{

@@ -25,8 +25,10 @@ namespace DTO
         public string phone { get; set; }
         public string password { get; set; }
         public List<Language> languages { get; set; }
-        public List<string> domain { get; set; }
+        //public List<string> domain { get; set; }
         public Availability availability { get; set; }
+        public List<VolunteeringDomain> volunteeringdomains { get; set; }
+        public List<Availability> availabilitys { get; set; }
 
 
 
@@ -67,6 +69,37 @@ namespace DTO
                 }
             }
             return alList;
+        }
+        public static List<assisted_domain> ConvertVolunteeringDomainEntityListToAssistedDomain(List<VolunteeringDomain> volunteeringdomains, string assistedId)
+        {
+            List<assisted_domain> adList = new List<assisted_domain>();
+            foreach (VolunteeringDomain d in volunteeringdomains)
+            {
+                if (d.IsSelected == true)
+                {
+                    assisted_domain al = new assisted_domain();
+                    al.id_assisted = assistedId;
+                    al.code_volunteering = d.code_volunteering;
+                    adList.Add(al);
+                }
+            }
+            return adList;
+        }
+        public static List<assisted_availability> ConvertAvailabilityEntityListToAssistedAvailability(List<Availability> availabilitys, string assisted_Id)
+        {
+            List<assisted_availability> AvailabilityList = new List<assisted_availability>();
+            foreach (Availability a in availabilitys)
+            {
+                if (a.IsSelected == true)
+                {
+                    assisted_availability al = new assisted_availability();
+                    al.id_assisted = assisted_Id;
+                    al.code_availability = a.code_availability;
+                    AvailabilityList.Add(al);
+
+                }
+            }
+            return AvailabilityList;
         }
         public static assisted convertassistedentitytoassistedtable(Assisted a)
         {

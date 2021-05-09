@@ -74,18 +74,18 @@ namespace DTO
             {
                 v1.validityw = v.validityw.Value;
             }
-             
-            if(v.code_weapons_license.HasValue)
+
+            if (v.code_weapons_license!=null)
             {
-                v1.code_weapons_license = v.code_weapons_license.Value;
+                v1.code_weapons_license = v.code_weapons_license;
             }
 
-            if(v.code_car_license.HasValue)
+            if (v.code_car_license!=null)
             {
-                v1.code_car_license = v.code_car_license.Value;
+                v1.code_car_license = v.code_car_license;
             }
-            
-          
+
+
             //description_service = v.description_service
             return v1;
         }
@@ -161,23 +161,19 @@ namespace DTO
                 phone = v.phone,
                 password = v.password,
                 release_date = v.release_date,
-
                 validityc = v.validityc,
                 validityw = v.validityw,
-  
-
-
                 code_weapons_license = v.code_weapons_license,
                 code_car_license = v.code_weapons_license,
                 description_service = v.description_service
             };
             if (v1.code_car_license == 0)
             {
-                v1.code_car_license = null;
+                v1.code_car_license = 0;
             }
             if (v1.code_weapons_license == 0)
             {
-                v1.code_weapons_license = null;
+                v1.code_weapons_license = 0;
             }
             return v1;
         }
