@@ -12,20 +12,6 @@ namespace WebApplication4.Controllers
     [RoutePrefix("api/assisted")]
     public class AssistedController : ApiController
     {
-        // GET: api/Assisted
-        [Route("get")]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/Assisted/5
-        [Route("get/{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         [HttpPost]
         [Route("embededAssisted")]
         public bool EmbededAssisted([FromBody] Assisted assisted)
@@ -39,16 +25,6 @@ namespace WebApplication4.Controllers
         {
 
             return BL.AssistedBL.AddAssisted(assisted);
-        }
-
-        // PUT: api/Assisted/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Assisted/5
-        public void Delete(int id)
-        {
         }
         [HttpGet]
         [Route("GetPersonalStatus")]
