@@ -129,9 +129,6 @@
     <Compile Include="shifts.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="training.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

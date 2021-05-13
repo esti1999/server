@@ -12,18 +12,19 @@ namespace DTO
         public string id_assisted { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }
-        public System.DateTime date_birth { get; set; }
-        public int code_status { get; set; }
-        public int code_gender { get; set; }
-        public int code_city { get; set; }
+        public Nullable<System.DateTime> date_birth { get; set; }
+        public Nullable<int> code_status { get; set; }
+        public Nullable<int> code_gender { get; set; }
+        public Nullable<int> code_city { get; set; }
         public string street { get; set; }
-        public int number_house { get; set; }
-        public int number_building { get; set; }
-        public int number_floor { get; set; }
+        public Nullable<int> number_house { get; set; }
+        public Nullable<int> number_building { get; set; }
+        public Nullable<int> number_floor { get; set; }
         public string postal_code { get; set; }
         public string e_mail { get; set; }
         public string phone { get; set; }
         public string password { get; set; }
+
         public List<Language> languages { get; set; }
         //public List<string> domain { get; set; }
         public Availability availability { get; set; }

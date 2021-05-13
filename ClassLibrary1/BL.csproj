@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DTO\bin\Debug\DTO.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\DAL\bin\Debug\EntityFramework.dll</HintPath>
     </Reference>
@@ -60,10 +64,6 @@
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{3bb76823-4979-4259-8092-175831cd7ca8}</Project>
       <Name>DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DTO\DTO.csproj">
-      <Project>{2535e84a-60d8-4dba-a9a4-cd0001945616}</Project>
-      <Name>DTO</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
