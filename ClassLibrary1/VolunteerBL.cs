@@ -24,6 +24,8 @@ namespace BL
         }
         public static bool AddVolunteer(Volunteer volunteer)
         {
+
+          
             try
             {
                 volunteer v = db.volunteer.FirstOrDefault(x => x.id_volunteer == volunteer.id_volunteer);
