@@ -17,7 +17,7 @@ namespace BL
             List<assisted> assisted = db.assisted.ToList();
             return Assisted.convertassistedtabletolistassistedentity(assisted);
         }
-        public static Assisted getBtId(string id_assisted)
+        public static Assisted getById(string id_assisted)
         {
             assisted assisted = db.assisted.FirstOrDefault(x => x.id_assisted == id_assisted);
             return Assisted.convertassistedtabletoassistedentity(assisted);
@@ -195,8 +195,10 @@ namespace BL
                     }
                 }
             }
+            var temp = new List<assisted>(assisteds);
+
             var avalVolunteer = db.availability_volunteer.Where(av => av.id_volunteer == volunteer.id_volunteer).ToList();
-            foreach (var item in assisteds)
+            foreach (var item in temp)
             {
                 var avalAssisted = db.assisted_availability.Where(x => x.id_assisted == item.id_assisted).ToList();
                 for (int i = 0; i < avalVolunteer.Count; i++)
@@ -207,8 +209,9 @@ namespace BL
                     }
                 }
             }
+            var temp1 = new List<assisted>(assisteds);
             var langVolunteer = db.volunteer_language.Where(vl => vl.id_volunteer == volunteer.id_volunteer).ToList();
-            foreach (var item in assisteds)
+            foreach (var item in temp1)
             {
                 var langAssisted = db.assisted_language.Where(x => x.id_assisted == item.id_assisted).ToList();
                 for (int i = 0; i < langVolunteer.Count; i++)

@@ -73,6 +73,12 @@ namespace WebApplication4.Controllers
         {
             return BL.VolunteerBL.GetAvailability();
         }
+        [HttpGet]
+        [Route("getById/{id_assisted}")]
+        public Assisted getById(string id_assisted)
+        {
+            return BL.AssistedBL.getById(id_assisted);
+        }
         //[HttpPost("SendMail/{volunteer}")]
         //public IActionResult SendMail(volunteer volunteer, [FromBody]  )
         //{

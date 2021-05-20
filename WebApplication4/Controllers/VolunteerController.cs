@@ -109,12 +109,12 @@ namespace WebApplication4.Controllers
         {
             return BL.VolunteerBL.GetServices();
         }
-        
-        //[HttpGet]
-        //[Route("getBtId/{id_volunteer}")]
-        //public List<Volunteer> getById(string id_volunteer)
-        //{
-        //    return BL.VolunteerBL.getById();
-        //}
+
+        [HttpGet]
+        [Route("getById/{id_volunteer}")]
+        public Volunteer getById(string id_volunteer)
+        {
+            return BL.VolunteerBL.getById(id_volunteer);
+        }
     }
 }
