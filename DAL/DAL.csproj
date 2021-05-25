@@ -97,6 +97,9 @@
     <Compile Include="domain.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="embedding.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="gender.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

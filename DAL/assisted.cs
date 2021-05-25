@@ -20,19 +20,20 @@ namespace DAL
             this.assisted_availability = new HashSet<assisted_availability>();
             this.assisted_domain = new HashSet<assisted_domain>();
             this.assisted_language = new HashSet<assisted_language>();
+            this.embedding = new HashSet<embedding>();
         }
     
         public string id_assisted { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }
-        public System.DateTime date_birth { get; set; }
-        public int code_status { get; set; }
-        public int code_gender { get; set; }
-        public int code_city { get; set; }
+        public Nullable<System.DateTime> date_birth { get; set; }
+        public Nullable<int> code_status { get; set; }
+        public Nullable<int> code_gender { get; set; }
+        public Nullable<int> code_city { get; set; }
         public string street { get; set; }
-        public int number_house { get; set; }
-        public int number_building { get; set; }
-        public int number_floor { get; set; }
+        public Nullable<int> number_house { get; set; }
+        public Nullable<int> number_building { get; set; }
+        public Nullable<int> number_floor { get; set; }
         public string postal_code { get; set; }
         public string e_mail { get; set; }
         public string phone { get; set; }
@@ -47,5 +48,7 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<assisted_language> assisted_language { get; set; }
         public virtual personal_status personal_status { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<embedding> embedding { get; set; }
     }
 }

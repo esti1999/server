@@ -12,29 +12,29 @@ namespace DTO
         public string id_volunteer { get; set; }
         public string firstName_volunteer { get; set; }
         public string lastName_volunteer { get; set; }
-        public System.DateTime date_of_birth { get; set; }
-        public int code_gender { get; set; }
-        public int code_status { get; set; }
-        public int code_city { get; set; }
+        public Nullable<System.DateTime> date_of_birth { get; set; }
+        public Nullable<int> code_gender { get; set; }
+        public Nullable<int> code_status { get; set; }
+        public Nullable<int> code_city { get; set; }
         public string street { get; set; }
         public string postal_code { get; set; }
-        public int house_number { get; set; }
-        public int bulding_number { get; set; }
-        public int number_floor { get; set; }
+        public Nullable<int> house_number { get; set; }
+        public Nullable<int> bulding_number { get; set; }
+        public Nullable<int> number_floor { get; set; }
         public string e_mail { get; set; }
-        public int code_service { get; set; }
+        public Nullable<int> code_service { get; set; }
         public string phone { get; set; }
         public string password { get; set; }
         public Nullable<System.DateTime> release_date { get; set; }
         public Nullable<System.DateTime> validityc { get; set; }
         public Nullable<System.DateTime> validityw { get; set; }
-        public int code_weapons_license { get; set; }
-        public int code_car_license { get; set; }
+        public Nullable<int> code_weapons_license { get; set; }
+        public Nullable<int> code_car_license { get; set; }
+        public string description_service { get; set; }
         public List<Language> languages { get; set; }
         public List<VolunteeringDomain> volunteeringdomains { get; set; }
         public Availability availability { get; set; }
         public List<Availability> availabilitys { get; set; }
-        public string description_service { get; set; }
 
         public static Volunteer convertvolunteertabletovolunteerentity(volunteer v)
         {
@@ -167,14 +167,6 @@ namespace DTO
                 code_car_license = v.code_weapons_license,
                 description_service = v.description_service
             };
-            if (v1.code_car_license == 0)
-            {
-                v1.code_car_license = 0;
-            }
-            if (v1.code_weapons_license == 0)
-            {
-                v1.code_weapons_license = 0;
-            }
             return v1;
         }
         public static List<Volunteer> convertvolunteertabletolistvolunteerentity(List<volunteer> vl)

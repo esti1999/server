@@ -40,7 +40,6 @@ namespace DAL
         public virtual DbSet<personal_status> personal_status { get; set; }
         public virtual DbSet<services> services { get; set; }
         public virtual DbSet<shifts> shifts { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<training> training { get; set; }
         public virtual DbSet<training_volunteer> training_volunteer { get; set; }
         public virtual DbSet<volunteer> volunteer { get; set; }
@@ -48,5 +47,7 @@ namespace DAL
         public virtual DbSet<volunteer_language> volunteer_language { get; set; }
         public virtual DbSet<volunteering_domain> volunteering_domain { get; set; }
         public virtual DbSet<weapons_license> weapons_license { get; set; }
+        public virtual DbSet<embedding> embedding { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

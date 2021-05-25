@@ -26,11 +26,23 @@ namespace WebApplication4.Controllers
             return "value";
         }
 
+        //[HttpPost]
+        //[Route("embededAssisted")]
+        //public bool EmbededAssisted([FromBody] Assisted assisted)
+        //{
+        //    return BL.AssistedBL.EmbededAssisted1(assisted);
+        //}
         [HttpPost]
-        [Route("embededAssisted")]
-        public bool EmbededAssisted([FromBody] Assisted assisted)
+        [Route("GetEmbededAssisteds")]
+        public List<EmbeddindAssisted> GetEmbededAssisteds([FromBody] Volunteer volunteer)
         {
-            return BL.AssistedBL.EmbededAssisted(assisted);
+            return BL.AssistedBL.GetEmbededAssisteds(volunteer);
+        }
+        [HttpPost]
+        [Route("SendMessagesToAssisteds")]
+        public bool SendMessagesToAssisteds([FromBody] List<EmbeddindAssisted> embeddindAssisteds)
+        {
+            return BL.AssistedBL.SendMessagesToAssisteds(embeddindAssisteds);
         }
         // POST: api/Assisted
         [HttpPost]

@@ -56,6 +56,7 @@
     <Compile Include="CarLicense.cs" />
     <Compile Include="City.cs" />
     <Compile Include="Days.cs" />
+    <Compile Include="Embedding.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="PersonalStatus.cs" />

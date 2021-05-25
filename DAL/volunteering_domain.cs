@@ -19,6 +19,7 @@ namespace DAL
         {
             this.assisted_domain = new HashSet<assisted_domain>();
             this.volunteer_domain = new HashSet<volunteer_domain>();
+            this.embedding = new HashSet<embedding>();
         }
     
         public int code_volunteering { get; set; }
@@ -30,5 +31,7 @@ namespace DAL
         public virtual domain domain { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<volunteer_domain> volunteer_domain { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<embedding> embedding { get; set; }
     }
 }

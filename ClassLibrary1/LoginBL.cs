@@ -19,8 +19,7 @@ namespace BL
                 Volunteer volunteer=Volunteer.convertvolunteertabletovolunteerentity(v);
                 volunteer.languages = VolunteerBL.GetLanguageVolunteer(volunteer.id_volunteer);
                 volunteer.availabilitys = VolunteerBL.GetAvailabilityVolunteer(volunteer.id_volunteer);
-                //volunteer.domains = VolunteerBL.GetDomainVolunteer(volunteer.id_volunteer);
-                
+                volunteer.volunteeringdomains = VolunteerBL.GetVolunteeringDomain(volunteer.id_volunteer);
                 return volunteer;
             }
             return null;
@@ -32,6 +31,8 @@ namespace BL
             {
                 Assisted assisted = Assisted.convertassistedtabletoassistedentity(v1);
                 assisted.languages = AssistedBL.GetLanguageAssisted(assisted.id_assisted);
+                assisted.availabilitys = AssistedBL.GetAvailabilityAssisted(assisted.id_assisted);
+                assisted.volunteeringdomains = AssistedBL.GetVolunteeringDomain(assisted.id_assisted);
                 return assisted;
             }
             return null;
