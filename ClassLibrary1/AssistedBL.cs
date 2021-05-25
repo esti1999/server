@@ -17,7 +17,7 @@ namespace BL
             List<assisted> assisted = db.assisted.ToList();
             return Assisted.convertassistedtabletolistassistedentity(assisted);
         }
-        public static Assisted getBtId(string id_assisted)
+        public static Assisted getById(string id_assisted)
         {
             assisted assisted = db.assisted.FirstOrDefault(x => x.id_assisted == id_assisted);
             return Assisted.convertassistedtabletoassistedentity(assisted);
@@ -29,35 +29,34 @@ namespace BL
                 assisted a = db.assisted.FirstOrDefault(x => x.id_assisted == assisted.id_assisted);
                 if (a != null)
                 {
-                    if (assisted.languages != null)
+                    List<assisted_language> lList = new List<assisted_language>();
+                    List<assisted_language> alList = db.assisted_language.Where(x => x.id_assisted == assisted.id_assisted).ToList();
+                    foreach (Language item in assisted.languages)
                     {
-                        List<assisted_language> lList = new List<assisted_language>();
-                        List<assisted_language> alList = db.assisted_language.Where(x => x.id_assisted == assisted.id_assisted).ToList();
-                        foreach (Language item in assisted.languages)
+                        if (item.IsSelected == true)
                         {
-                            if (item.IsSelected == true)
+                            assisted_language temp = alList.FirstOrDefault(x => x.id_assisted == assisted.id_assisted && x.code_language == item.code_language);
+                            if (temp == null)
                             {
-                                assisted_language temp = alList.FirstOrDefault(x => x.id_assisted == assisted.id_assisted && x.code_language == item.code_language);
-                                if (temp == null)
-                                {
-                                    assisted_language al = new assisted_language();
-                                    al.id_assisted = assisted.id_assisted;
-                                    al.code_language = item.code_language;
-                                    lList.Add(al);
-                                }
-                                else
-                                    alList.Remove(temp);
+                                assisted_language al = new assisted_language();
+                                al.id_assisted = assisted.id_assisted;
+                                al.code_language = item.code_language;
+                                lList.Add(al);
                             }
-                        }
-                        foreach (assisted_language item in lList)
-                        {
-                            db.assisted_language.Add(item);
-                        }
-                        foreach (assisted_language item in alList)
-                        {
-                            db.assisted_language.Remove(item);
+                            else
+                                alList.Remove(temp);
                         }
                     }
+                    foreach (assisted_language item in lList)
+                    {
+                        db.assisted_language.Add(item);
+                    }
+                    foreach (assisted_language item in alList)
+                    {
+                        db.assisted_language.Remove(item);
+                    }
+
+
                     List<assisted_domain> dList = new List<assisted_domain>();
                     List<assisted_domain> adList = db.assisted_domain.Where(x => x.id_assisted == assisted.id_assisted).ToList();
                     if (assisted.volunteeringdomains != null)
@@ -84,36 +83,41 @@ namespace BL
                             db.assisted_domain.Remove(item);
                         }
                     }
-                    if (assisted.availabilitys != null)
+                    var aval = db.availability.Where(x => x.code_day == assisted.availability.code_day && x.code_shift == assisted.availability.code_shift).FirstOrDefault();
+                    assisted_availability availability = new assisted_availability();
+                    availability.code_availability = aval.code_availability;
+                    availability.id_assisted = assisted.id_assisted;
+                    assisted_availability a_v = db.assisted_availability.Where(x => x.id_assisted == availability.id_assisted).FirstOrDefault();
+                    a_v.code_availability = availability.code_availability;
+                    List<assisted_availability> aList = new List<assisted_availability>();
+                    List<assisted_availability> aaList = db.assisted_availability.Where(x => x.id_assisted == assisted.id_assisted).ToList();
+                    foreach (Availability item in assisted.availabilitys)
                     {
-                        List<assisted_availability> aList = new List<assisted_availability>();
-                        List<assisted_availability> aaList = db.assisted_availability.Where(x => x.id_assisted == assisted.id_assisted).ToList();
-                        foreach (Availability item in assisted.availabilitys)
+                        if (item.IsSelected == true)
                         {
-                            if (item.IsSelected == true)
+                            assisted_availability temp = aaList.FirstOrDefault(x => x.id_assisted == assisted.id_assisted && x.code_availability == item.code_availability);
+                            if (temp == null)
                             {
-                                assisted_availability temp = aaList.FirstOrDefault(x => x.id_assisted == assisted.id_assisted && x.code_availability == item.code_availability);
-                                if (temp == null)
-                                {
-                                    assisted_availability av = new assisted_availability();
-                                    av.id_assisted = assisted.id_assisted;
-                                    av.code_availability = item.code_availability;
-                                    aList.Add(av);
-                                }
-                                else
-                                    aaList.Remove(temp);
+                                assisted_availability av = new assisted_availability();
+                                av.id_assisted = assisted.id_assisted;
+                                av.code_availability = item.code_availability;
+                                aList.Add(av);
                             }
-                        }
-                        foreach (assisted_availability item in aList)
-                        {
-                            db.assisted_availability.Add(item);
-                        }
-                        foreach (assisted_availability item in aaList)
-                        {
-                            db.assisted_availability.Remove(item);
+                            else
+                                aaList.Remove(temp);
                         }
                     }
-                    assisted a1 = Assisted.convertassistedentitytoassistedtable(assisted);
+                    foreach (assisted_availability item in aList)
+                    {
+                        db.assisted_availability.Add(item);
+                    }
+                    foreach (assisted_availability item in aaList)
+                    {
+                        db.assisted_availability.Remove(item);
+                    }
+
+
+                    assisted a1 = Assisted.convertassistedentitytoassistedtable(assisted);      
                     a.id_assisted = a1.id_assisted;
                     a.first_name = a1.first_name;
                     a.last_name = a1.last_name;
@@ -136,35 +140,52 @@ namespace BL
                 else
                 {
                     db.assisted.Add(Assisted.convertassistedentitytoassistedtable(assisted));
-                    db.SaveChanges();
-                    Mail.SendMail(assisted.e_mail, " ברוך הבא למשפחת", "פרטיך נקלטו במערכת בהצלחה תודה שבחרת בנו ");
-                    // בקשתך נקלטה במערכת בהצלחה והועברה לטיפול על ידי אחד ממתנדבינו" פניה חדשה מהמערכת"
+                    //db.SaveChanges();
 
                     List<assisted_language> alList = Assisted.ConvertLanguageEntityListToAssistedLanguage(assisted.languages, assisted.id_assisted);
                     foreach (assisted_language l in alList)
                     {
                         db.assisted_language.Add(l);
                     }
+                    db.assisted.Add(Assisted.convertassistedentitytoassistedtable(assisted));
+
                     List<assisted_availability> AvailabilityList = Assisted.ConvertAvailabilityEntityListToAssistedAvailability(assisted.availabilitys, assisted.id_assisted);
                     foreach (assisted_availability al in AvailabilityList)
                     {
                         db.assisted_availability.Add(al);
                     }
-                    if (assisted.volunteeringdomains != null)
+                    db.assisted.Add(Assisted.convertassistedentitytoassistedtable(assisted));
+
+                    List<assisted_domain> dList = new List<assisted_domain>();
+                    foreach (VolunteeringDomain item in assisted.volunteeringdomains)
                     {
-                        List<assisted_domain> dList = new List<assisted_domain>();
-                        foreach (VolunteeringDomain item in assisted.volunteeringdomains)
-                        {
-                            assisted_domain ad = new assisted_domain();
-                            ad.id_assisted = assisted.id_assisted;
-                            ad.code_volunteering = item.code_volunteering;
-                            dList.Add(ad);
-                        }
-                        foreach (assisted_domain item in dList)
-                        {
-                            db.assisted_domain.Add(item);
-                        }
+                        assisted_domain ad = new assisted_domain();
+                        ad.id_assisted = assisted.id_assisted;
+                        ad.code_volunteering = item.code_volunteering;
+                        dList.Add(ad);
                     }
+                    foreach (assisted_domain item in dList)
+                    {
+                        db.assisted_domain.Add(item);
+                    }
+                    db.assisted.Add(Assisted.convertassistedentitytoassistedtable(assisted));
+                    //List<assisted_domain> dList = new List<assisted_domain>();
+                    //foreach (string item in assisted.domain)
+                    //{
+                    //    assisted_domain vvo = new assisted_domain();
+                    //    vvo.id_assisted = assisted.id_assisted;
+                    //    vvo.code_volunteering = db.volunteering_domain.Where(x => x.description == item).Select(s => s.code_volunteering).FirstOrDefault();
+                    //    dList.Add(vvo);
+                    //}
+                    //foreach (assisted_domain item in dList)
+                    //{
+                    //    db.assisted_domain.Add(item);
+                    //}
+                    //var aval = db.availability.Where(x => x.code_day == assisted.availability.code_day && x.code_shift == assisted.availability.code_shift).FirstOrDefault();
+                    //assisted_availability availability = new assisted_availability();
+                    //availability.code_availability = aval.code_availability;
+                    //availability.id_assisted = assisted.id_assisted;
+                    //db.assisted_availability.Add(availability);
                 }
                 db.SaveChanges();
             }
@@ -174,99 +195,44 @@ namespace BL
             }
             return true;
         }
-        public static List<Assisted> EmbededAssisted1(Volunteer volunteer)
+        public static bool EmbededAssisted(Assisted assisted)
         {
-            List<assisted> assisteds = new List<assisted>();
-            var domainVolunteer = db.volunteer_domain.Where(vd => vd.id_volunteer == volunteer.id_volunteer).ToList();
-            foreach (var item in db.assisted.ToList())
+            List<volunteer> vDomain = new List<volunteer>();
+            var domainAssisted = db.assisted_domain.Where(ad => ad.id_assisted == assisted.id_assisted).ToList();
+            foreach (var item in db.volunteer.ToList())
             {
-                foreach (var ad in item.assisted_domain)
+                foreach (var vd in item.volunteer_domain)
                 {
-                    if (domainVolunteer.Find(x => x.code_volunteering == ad.code_volunteering) != null)
+                    if(domainAssisted.Find(x=>x.code_volunteering == vd.code_volunteering) != null)
                     {
-                        if (!assisteds.Contains(item))
+                        if (!vDomain.Contains(item))
                         {
-                            assisteds.Add(item);
+                            vDomain.Add(item);
                         }
                     }
                 }
             }
-            var avalVolunteer = db.availability_volunteer.Where(av => av.id_volunteer == volunteer.id_volunteer).ToList();
-            foreach (var item in assisteds)
+            var avalAssisted = db.assisted_availability.Where(av => av.id_assisted == assisted.id_assisted).ToList();
+            foreach (var item in vDomain)
             {
-                var avalAssisted = db.assisted_availability.Where(x => x.id_assisted == item.id_assisted).ToList();
-                for (int i = 0; i < avalVolunteer.Count; i++)
+                var list = db.availability_volunteer.Where(x => x.id_volunteer == item.id_volunteer).ToList();
+                for (int i = 0; i < avalAssisted.Count; i++)
                 {
-                    if (avalAssisted.Find(x => x.code_availability == avalVolunteer[i].code_availability) == null)
+                    if(list.Find(x=>x.code_availability == avalAssisted[i].code_availability) != null)
                     {
-                        assisteds.Remove(item);
+
+                        return true;
                     }
                 }
             }
-            var langVolunteer = db.volunteer_language.Where(vl => vl.id_volunteer == volunteer.id_volunteer).ToList();
-            foreach (var item in assisteds)
-            {
-                var langAssisted = db.assisted_language.Where(x => x.id_assisted == item.id_assisted).ToList();
-                for (int i = 0; i < langVolunteer.Count; i++)
-                {
-                    if (langAssisted.Find(x => x.code_language == langVolunteer[i].code_language) == null)
-                    {
-                        assisteds.Remove(item);
-                    }
-                }
-            }
-            assisteds = assisteds.Where(a => a.code_city == volunteer.code_city).ToList();
-            return Assisted.convertassistedtabletolistassistedentity(assisteds);
-        }
-        public static List<EmbeddindAssisted> GetEmbededAssisteds(Volunteer volunteer)
-        {
-            List<EmbeddindAssisted> assisteds = new List<EmbeddindAssisted>();
-            var domainVolunteer = db.volunteer_domain.Where(vd => vd.id_volunteer == volunteer.id_volunteer).ToList();
-            var avalVolunteer = db.availability_volunteer.Where(av => av.id_volunteer == volunteer.id_volunteer).ToList();
-            var langVolunteer = db.volunteer_language.Where(vl => vl.id_volunteer == volunteer.id_volunteer).ToList();
-            var embeddingsVolunteer = db.embedding.Where(e => e.id_volunteer == volunteer.id_volunteer).ToList();
-            var flag = false;
-            foreach (var assisted in db.assisted.ToList())
-            {
-                if (volunteer.code_city == assisted.code_city)
-                {
-                    foreach (var ad in assisted.assisted_domain)
-                    {
-                        flag = true;
-                        if (domainVolunteer.Find(x => x.code_volunteering == ad.code_volunteering) != null)
-                        {
-                            foreach (var aa in assisted.assisted_availability)
-                            {
-                                if (avalVolunteer.Find(x => x.code_availability == aa.code_availability) != null)
-                                {
-                                    foreach (var al in assisted.assisted_language)
-                                    {
-                                        if (langVolunteer.Find(x => x.code_language == al.code_language) != null)
-                                        {
-                                            var embeddingAssisted = new EmbeddindAssisted();
-                                            embeddingAssisted.id_assisted = assisted.id_assisted;
-                                            embeddingAssisted.id_volunteer = volunteer.id_volunteer;
-                                            embeddingAssisted.volunteering_domain = db.volunteering_domain.Where(vd => vd.code_volunteering == ad.code_volunteering).First().description;
-                                            embeddingAssisted.full_name = assisted.first_name + " " + assisted.last_name;
-                                            embeddingAssisted.phone = assisted.phone;
-                                            embeddingAssisted.email = assisted.e_mail;
-                                            var temp = embeddingsVolunteer.FirstOrDefault(ev => ev.id_assisted == assisted.id_assisted && ev.code_volunteering == ad.code_volunteering);
-                                            if (temp != null)
-                                                embeddingAssisted.isApproved = true;
-                                            else
-                                                embeddingAssisted.isApproved = false;
-                                            if (flag)
-                                                assisteds.Add(embeddingAssisted);
-                                            flag = false;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return assisteds.Distinct().ToList();
+            return false;
+            //var domaim = db.volunteer_domain
+            //db.volunteer.Where(v=>v.code_volunteering_domain == )
+
+            //SendMail(assisted.e_mail, "ddd" , "ddd");
+
+
+            //SendMail(assisted.e_mail, "ddd", "ddd");
         }
         public static List<Assisted> RemoveAssisted(string id_assisted)
         {

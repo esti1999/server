@@ -26,41 +26,18 @@ namespace WebApplication4.Controllers
             return "value";
         }
 
-        //[HttpPost]
-        //[Route("embededAssisted")]
-        //public bool EmbededAssisted([FromBody] Assisted assisted)
-        //{
-        //    return BL.AssistedBL.EmbededAssisted1(assisted);
-        //}
         [HttpPost]
-        [Route("GetEmbededAssisteds")]
-        public List<EmbeddindAssisted> GetEmbededAssisteds([FromBody] Volunteer volunteer)
+        [Route("embededAssisted")]
+        public bool EmbededAssisted([FromBody] Assisted assisted)
         {
-            return BL.AssistedBL.GetEmbededAssisteds(volunteer);
+            return BL.AssistedBL.EmbededAssisted(assisted);
         }
-        [HttpPost]
-        [Route("SendMessagesToAssisteds")]
-        public bool SendMessagesToAssisteds([FromBody] List<EmbeddindAssisted> embeddindAssisteds)
-        {
-            return BL.AssistedBL.SendMessagesToAssisteds(embeddindAssisteds);
-        }
-        // POST: api/Assisted
         [HttpPost]
         [Route("addAssisted")]
         public bool AddAssisted( [FromBody] Assisted assisted)
         {
 
             return BL.AssistedBL.AddAssisted(assisted);
-        }
-
-        // PUT: api/Assisted/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Assisted/5
-        public void Delete(int id)
-        {
         }
         [HttpGet]
         [Route("GetPersonalStatus")]
@@ -109,6 +86,12 @@ namespace WebApplication4.Controllers
         public List<Availability> GetAvailability()
         {
             return BL.VolunteerBL.GetAvailability();
+        }
+        [HttpGet]
+        [Route("getById/{id_assisted}")]
+        public Assisted getById(string id_assisted)
+        {
+            return BL.AssistedBL.getById(id_assisted);
         }
         //[HttpPost("SendMail/{volunteer}")]
         //public IActionResult SendMail(volunteer volunteer, [FromBody]  )

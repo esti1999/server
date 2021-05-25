@@ -31,8 +31,6 @@ namespace BL
             {
                 Assisted assisted = Assisted.convertassistedtabletoassistedentity(v1);
                 assisted.languages = AssistedBL.GetLanguageAssisted(assisted.id_assisted);
-                assisted.availabilitys = AssistedBL.GetAvailabilityAssisted(assisted.id_assisted);
-                assisted.volunteeringdomains = AssistedBL.GetVolunteeringDomain(assisted.id_assisted);
                 return assisted;
             }
             return null;

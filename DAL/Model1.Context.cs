@@ -48,6 +48,6 @@ namespace DAL
         public virtual DbSet<volunteering_domain> volunteering_domain { get; set; }
         public virtual DbSet<weapons_license> weapons_license { get; set; }
         public virtual DbSet<embedding> embedding { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        //public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

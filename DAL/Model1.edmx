@@ -137,16 +137,6 @@
           <Property Name="code_shift" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="training">
           <Key>
             <PropertyRef Name="code_training" />
@@ -585,7 +575,6 @@
           <EntitySet Name="personal_status" EntityType="Self.personal_status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="services" EntityType="Self.services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="shifts" EntityType="Self.shifts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="training" EntityType="Self.training" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="training_volunteer" EntityType="Self.training_volunteer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="volunteer" EntityType="Self.volunteer" Schema="dbo" store:Type="Tables" />

@@ -151,22 +151,23 @@ namespace BL
                 {
                     db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
                     db.SaveChanges();
-                    Mail.SendMail(volunteer.e_mail, "ברוך הבא לקהילת המתנדבים", "פרטיך נקלטו במערכת בהצלחה  תודה שבחרת להצטרף אלינו");
-                    if (volunteer.volunteeringdomains!=null)
+
+
+                    // List<volunteer_domain> dList = VolunteerDomain.convertvolunteerdomainentitytolistvolunteerdomaintable(volunteer.domain);
+                    List<volunteer_domain> dList = new List<volunteer_domain>();
+                    foreach (VolunteeringDomain item in volunteer.volunteeringdomains)
                     {
-                        List<volunteer_domain> dList = new List<volunteer_domain>();
-                        foreach (VolunteeringDomain item in volunteer.volunteeringdomains)
-                        {
-                            volunteer_domain vvo = new volunteer_domain();
-                            vvo.id_volunteer = volunteer.id_volunteer;
-                            vvo.code_volunteering = item.code_volunteering;
-                            dList.Add(vvo);
-                        }
-                        foreach (volunteer_domain item in dList)
-                        {
-                            db.volunteer_domain.Add(item);
-                        }
+                        volunteer_domain vvo = new volunteer_domain();
+                        vvo.id_volunteer = volunteer.id_volunteer;
+                        vvo.code_volunteering = item.code_volunteering;
+                        dList.Add(vvo);
                     }
+                    foreach (volunteer_domain item in dList)
+                    {
+                        db.volunteer_domain.Add(item);
+                    }
+                    db.volunteer.Add(Volunteer.convertvolunteerentitytovolunteertable(volunteer));
+
 
                     if (volunteer.languages != null)
                     {
